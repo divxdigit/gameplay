@@ -11,17 +11,21 @@ public class Product {
     private String name;
 
     private String description;
+    @ManyToOne
     private Genre genre;
+    @ManyToOne
     private AgeCategory ageCategory;
     private Integer playersMinimum;
     private Integer playersMaximum;
     private Integer rating;
     private Integer rentStock;
     private Integer buyStock;
+    @ManyToOne
     private Publisher publisher;
     private String picture;
     private Double rentPrice;
     private Double buyPrice;
+    @ManyToOne
     private Language language;
     private Date dateLaunch;
     private Boolean isActive;
@@ -125,7 +129,6 @@ public class Product {
         this.buyStock = buyStock;
     }
 
-    @ManyToOne
     public Publisher getPublisher() {
         return publisher;
     }
@@ -154,7 +157,6 @@ public class Product {
         this.buyPrice = buyPrice;
     }
 
-    @ManyToOne
     public Language getLanguage() {
         return language;
     }
