@@ -14,7 +14,7 @@ public class User {
 
     private String email;
     private String password;
-    private boolean isActive;  // flag: user is not active after # amount false password input
+    private boolean active;  // flag: user is not active after # amount false password input
     private boolean isDeleted; // this is a soft delete of a user. This is needed for history queries
     private Integer wrongPasswordcounter;
 
@@ -61,10 +61,11 @@ public class User {
     }
 
     public boolean isActive() {
-        return isActive;
+        return active;
     }
+
     public void setActive(boolean active) {
-        isActive = active;
+        this.active = active;
     }
 
     public boolean isDeleted() {
