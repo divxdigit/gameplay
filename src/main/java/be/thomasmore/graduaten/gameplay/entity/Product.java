@@ -1,9 +1,6 @@
 package be.thomasmore.graduaten.gameplay.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -13,44 +10,48 @@ public class Product {
     private Long id;
     private String name;
 
-    private String Description;
-    private String Genre;
-    private Integer AgeCategory;
-    private Integer PlayersMinimum;
-    private Integer PlayersMaximum;
-    private Integer Rating;
-    private Integer RentStock;
-    private Integer BuyStock;
-    private Integer Publisher;
-    private String Picture;
-    private Double RentPrice;
-    private Double BuyPrice;
-    private Integer Language;
-    private Date DateLaunch;
-    private Boolean IsActive;
+    private String description;
+    private Genre genre;
+    private AgeCategory ageCategory;
+    private Integer playersMinimum;
+    private Integer playersMaximum;
+    private Integer rating;
+    private Integer rentStock;
+    private Integer buyStock;
+    private Publisher publisher;
+    private String picture;
+    private Double rentPrice;
+    private Double buyPrice;
+    private Language language;
+    private Date dateLaunch;
+    private Boolean isActive;
+
+    ///constructors
 
     public Product() {
     }
 
-    public Product(Long id, String name, String description, String genre, Integer ageCategory, Integer playersMinimum, Integer playersMaximum, Integer rating, Integer rentStock, Integer buyStock, Integer publisher, String picture, Double rentPrice, Double buyPrice, Integer language, Date dateLaunch, Boolean isActive) {
+    public Product(Long id, String name, String description, Genre genre, AgeCategory ageCategory, Integer playersMinimum, Integer playersMaximum, Integer rating, Integer rentStock, Integer buyStock, Publisher publisher, String picture, Double rentPrice, Double buyPrice, Language language, Date dateLaunch, Boolean isActive) {
         this.id = id;
         this.name = name;
-        Description = description;
-        Genre = genre;
-        AgeCategory = ageCategory;
-        PlayersMinimum = playersMinimum;
-        PlayersMaximum = playersMaximum;
-        Rating = rating;
-        RentStock = rentStock;
-        BuyStock = buyStock;
-        Publisher = publisher;
-        Picture = picture;
-        RentPrice = rentPrice;
-        BuyPrice = buyPrice;
-        Language = language;
-        DateLaunch = dateLaunch;
-        IsActive = isActive;
+        this.description = description;
+        this.genre = genre;
+        this.ageCategory = ageCategory;
+        this.playersMinimum = playersMinimum;
+        this.playersMaximum = playersMaximum;
+        this.rating = rating;
+        this.rentStock = rentStock;
+        this.buyStock = buyStock;
+        this.publisher = publisher;
+        this.picture = picture;
+        this.rentPrice = rentPrice;
+        this.buyPrice = buyPrice;
+        this.language = language;
+        this.dateLaunch = dateLaunch;
+        this.isActive = isActive;
     }
+
+    // get/set
 
     public Long getId() {
         return id;
@@ -67,112 +68,139 @@ public class Product {
     }
 
     public String getDescription() {
-        return Description;
+        return description;
     }
     public void setDescription(String description) {
-        Description = description;
+        this.description = description;
     }
 
-    public String getGenre() {
-        return Genre;
+    @ManyToOne
+    public Genre getGenre() {
+        return genre;
     }
-    public void setGenre(String genre) {
-        Genre = genre;
+    public void setGenre(Genre genre) {
+        this.genre = genre;
     }
 
-    public Integer getAgeCategory() {
-        return AgeCategory;
+    @ManyToOne
+    public AgeCategory getAgeCategory() {
+        return ageCategory;
     }
-    public void setAgeCategory(Integer ageCategory) {
-        AgeCategory = ageCategory;
+    public void setAgeCategory(AgeCategory ageCategory) {
+        this.ageCategory = ageCategory;
     }
 
     public Integer getPlayersMinimum() {
-        return PlayersMinimum;
+        return playersMinimum;
     }
     public void setPlayersMinimum(Integer playersMinimum) {
-        PlayersMinimum = playersMinimum;
+        this.playersMinimum = playersMinimum;
     }
 
     public Integer getPlayersMaximum() {
-        return PlayersMaximum;
+        return playersMaximum;
     }
     public void setPlayersMaximum(Integer playersMaximum) {
-        PlayersMaximum = playersMaximum;
+        this.playersMaximum = playersMaximum;
     }
 
     public Integer getRating() {
-        return Rating;
+        return rating;
     }
     public void setRating(Integer rating) {
-        Rating = rating;
+        this.rating = rating;
     }
 
     public Integer getRentStock() {
-        return RentStock;
+        return rentStock;
     }
     public void setRentStock(Integer rentStock) {
-        RentStock = rentStock;
+        this.rentStock = rentStock;
     }
 
     public Integer getBuyStock() {
-        return BuyStock;
+        return buyStock;
     }
     public void setBuyStock(Integer buyStock) {
-        BuyStock = buyStock;
+        this.buyStock = buyStock;
     }
 
-    public Integer getPublisher() {
-        return Publisher;
+    @ManyToOne
+    public Publisher getPublisher() {
+        return publisher;
     }
-    public void setPublisher(Integer publisher) {
-        Publisher = publisher;
+    public void setPublisher(Publisher publisher) {
+        this.publisher = publisher;
     }
 
     public String getPicture() {
-        return Picture;
+        return picture;
     }
     public void setPicture(String picture) {
-        Picture = picture;
+        this.picture = picture;
     }
 
     public Double getRentPrice() {
-        return RentPrice;
+        return rentPrice;
     }
     public void setRentPrice(Double rentPrice) {
-        RentPrice = rentPrice;
+        this.rentPrice = rentPrice;
     }
 
     public Double getBuyPrice() {
-        return BuyPrice;
+        return buyPrice;
     }
     public void setBuyPrice(Double buyPrice) {
-        BuyPrice = buyPrice;
+        this.buyPrice = buyPrice;
     }
 
-    public Integer getLanguage() {
-        return Language;
+    @ManyToOne
+    public Language getLanguage() {
+        return language;
     }
-    public void setLanguage(Integer language) {
-        Language = language;
+    public void setLanguage(Language language) {
+        this.language = language;
     }
 
     public Date getDateLaunch() {
-        return DateLaunch;
+        return dateLaunch;
     }
     public void setDateLaunch(Date dateLaunch) {
-        DateLaunch = dateLaunch;
+        this.dateLaunch = dateLaunch;
     }
 
     public Boolean getActive() {
-        return IsActive;
+        return isActive;
     }
     public void setActive(Boolean active) {
-        IsActive = active;
+        isActive = active;
     }
+
+
+    //methodes
+
+    // overrrides
 
     @Override
     public String toString() {
-        return super.toString();
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", genre=" + genre +
+                ", ageCategory=" + ageCategory +
+                ", playersMinimum=" + playersMinimum +
+                ", playersMaximum=" + playersMaximum +
+                ", rating=" + rating +
+                ", rentStock=" + rentStock +
+                ", buyStock=" + buyStock +
+                ", publisher=" + publisher +
+                ", picture='" + picture + '\'' +
+                ", rentPrice=" + rentPrice +
+                ", buyPrice=" + buyPrice +
+                ", language=" + language +
+                ", dateLaunch=" + dateLaunch +
+                ", isActive=" + isActive +
+                '}';
     }
 }
