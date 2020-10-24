@@ -6,7 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-public class UserProduct {
+public class OrderProduct {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -19,10 +19,10 @@ public class UserProduct {
     private Double discountPrice;
 
     //constructors
-    public UserProduct() {
+    public OrderProduct() {
     }
 
-    public UserProduct(Long id, Product product, Order order, Integer rentDurationWeeks, Integer orderType, Double price, Double discountPrice) {
+    public OrderProduct(Long id, Product product, Order order, Integer rentDurationWeeks, Integer orderType, Double price, Double discountPrice) {
         this.id = id;
         this.product = product;
         this.order = order;
