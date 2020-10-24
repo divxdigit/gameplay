@@ -11,7 +11,7 @@
     <title>Index</title>
 </head>
 <body>
-<img src="../src/main/resources/Images/GamePlayLogo.png" alt="Logo GamePlay">
+<img src="images/GamePlayLogo.png" alt="Logo GamePlay">
 
 </body>
 </html>
