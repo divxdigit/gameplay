@@ -1,14 +1,6 @@
-drop table IF EXISTS Publishers;
-drop table IF EXISTS AgeCategories;
-drop table IF EXISTS Languages;
-drop table IF EXISTS Genres;
-drop table IF EXISTS Products;
-drop table IF EXISTS Users;
-drop table IF EXISTS UserTypes;
-drop table IF EXISTS Orders;
-drop table IF EXISTS OrderProducts;
 
-create table Publishers(
+
+CREATE TABLE IF NOT EXISTS Publishers(
     PublisherId int not null AUTO_INCREMENT,
     Name varchar(50) not null,
     primary key (PublisherId)
@@ -31,7 +23,7 @@ values ('Hasbro');
 insert into Publishers(Name)
 values ('Jumbo');
 
-create table AgeCategories(
+CREATE TABLE IF NOT EXISTS AgeCategories(
     AgeCategoryId int not null AUTO_INCREMENT,
     Name varchar(50) not null,
     primary key (AgeCategoryId)
@@ -62,7 +54,7 @@ values ('13 jaar en ouder');
 insert into AgeCategories(Name)
 values ('Volwassenen');
 
-create table Languages(
+CREATE TABLE IF NOT EXISTS Languages(
     LanguageId int not null AUTO_INCREMENT,
     Name varchar(50) not null,
     primary key (LanguageId)
@@ -81,7 +73,7 @@ values ('Spaans');
 insert into Languages(Name)
 values ('Italiaans');
 
-create table Genres(
+CREATE TABLE IF NOT EXISTS Genres(
     GenreId int not null AUTO_INCREMENT,
     Name varchar(50) not null,
     primary key (GenreId)
@@ -102,7 +94,7 @@ values ('Drankspel');
 insert into Genres(Name)
 values ('Erotisch');
 
-create table Products(
+CREATE TABLE IF NOT EXISTS Products(
     ProductId int not null AUTO_INCREMENT,
     Name varchar(50) not null,
     Description varchar,
