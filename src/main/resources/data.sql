@@ -1,4 +1,5 @@
 //zeveraar
+DROP TABLE Products;
 
 CREATE TABLE IF NOT EXISTS Publishers(
     PublisherId int not null AUTO_INCREMENT,
@@ -97,7 +98,7 @@ values ('Erotisch');
 CREATE TABLE IF NOT EXISTS Products(
     ProductId int not null AUTO_INCREMENT,
     Name varchar(50) not null,
-    Description varchar,
+    Description varchar(max),
     Genre int not null,
     AgeCategory int not null,
     PlayersMinimum int,
