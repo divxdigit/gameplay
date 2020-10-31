@@ -1,7 +1,7 @@
 package be.thomasmore.graduaten.gameplay.repository;
 
 import be.thomasmore.graduaten.gameplay.entity.Order;
-import be.thomasmore.graduaten.gameplay.entity.Publisher;
+import be.thomasmore.graduaten.gameplay.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -18,5 +18,6 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
     List<Order> findByDateCreated(Date date);
     List<Order> findByDateCreatedBetween(Date dateStart, Date dateEnd);
 
-    List<Order> findByUser(Integer id);
+    List<Order> findByUser(User user);
+
 }

@@ -56,7 +56,7 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
                         <div class="dropdown-menu" aria-labelledby="dropdown03">
-                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="/publishers">Publishers</a>
                             <a class="dropdown-item" href="#">Another action</a>
                             <a class="dropdown-item" href="#">Something else here</a>
                         </div>
@@ -68,7 +68,11 @@
             </div>
         </nav>
 
-
+        <p>
+            <a href="/publishers">
+                One to one relation example
+            </a>
+        </p>
 <!-- JavaScript -->
 
 <script src="/js/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>

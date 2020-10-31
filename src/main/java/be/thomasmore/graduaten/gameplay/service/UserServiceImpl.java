@@ -12,13 +12,31 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserRepository userRepository;
 
-    public List<User> findUsersLastname() {
-        return userRepository.findByLastname("Jef");
+    @Override
+    public List<User> getUsers() { return userRepository.findAll();}
+
+    @Override
+    public User getUserById(Long id) { return userRepository.getOne(id);}
+
+    @Override
+    public List<User> getUsersByLastname(String name) { return userRepository.findByLastname(name);  }
+
+    @Override
+    public List<User> getUsersByFirstname(String name) { return userRepository.findByFirstname(name);  }
+
+    @Override
+    public User getUserByEmail(String email) { return userRepository.findByEmail(email);  }
+
+
+
+    @Override
+    public List<User> getUsersIsActive(Boolean bool) {
+        return userRepository.findByActive(bool);
     }
-    public List<User> findUsersIsActive() {
-        return userRepository.findByActive(true);
-    }
-    public List<User> findUsersFirstLastname() {
-        return userRepository.findByFirstnameAndLastname("Jef","Peeters");
-    }
+
+    @Override
+    public List<User> getUsersByFirstnameLastname(String firstname, String lastname) { return userRepository.findByFirstnameAndLastname(firstname, lastname);}
+
+    @Override
+    public User addUser(User user) { return userRepository.save(user);  }
 }

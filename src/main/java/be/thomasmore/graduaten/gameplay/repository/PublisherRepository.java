@@ -10,5 +10,5 @@ import java.util.List;
 @Repository
 public interface PublisherRepository extends JpaRepository<Publisher, Long> {
     List<Publisher> findByName(String name);
-
+    Publisher findById(Integer id);
 }

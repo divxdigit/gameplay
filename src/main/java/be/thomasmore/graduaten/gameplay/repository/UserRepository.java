@@ -9,7 +9,11 @@ import java.util.List;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
+    User findById(Integer id);
     List<User> findByFirstnameAndLastname (String firstname, String lastname);
     List<User> findByLastname(String lastname);
-    List<User> findByActive(boolean active);
+    List<User> findByFirstname(String lastname);
+    List<User> findByActive(Boolean bool);
+    User findByEmail(String email);
+
 }

@@ -1,11 +1,22 @@
 package be.thomasmore.graduaten.gameplay.service;
 
+import be.thomasmore.graduaten.gameplay.entity.Publisher;
 import be.thomasmore.graduaten.gameplay.entity.User;
 
 import java.util.List;
 
 public interface UserService {
-    public List<User> findUsersLastname();
-    public List<User> findUsersIsActive();
-    public List<User> findUsersFirstLastname();
+
+    List<User> getUsers();
+    User getUserById(Long id);
+
+    List<User> getUsersByLastname(String lastname);
+    List<User> getUsersByFirstname(String firstname);
+    User getUserByEmail(String email);
+
+    List<User> getUsersIsActive(Boolean bool);
+    List<User> getUsersByFirstnameLastname(String firstname, String lastname);
+
+    User addUser(User user);
+
 }
