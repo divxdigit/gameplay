@@ -11,11 +11,11 @@
     <link href="/css/bootstrap.min.css" rel="stylesheet">
 
     <title>Index</title>
+
+    <jsp:include page="navigation.jsp" />
+
 </head>
 <body>
-<jsp:include page="navigation.jsp" />
-
-<!-- JavaScript -->
 
             <h1>
                 Publishers
@@ -26,7 +26,7 @@
                 out.print("<table border='1'>");
                 out.print("<tr><th>Id</th><th>Naam</th></tr>");
                 for (Publisher publisher: publishers) {
-                    out.print("<tr><td>" + publisher.getId() + "</td><td>" + publisher.getId() + "</td></tr>");
+                    out.print("<tr><td>" + publisher.getId() + "</td><td>" + publisher.getName() + "</td></tr>");
                 }
                 out.print("</table>");
             %>
