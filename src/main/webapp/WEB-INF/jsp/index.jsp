@@ -37,7 +37,7 @@
 </head>
 <body>
         <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-            <a class="navbar-brand" href="#">Expand at sm</a>
+            <a class="navbar-brand" href="#"><img src="/images/GamePlayLogo.png" alt="Logo GamePlay" height="40"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -67,7 +67,7 @@
                 </form>
             </div>
         </nav>
-<img src="/images/GamePlayLogo.png" alt="Logo GamePlay">
+
 
 <!-- JavaScript -->
 
