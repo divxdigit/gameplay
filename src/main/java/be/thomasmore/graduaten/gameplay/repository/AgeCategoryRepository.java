@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface AgeCategoryRepository extends JpaRepository<AgeCategory, Long> {
-    List<AgeCategory> findByName(String name);
+    List<AgeCategory> findByName (String name);
 }
