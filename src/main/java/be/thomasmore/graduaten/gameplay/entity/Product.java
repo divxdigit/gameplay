@@ -4,9 +4,10 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@Table(name = "Products")
 public class Product {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
 

@@ -2,13 +2,13 @@ package be.thomasmore.graduaten.gameplay.entity;
 
 import org.hibernate.criterion.Order;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
+
+@Table(name = "OrderProducts")
 public class OrderProduct {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Product product;
 

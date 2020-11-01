@@ -1,11 +1,3 @@
-SET FOREIGN_KEY_CHECKS = 0;
-drop table if exists Publishers;
-drop table if exists AgeCategories;
-drop table if exists Languages;
-drop table if exists Genres;
-SET FOREIGN_KEY_CHECKS = 1;
-
-
 CREATE TABLE IF NOT EXISTS Publishers(
     PublisherId int not null AUTO_INCREMENT,
     Name varchar(50) not null,
