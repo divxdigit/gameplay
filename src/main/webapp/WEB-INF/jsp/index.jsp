@@ -7,7 +7,7 @@
 
     <!-- Bootstrap CSS -->
     <link href="/css/bootstrap.css" rel="stylesheet">
-
+    <link href="/css/styles.css" rel="stylesheet">
     <title>Index</title>
 
     <jsp:include page="navigation.jsp" />
@@ -31,21 +31,23 @@
 
 </head>
 <body>
+<div class="div-maincontainer">
+    <h2>
+        Over Gameplay
+    </h2>
+    <p>GamePlay is opgericht als schoolproject en uitgegroeid tot een webshop met een zeer groot aanbod.</p>
+</div>
 
-<h1 align="center">
-    Home
-</h1>
-<h2>
-    Over Gameplay
-</h2>
-<p>GamePlay is opgericht als schoolproject en uitgegroeid tot een webshop met een zeer groot aanbod.</p>
-<h2>
-    Aanbod
-</h2>
-<p>Bij ons kan u verschillende bordspellen vinden in alle genres.<br>
-- RPG<br>
-- Co-op<br>
-- ...</p>
+<div class="div-maincontainer card shadow p-3 mb-5 bg-white rounded">
+    <h2>
+        Aanbod
+    </h2>
+    <p>Bij ons kan u verschillende bordspellen vinden in alle genres.<br>
+        - RPG<br>
+        - Co-op<br>
+        - ...</p>
+</div>
+
 
 
 

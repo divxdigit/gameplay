@@ -8,17 +8,20 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
-<html lang="en">
-<head>
+<%--<html lang="en">
+<head>--%>
     <!-- Required meta tags -->
+<%--
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+--%>
 
     <!-- Bootstrap CSS -->
     <link href="/css/bootstrap.css" rel="stylesheet">
 
-    <title>Index</title>
+<%--    <title>Index</title>--%>
 
+<%--
     <style>
         .bd-placeholder-img {
             font-size: 1.125rem;
@@ -35,9 +38,10 @@
             }
         }
     </style>
-
+--%>
+<%--
 </head>
-<body>
+<body>--%>
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
     <a class="navbar-brand" href="#"><img src="/images/GamePlayLogo.png" alt="Logo GamePlay" height="40"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
@@ -67,7 +71,14 @@
                 <div class="dropdown-menu" aria-labelledby="dropdown03">
                     <a class="dropdown-item" href="/publishers">Publishers</a>
                     <a class="dropdown-item" href="/admin">Admin page</a>
+                    <a class="dropdown-item" href="/genres">Genres page</a>
                     <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown2</a>
+                <div class="dropdown-menu" aria-labelledby="dropdown04">
+                    <a class="dropdown-item" href="/genres">Genres page</a>
                 </div>
             </li>
         </ul>
@@ -83,7 +94,7 @@
 <script src="/js/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
 <script src="/js/popper.min.js" crossorigin="anonymous"></script>
 <script src="/js/bootstrap.min.js" crossorigin="anonymous"></script>
-
+<%--
 </body>
 
-</html>
+</html>--%>
