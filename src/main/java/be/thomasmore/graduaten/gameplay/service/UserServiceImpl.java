@@ -27,8 +27,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserByEmail(String email) { return userRepository.findByEmail(email);  }
 
-
-
     @Override
     public List<User> getUsersIsActive(Boolean bool) {
         return userRepository.findByActive(bool);

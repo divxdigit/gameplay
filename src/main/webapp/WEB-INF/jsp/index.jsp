@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Maarten
-  Date: 24/10/2020
-  Time: 10:47
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en">
 <head>
@@ -17,7 +10,9 @@
 
     <title>Index</title>
 
-    <style>
+    <jsp:include page="navigation.jsp" />
+
+    <%--<style>
         .bd-placeholder-img {
             font-size: 1.125rem;
             text-anchor: middle;
@@ -32,11 +27,11 @@
                 font-size: 3.5rem;
             }
         }
-    </style>
+    </style>--%>
 
 </head>
 <body>
-        <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+       <%-- <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
             <a class="navbar-brand" href="#"><img src="/images/GamePlayLogo.png" alt="Logo GamePlay" height="40"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -87,7 +82,7 @@
 
 <script src="/js/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
 <script src="/js/popper.min.js" crossorigin="anonymous"></script>
-<script src="/js/bootstrap.min.js" crossorigin="anonymous"></script>
+<script src="/js/bootstrap.min.js" crossorigin="anonymous"></script>--%>
 
 </body>
 

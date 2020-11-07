@@ -31,4 +31,9 @@ public class MainController {
         model.addAttribute("publishers", publishers);
         return "publishers";
     }
+
+    @RequestMapping("/admin")
+    public String admin() {
+        return "admin";
+    }
 }

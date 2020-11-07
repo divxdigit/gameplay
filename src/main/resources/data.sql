@@ -1,4 +1,5 @@
-/*DROP TABLE Publishers;
+/*SET FOREIGN_KEY_CHECKS = 0;
+DROP TABLE Publishers;
 DROP TABLE Genres;
 DROP TABLE AgeCategories;
 DROP TABLE Languages;
@@ -6,7 +7,8 @@ DROP TABLE Users;
 DROP TABLE UserTypes;
 DROP TABLE Orders;
 DROP TABLE OrderProducts;
-DROP TABLE Products;*/
+DROP TABLE Products;
+SET FOREIGN_KEY_CHECKS = 1;*/
 
 CREATE TABLE IF NOT EXISTS Publishers(
     PublisherId long not null AUTO_INCREMENT,
@@ -105,7 +107,7 @@ values ('Erotisch');
 CREATE TABLE IF NOT EXISTS Products(
     ProductId long not null AUTO_INCREMENT,
     Name varchar(50) not null,
-    Description varchar(),
+    Description varchar(MAX),
     Genre int not null,
     AgeCategory int not null,
     PlayersMinimum int,

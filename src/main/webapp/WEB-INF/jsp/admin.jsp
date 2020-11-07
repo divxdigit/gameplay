@@ -18,21 +18,8 @@
 <body>
 
             <h1>
-                Publishers
+                Admin page
             </h1>
-
-
-
-            <%
-                List<Publisher> publishers = (List<Publisher>) request.getAttribute("publishers");
-                out.print("<table border='1'>");
-                out.print("<tr><th>Id</th><th>Naam</th></tr>");
-                for (Publisher publisher: publishers) {
-                    out.print("<tr><td>" + publisher.getId() + "</td><td>" + publisher.getName() + "</td></tr>");
-                }
-                out.print("</table>");
-            %>
-
 
 </body>
 

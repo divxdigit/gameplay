@@ -9,10 +9,6 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    private UserType type;
-
-
     private String email;
     private String password;
     private boolean active;  // flag: user is not active after # amount false password input
@@ -26,6 +22,9 @@ public class User {
     private Integer bus;
     private Integer postalcode;
     private String city;
+
+    @ManyToOne
+    private UserType type;
 
     //constructors
 
@@ -54,9 +53,9 @@ public class User {
         this.email = email;
     }
 
-    // public String getPassword() {
-    //    return password;
-    //}
+    public String getPassword() {
+    return password;
+    }
     public void setPassword(String password) {
         this.password = password;
     }
@@ -79,9 +78,9 @@ public class User {
     public Integer getWrongPasswordcounter() {
         return wrongPasswordcounter;
     }
-    //public void setWrongPasswordcounter(Integer wrongPasswordcounter) {
-    //    this.wrongPasswordcounter = wrongPasswordcounter;
-    //}
+    public void setWrongPasswordcounter(Integer wrongPasswordcounter) {
+        this.wrongPasswordcounter = wrongPasswordcounter;
+    }
 
     public String getLastname() {
         return lastname;

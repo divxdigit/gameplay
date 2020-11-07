@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
 <html lang="en">
 <head>
     <!-- Required meta tags -->
@@ -50,14 +52,21 @@
             <li class="nav-item">
                 <a class="nav-link" href="#">Link</a>
             </li>
+            <sec:authorize access="hasAnyAuthority('USER','ADMIN')">
             <li class="nav-item">
-                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                <a class="nav-link" href="#">USER PRIVILEGE</a>
             </li>
+            </sec:authorize>
+            <sec:authorize access="hasAnyAuthority('ADMIN')">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">ADMIN PRIVILEGE</a>
+                </li>
+            </sec:authorize>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
                 <div class="dropdown-menu" aria-labelledby="dropdown03">
                     <a class="dropdown-item" href="/publishers">Publishers</a>
-                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="/admin">Admin page</a>
                     <a class="dropdown-item" href="#">Something else here</a>
                 </div>
             </li>
