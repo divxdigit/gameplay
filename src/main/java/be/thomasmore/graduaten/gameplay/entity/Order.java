@@ -23,6 +23,9 @@ public class Order {
     private LocalDate dateCreated= LocalDate.now(ZoneId.of("Europe/Paris"));
     private Date dateCollect;
 
+
+    private int status;
+
     ///constructors
 
 
@@ -79,5 +82,10 @@ public class Order {
     public void setDateCollect(Date dateCollect) {
         this.dateCollect = dateCollect;
     }
+
+    public int getStatus() { return status;  }
+
+    public void setStatus(int status) { this.status = status; }
+
 }
 

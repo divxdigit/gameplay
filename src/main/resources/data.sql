@@ -169,7 +169,8 @@ VALUES (1,'2020-09-10','2020-12-11',0);
 CREATE TABLE IF NOT EXISTS Users(
     UserId int not null AUTO_INCREMENT,
     Type int not null,
-    Name text,
+    FirstName text,
+    LastName text,
     BirthDate date,
     Password text,
     Email text,
@@ -184,12 +185,12 @@ CREATE TABLE IF NOT EXISTS Users(
     primary key (UserId),
 );
 
-insert into Users(Type, Name, BirthDate, Password, Email, Street, Number, PostalCode, City, IsActive, IsDeleted, WrongPasswordCounter)
-values (1,'KlantA','1989-02-8','DEMO','maartencelen@gmail.com','Vuchterhoeve','6',2440,'Geel',1,0,0);
-insert into Users(Type, Name, BirthDate, Password, Email, Street, Number, PostalCode, City, IsActive, IsDeleted, WrongPasswordCounter)
-values (2,'AdminA','1990-03-8','DEMO','test@test.com','Teststraat','69',2300,'Turnhout',1,0,0);
-insert into Users(Type, Name, BirthDate, Password, Email, Street, Number, PostalCode, City, IsActive, IsDeleted, WrongPasswordCounter)
-values (2,'KlantB','2005-02-8','Minderjarige Benny','test2@test.com','Demostraat','15',2300,'Turnhout',1,0,0);
+insert into Users(Type, FirstName, LastName, BirthDate, Password, Email, Street, Number, PostalCode, City, IsActive, IsDeleted, WrongPasswordCounter)
+values (1,'KlantA', 'Achternaam klantA','1989-02-8','DEMO','maartencelen@gmail.com','Vuchterhoeve','6',2440,'Geel',1,0,0);
+insert into Users(Type, FirstName, LastName, BirthDate, Password, Email, Street, Number, PostalCode, City, IsActive, IsDeleted, WrongPasswordCounter)
+values (2,'AdminA', 'Achternaam AdminA','1990-03-8','DEMO','test@test.com','Teststraat','69',2300,'Turnhout',1,0,0);
+insert into Users(Type, FirstName, LastName, BirthDate, Password, Email, Street, Number, PostalCode, City, IsActive, IsDeleted, WrongPasswordCounter)
+values (2,'KlantB', 'Achternaam klantB','2005-02-8','Minderjarige Benny','test2@test.com','Demostraat','15',2300,'Turnhout',1,0,0);
 
 CREATE TABLE IF NOT EXISTS UserTypes(
     UserTypeId int not null AUTO_INCREMENT,
