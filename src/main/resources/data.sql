@@ -1,8 +1,15 @@
-//zeveraar
-DROP TABLE Products;
+/*DROP TABLE Publishers;
+DROP TABLE Genres;
+DROP TABLE AgeCategories;
+DROP TABLE Languages;
+DROP TABLE Users;
+DROP TABLE UserTypes;
+DROP TABLE Orders;
+DROP TABLE OrderProducts;
+DROP TABLE Products;*/
 
 CREATE TABLE IF NOT EXISTS Publishers(
-    PublisherId int not null AUTO_INCREMENT,
+    PublisherId long not null AUTO_INCREMENT,
     Name varchar(50) not null,
     primary key (PublisherId)
 );
@@ -25,7 +32,7 @@ insert into Publishers(Name)
 values ('Jumbo');
 
 CREATE TABLE IF NOT EXISTS AgeCategories(
-    AgeCategoryId int not null AUTO_INCREMENT,
+    AgeCategoryId long not null AUTO_INCREMENT,
     Name varchar(50) not null,
     primary key (AgeCategoryId)
 );
@@ -56,7 +63,7 @@ insert into AgeCategories(Name)
 values ('Volwassenen');
 
 CREATE TABLE IF NOT EXISTS Languages(
-    LanguageId int not null AUTO_INCREMENT,
+    LanguageId long not null AUTO_INCREMENT,
     Name varchar(50) not null,
     primary key (LanguageId)
 );
@@ -75,7 +82,7 @@ insert into Languages(Name)
 values ('Italiaans');
 
 CREATE TABLE IF NOT EXISTS Genres(
-    GenreId int not null AUTO_INCREMENT,
+    GenreId long not null AUTO_INCREMENT,
     Name varchar(50) not null,
     primary key (GenreId)
 );
@@ -96,9 +103,9 @@ insert into Genres(Name)
 values ('Erotisch');
 
 CREATE TABLE IF NOT EXISTS Products(
-    ProductId int not null AUTO_INCREMENT,
+    ProductId long not null AUTO_INCREMENT,
     Name varchar(50) not null,
-    Description varchar(max),
+    Description varchar(),
     Genre int not null,
     AgeCategory int not null,
     PlayersMinimum int,
@@ -130,7 +137,7 @@ insert into Products(Name,Description,Genre,AgeCategory,PlayersMinimum,PlayersMa
 values ('Wingspan','Een vogelspel vol tactiek en spanning Als vogelliefhebber probeer je de beste leefomstandigheden voor de vogels in je opvangcentrum te creëren. Elke vogel breidt in één van zijn leefgebieden een ketting van krachtige combinaties uit. Deze leefgebieden richten zich op verschillende groeifactoren: voedsel pakken, eieren leggen en nieuwe vogelkaarten trekken. Wie bouwt het beste actiemotortje en scoort aan het einde van het spel de meeste punten met zijn vogels? Elke beurt speel je een vogel, waarna je alle acties die zich in het betreffende leefgebied bevinden, mag uitvoeren. Zo kun je voedsel uit een “echt” vogelhuisje pakken, ei-miniaturen in nesten leggen of nieuwe vogels verzamelen. Alle opties leveren op verschillende manieren punten op. Het spel bevat 170 unieke vogelkaarten, die in combinatie met de verschillende bonuskaarten en de interactie met de andere spelers voor oneindige variatie zorgen. Het spel is ook solitair te spelen!',4,9,1,5,1,1,0,5,'LINK AFBEELDING HIER',3.50,56.14,1,'2000-06-20',1);
 
 CREATE TABLE IF NOT EXISTS OrderProducts(
-    OrderProductId int not null AUTO_INCREMENT,
+    OrderProductId long not null AUTO_INCREMENT,
     Product int not null,
     "Order" int not null,
     RendDurationWeeks int,
@@ -150,7 +157,7 @@ insert into OrderProducts(Product,"Order", RendDurationWeeks, OrderType, Price, 
 VALUES (2,2,2,2,4,0);
 
 CREATE TABLE IF NOT EXISTS Orders(
-    OrderId int not null AUTO_INCREMENT,
+    OrderId long not null AUTO_INCREMENT,
     User int not null,
     DateCreated date,
     DateCollect date,
@@ -167,7 +174,7 @@ insert into Orders(User, DateCreated, DateCollect, Status)
 VALUES (1,'2020-09-10','2020-12-11',0);
 
 CREATE TABLE IF NOT EXISTS Users(
-    UserId int not null AUTO_INCREMENT,
+    UserId long not null AUTO_INCREMENT,
     Type int not null,
     FirstName text,
     LastName text,
@@ -193,7 +200,7 @@ insert into Users(Type, FirstName, LastName, BirthDate, Password, Email, Street,
 values (2,'KlantB', 'Achternaam klantB','2005-02-8','Minderjarige Benny','test2@test.com','Demostraat','15',2300,'Turnhout',1,0,0);
 
 CREATE TABLE IF NOT EXISTS UserTypes(
-    UserTypeId int not null AUTO_INCREMENT,
+    UserTypeId long not null AUTO_INCREMENT,
     Name text,
     Description text,
     primary key (UserTypeId),
