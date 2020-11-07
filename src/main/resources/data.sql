@@ -1,17 +1,17 @@
-/*SET FOREIGN_KEY_CHECKS = 0;
-DROP TABLE Publishers;
-DROP TABLE Genres;
-DROP TABLE AgeCategories;
-DROP TABLE Languages;
-DROP TABLE Users;
-DROP TABLE UserTypes;
-DROP TABLE Orders;
-DROP TABLE OrderProducts;
-DROP TABLE Products;
-SET FOREIGN_KEY_CHECKS = 1;*/
+//SET FOREIGN_KEY_CHECKS = 0;
+DROP TABLE if exists Orders;
+DROP TABLE if exists Products;
+DROP TABLE if exists OrderProducts;
+DROP TABLE if exists Users;
+DROP TABLE if exists UserTypes;
+DROP TABLE if exists Publishers;
+DROP TABLE if exists Genres;
+DROP TABLE if exists AgeCategories;
+DROP TABLE if exists Languages;
+//SET FOREIGN_KEY_CHECKS = 1;
 
 CREATE TABLE IF NOT EXISTS Publishers(
-    PublisherId long not null AUTO_INCREMENT,
+    PublisherId int not null AUTO_INCREMENT,
     Name varchar(50) not null,
     primary key (PublisherId)
 );
@@ -34,7 +34,7 @@ insert into Publishers(Name)
 values ('Jumbo');
 
 CREATE TABLE IF NOT EXISTS AgeCategories(
-    AgeCategoryId long not null AUTO_INCREMENT,
+    AgeCategoryId int not null AUTO_INCREMENT,
     Name varchar(50) not null,
     primary key (AgeCategoryId)
 );
@@ -65,7 +65,7 @@ insert into AgeCategories(Name)
 values ('Volwassenen');
 
 CREATE TABLE IF NOT EXISTS Languages(
-    LanguageId long not null AUTO_INCREMENT,
+    LanguageId int not null AUTO_INCREMENT,
     Name varchar(50) not null,
     primary key (LanguageId)
 );
@@ -84,7 +84,7 @@ insert into Languages(Name)
 values ('Italiaans');
 
 CREATE TABLE IF NOT EXISTS Genres(
-    GenreId long not null AUTO_INCREMENT,
+    GenreId int not null AUTO_INCREMENT,
     Name varchar(50) not null,
     primary key (GenreId)
 );
@@ -105,7 +105,7 @@ insert into Genres(Name)
 values ('Erotisch');
 
 CREATE TABLE IF NOT EXISTS Products(
-    ProductId long not null AUTO_INCREMENT,
+    ProductId int not null AUTO_INCREMENT,
     Name varchar(50) not null,
     Description varchar(MAX),
     Genre int not null,
@@ -138,45 +138,20 @@ values ('De Kwakzalvers van Kakelenburg','De Kwakzalvers van Kakelenburg Eenmaal
 insert into Products(Name,Description,Genre,AgeCategory,PlayersMinimum,PlayersMaximum,Rating,RentStock,BuyStock,Publisher,Picture,RentPrice,BuyPrice,Language,DateLaunch,IsActive)
 values ('Wingspan','Een vogelspel vol tactiek en spanning Als vogelliefhebber probeer je de beste leefomstandigheden voor de vogels in je opvangcentrum te creëren. Elke vogel breidt in één van zijn leefgebieden een ketting van krachtige combinaties uit. Deze leefgebieden richten zich op verschillende groeifactoren: voedsel pakken, eieren leggen en nieuwe vogelkaarten trekken. Wie bouwt het beste actiemotortje en scoort aan het einde van het spel de meeste punten met zijn vogels? Elke beurt speel je een vogel, waarna je alle acties die zich in het betreffende leefgebied bevinden, mag uitvoeren. Zo kun je voedsel uit een “echt” vogelhuisje pakken, ei-miniaturen in nesten leggen of nieuwe vogels verzamelen. Alle opties leveren op verschillende manieren punten op. Het spel bevat 170 unieke vogelkaarten, die in combinatie met de verschillende bonuskaarten en de interactie met de andere spelers voor oneindige variatie zorgen. Het spel is ook solitair te spelen!',4,9,1,5,1,1,0,5,'LINK AFBEELDING HIER',3.50,56.14,1,'2000-06-20',1);
 
-CREATE TABLE IF NOT EXISTS OrderProducts(
-    OrderProductId long not null AUTO_INCREMENT,
-    Product int not null,
-    "Order" int not null,
-    RendDurationWeeks int,
-    OrderType int,
-    Price double,
-    DiscountPrice double,
-    foreign key (Product) references Products (ProductId),
-    foreign key ("Order") references Orders (OrderId),
-    primary key (OrderProductId),
+CREATE TABLE IF NOT EXISTS UserTypes(
+    UserTypeId int not null AUTO_INCREMENT,
+    Name text,
+    Description text,
+    primary key (UserTypeId)
 );
 
-insert into OrderProducts(Product,"Order", RendDurationWeeks, OrderType, Price, DiscountPrice)
-VALUES (1,1,'',1,34.95,5);
-insert into OrderProducts(Product,"Order", RendDurationWeeks, OrderType, Price, DiscountPrice)
-VALUES (2,1,'',1,20.10,0);
-insert into OrderProducts(Product,"Order", RendDurationWeeks, OrderType, Price, DiscountPrice)
-VALUES (2,2,2,2,4,0);
-
-CREATE TABLE IF NOT EXISTS Orders(
-    OrderId long not null AUTO_INCREMENT,
-    User int not null,
-    DateCreated date,
-    DateCollect date,
-    Status int,
-    foreign key (User) references Users (UserId),
-    primary key (OrderId),
-);
-
-insert into Orders(User, DateCreated, DateCollect, Status)
-VALUES (1,'2020-10-10','2020-10-11',1);
-insert into Orders(User, DateCreated, DateCollect, Status)
-VALUES (3,'2020-08-10','2020-08-11',1);
-insert into Orders(User, DateCreated, DateCollect, Status)
-VALUES (1,'2020-09-10','2020-12-11',0);
+insert into UserTypes(Name,Description)
+values ('Standaard','Klassieke klant');
+insert into UserTypes(Name,Description)
+values ('Admin','Systeembeheerder van de webshop');
 
 CREATE TABLE IF NOT EXISTS Users(
-    UserId long not null AUTO_INCREMENT,
+    UserId int not null AUTO_INCREMENT,
     Type int not null,
     FirstName text,
     LastName text,
@@ -191,7 +166,7 @@ CREATE TABLE IF NOT EXISTS Users(
     IsDeleted boolean,
     WrongPasswordCounter int,
     foreign key (Type) references UserTypes (UserTypeId),
-    primary key (UserId),
+    primary key (UserId)
 );
 
 insert into Users(Type, FirstName, LastName, BirthDate, Password, Email, Street, Number, PostalCode, City, IsActive, IsDeleted, WrongPasswordCounter)
@@ -199,16 +174,45 @@ values (1,'KlantA', 'Achternaam klantA','1989-02-8','DEMO','maartencelen@gmail.c
 insert into Users(Type, FirstName, LastName, BirthDate, Password, Email, Street, Number, PostalCode, City, IsActive, IsDeleted, WrongPasswordCounter)
 values (2,'AdminA', 'Achternaam AdminA','1990-03-8','DEMO','test@test.com','Teststraat','69',2300,'Turnhout',1,0,0);
 insert into Users(Type, FirstName, LastName, BirthDate, Password, Email, Street, Number, PostalCode, City, IsActive, IsDeleted, WrongPasswordCounter)
-values (2,'KlantB', 'Achternaam klantB','2005-02-8','Minderjarige Benny','test2@test.com','Demostraat','15',2300,'Turnhout',1,0,0);
+values (1,'KlantB', 'Achternaam klantB','2005-02-8','Minderjarige Benny','test2@test.com','Demostraat','15',2300,'Turnhout',1,0,0);
 
-CREATE TABLE IF NOT EXISTS UserTypes(
-    UserTypeId long not null AUTO_INCREMENT,
-    Name text,
-    Description text,
-    primary key (UserTypeId),
+
+CREATE TABLE IF NOT EXISTS Orders(
+    OrderId int not null AUTO_INCREMENT,
+    User int not null,
+    DateCreated date,
+    DateCollect date,
+    Status int,
+    foreign key (User) references Users (UserId),
+    primary key (OrderId)
 );
 
-insert into UserTypes(Name,Description)
-values ('Standaard','Klassieke klant');
-insert into UserTypes(Name,Description)
-values ('Admin','Systeembeheerder van de webshop');
+insert into Orders(User, DateCreated, DateCollect, Status)
+VALUES (1,'2020-10-10','2020-10-11',1);
+insert into Orders(User, DateCreated, DateCollect, Status)
+VALUES (3,'2020-08-10','2020-08-11',1);
+insert into Orders(User, DateCreated, DateCollect, Status)
+VALUES (1,'2020-09-10','2020-12-11',0);
+
+
+CREATE TABLE IF NOT EXISTS OrderProducts(
+    OrderProductId int not null AUTO_INCREMENT,
+    Product int not null,
+    "Order" int not null,
+    RentDurationWeeks int,
+    OrderType int,
+    Price double,
+    DiscountPrice double,
+    foreign key (Product) references Products (ProductId),
+    foreign key ("Order") references Orders (OrderId),
+    primary key (OrderProductId)
+);
+
+insert into OrderProducts(Product,"Order", RentDurationWeeks, OrderType, Price, DiscountPrice)
+VALUES (1,1,null,1,34.95,5);
+insert into OrderProducts(Product,"Order", RentDurationWeeks, OrderType, Price, DiscountPrice)
+VALUES (2,1,null,1,20.10,0);
+insert into OrderProducts(Product,"Order", RentDurationWeeks, OrderType, Price, DiscountPrice)
+VALUES (2,2,2,2,4,0);
+
+
