@@ -31,6 +31,24 @@
 
 </head>
 <body>
+
+<h1 align="center">
+    Home
+</h1>
+<h2>
+    Over Gameplay
+</h2>
+<p>GamePlay is opgericht als schoolproject en uitgegroeid tot een webshop met een zeer groot aanbod.</p>
+<h2>
+    Aanbod
+</h2>
+<p>Bij ons kan u verschillende bordspellen vinden in alle genres.<br>
+- RPG<br>
+- Co-op<br>
+- ...</p>
+
+
+
        <%-- <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
             <a class="navbar-brand" href="#"><img src="/images/GamePlayLogo.png" alt="Logo GamePlay" height="40"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
