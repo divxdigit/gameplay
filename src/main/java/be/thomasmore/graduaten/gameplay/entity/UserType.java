@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "UserTypes")
+@Table(name = "Usertypes")
 public class UserType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,8 +17,7 @@ public class UserType {
 
     public UserType() {
     }
-    public UserType(Long id, String name, String description) {
-        this.id = id;
+    public UserType(String name, String description) {
         this.name = name;
         this.description = description;
     }

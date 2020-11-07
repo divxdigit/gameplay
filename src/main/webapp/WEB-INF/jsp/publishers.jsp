@@ -22,7 +22,6 @@
             </h1>
 
 
-
             <%
                 List<Publisher> publishers = (List<Publisher>) request.getAttribute("publishers");
                 out.print("<table border='1'>");
@@ -32,7 +31,6 @@
                 }
                 out.print("</table>");
             %>
-
 
 </body>
 

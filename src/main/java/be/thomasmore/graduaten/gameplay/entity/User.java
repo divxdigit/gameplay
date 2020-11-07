@@ -12,23 +12,38 @@ public class User {
     private String email;
     private String password;
     private boolean active;  // flag: user is not active after # amount false password input
-    private boolean isDeleted; // this is a soft delete of a user. This is needed for history queries
-    private Integer wrongPasswordcounter;
+    private boolean deleted; // this is a soft delete of a user. This is needed for history queries
+    private Integer wrongpasswordcounter;
 
     private String lastname;
     private String firstname;
     private String street;
-    private Integer number;
-    private Integer bus;
+    private String number;
     private Integer postalcode;
     private String city;
 
     @ManyToOne
-    private UserType type;
+    private UserType userType;
 
     //constructors
 
+    public User() {
+    }
 
+    public User(String email, String password, boolean active, boolean deleted, Integer wrongpasswordcounter, String lastname, String firstname, String street, String number, Integer postalcode, String city, UserType userType) {
+        this.email = email;
+        this.password = password;
+        this.active = active;
+        this.deleted = deleted;
+        this.wrongpasswordcounter = wrongpasswordcounter;
+        this.lastname = lastname;
+        this.firstname = firstname;
+        this.street = street;
+        this.number = number;
+        this.postalcode = postalcode;
+        this.city = city;
+        this.userType = userType;
+    }
     //Get & Set
 
 
@@ -40,10 +55,10 @@ public class User {
     }
 
     public UserType getType() {
-        return type;
+        return userType;
     }
     public void setType(UserType type) {
-        this.type = type;
+        this.userType = type;
     }
 
     public String getEmail() {
@@ -68,18 +83,18 @@ public class User {
         this.active = active;
     }
 
-    public boolean isDeleted() {
-        return isDeleted;
+    public boolean Deleted() {
+        return deleted;
     }
     public void setDeleted(boolean deleted) {
-        isDeleted = deleted;
+        this.deleted = deleted;
     }
 
     public Integer getWrongPasswordcounter() {
-        return wrongPasswordcounter;
+        return wrongpasswordcounter;
     }
     public void setWrongPasswordcounter(Integer wrongPasswordcounter) {
-        this.wrongPasswordcounter = wrongPasswordcounter;
+        this.wrongpasswordcounter = wrongPasswordcounter;
     }
 
     public String getLastname() {
@@ -103,18 +118,11 @@ public class User {
         this.street = street;
     }
 
-    public Integer getNumber() {
+    public String getNumber() {
         return number;
     }
-    public void setNumber(Integer number) {
+    public void setNumber(String number) {
         this.number = number;
-    }
-
-    public Integer getBus() {
-        return bus;
-    }
-    public void setBus(Integer bus) {
-        this.bus = bus;
     }
 
     public Integer getPostalcode() {
@@ -133,9 +141,9 @@ public class User {
 
     // methods
     public void CountFalsePwdInput(){
-        wrongPasswordcounter++;
+        wrongpasswordcounter++;
     }
     public void ResetFalsePwdInput(){
-        wrongPasswordcounter=0;
+        wrongpasswordcounter=0;
     }
 }

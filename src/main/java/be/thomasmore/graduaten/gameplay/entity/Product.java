@@ -29,14 +29,14 @@ public class Product {
     @ManyToOne
     private Language language;
     private Date dateLaunch;
-    private Boolean isActive;
+    private Boolean active;
 
     ///constructors
 
     public Product() {
     }
 
-    public Product(Long id, String name, String description, Genre genre, AgeCategory ageCategory, Integer playersMinimum, Integer playersMaximum, Integer rating, Integer rentStock, Integer buyStock, Publisher publisher, String picture, Double rentPrice, Double buyPrice, Language language, Date dateLaunch, Boolean isActive) {
+    public Product(Long id, String name, String description, Genre genre, AgeCategory ageCategory, Integer playersMinimum, Integer playersMaximum, Integer rating, Integer rentStock, Integer buyStock, Publisher publisher, String picture, Double rentPrice, Double buyPrice, Language language, Date dateLaunch, Boolean active) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -53,7 +53,7 @@ public class Product {
         this.buyPrice = buyPrice;
         this.language = language;
         this.dateLaunch = dateLaunch;
-        this.isActive = isActive;
+        this.active = active;
     }
 
     // get/set
@@ -173,10 +173,10 @@ public class Product {
     }
 
     public Boolean getActive() {
-        return isActive;
+        return active;
     }
     public void setActive(Boolean active) {
-        isActive = active;
+        this.active = active;
     }
 
 
@@ -203,7 +203,7 @@ public class Product {
                 ", buyPrice=" + buyPrice +
                 ", language=" + language +
                 ", dateLaunch=" + dateLaunch +
-                ", isActive=" + isActive +
+                ", active=" + active +
                 '}';
     }
 }

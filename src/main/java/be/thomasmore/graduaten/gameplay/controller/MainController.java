@@ -33,6 +33,11 @@ public class MainController {
         return "contact";
     }
 
+    @RequestMapping("/login")
+    public String login() {
+        return "login";
+    }
+
     @RequestMapping("/admin")
     public String admin() {
         return "admin";
