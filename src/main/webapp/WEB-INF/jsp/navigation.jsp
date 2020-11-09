@@ -104,7 +104,7 @@
                     <a class="dropdown-item" href="#">Manage Orders</a>
                     <hr>
                 </sec:authorize>
-                <sec:authorize access="hasAnyAuthority('User')">
+                <sec:authorize access="hasAnyAuthority('USER')">
                     <a class="dropdown-item" href="#">My orders</a>
                     <hr>
                 </sec:authorize>
