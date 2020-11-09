@@ -1,5 +1,7 @@
 package be.thomasmore.graduaten.gameplay.controller;
 
+
+
 import be.thomasmore.graduaten.gameplay.entity.Genre;
 import be.thomasmore.graduaten.gameplay.entity.Publisher;
 import be.thomasmore.graduaten.gameplay.service.GenreService;
@@ -7,8 +9,11 @@ import be.thomasmore.graduaten.gameplay.service.PublisherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -49,8 +54,19 @@ public class MainController {
         model.addAttribute("genres", genres);
         return "genres";
     }
+
+    @PostMapping("/genres")
+    public String postGenre(Model model, HttpServletRequest request) {
+        String name = request.getParameter("name");
+
+        model.addAttribute("genre", new Genre(name));
+        return "genres";
+    }
+
+
     @RequestMapping("/admin")
     public String admin() {
         return "admin";
     }
 }
+

@@ -53,10 +53,17 @@
             <li class="nav-item">
                 <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
             </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Aanbod</a>
+                <div class="dropdown-menu" aria-labelledby="Aanbod">
+                    <a class="dropdown-item" href="/genres">Genres page</a>
+                </div>
+            </li>
             <li class="nav-item">
                 <a class="nav-link" href="/contact">Contact</a>
             </li>
-            <sec:authorize access="hasAnyAuthority('USER','ADMIN')">
+            <%--<sec:authorize access="hasAnyAuthority('USER','ADMIN')">--%>
+            <sec:authorize access="isAuthenticated()">
             <li class="nav-item">
                 <a class="nav-link" href="#">USER PRIVILEGE</a>
             </li>
@@ -66,25 +73,52 @@
                     <a class="nav-link" href="#">ADMIN PRIVILEGE</a>
                 </li>
             </sec:authorize>
+
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
                 <div class="dropdown-menu" aria-labelledby="dropdown03">
-                    <a class="dropdown-item" href="/publishers">Publishers</a>
+                    <sec:authorize access="hasAnyAuthority('ADMIN')">
+                        <a class="dropdown-item" href="/publishers">Manage Publishers</a>
+
+                    </sec:authorize>
                     <a class="dropdown-item" href="/admin">Admin page</a>
-                    <a class="dropdown-item" href="/genres">Genres page</a>
+
                     <a class="dropdown-item" href="#">Something else here</a>
                 </div>
             </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown2</a>
-                <div class="dropdown-menu" aria-labelledby="dropdown04">
-                    <a class="dropdown-item" href="/genres">Genres page</a>
-                </div>
-            </li>
+
+
         </ul>
         <form class="form-inline my-2 my-md-0">
             <input class="form-control" type="text" placeholder="Search">
         </form>
+
+        <div class="btn-group" style="margin-left: 15px">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Leden
+            </button>
+            <div class="dropdown-menu dropdown-menu-right">
+                <sec:authorize access="hasAnyAuthority('ADMIN')">
+                    <a class="dropdown-item" href="/genres">Manage Genres</a>
+                    <a class="dropdown-item" href="#">Manage Games</a>
+                    <a class="dropdown-item" href="#">Manage Orders</a>
+                    <hr>
+                </sec:authorize>
+                <sec:authorize access="hasAnyAuthority('User')">
+                    <a class="dropdown-item" href="#">My orders</a>
+                    <hr>
+                </sec:authorize>
+
+                <sec:authorize access="!isAuthenticated()">
+                    <a class="dropdown-item" href="/login">Login</a>
+
+                </sec:authorize>
+                <%--<sec:authorize access="hasAnyAuthority('USER','ADMIN')">--%>
+                <sec:authorize access="isAuthenticated()">
+                    <a class="dropdown-item" href="/logout">Logout</a>
+                </sec:authorize>
+            </div>
+        </div>
     </div>
 </nav>
 
