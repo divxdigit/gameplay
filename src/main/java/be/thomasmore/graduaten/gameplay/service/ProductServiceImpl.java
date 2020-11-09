@@ -28,6 +28,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public List<Product> getProductByNameContains(String name) {
+        return productRepository.findByNameContains(name);
+    }
+
+    @Override
     public Product getAgeCategoryById(Long id) {
         return productRepository.getOne(id);
     }

@@ -90,8 +90,9 @@
 --%>
 
         </ul>
-        <form class="form-inline my-2 my-md-0">
-            <input class="form-control" type="text" placeholder="Search">
+        <form class="form-inline my-2 my-md-0" method="get" action="/search">
+            <input class="form-control" type="text" placeholder="Zoeken naar" name="searchString">
+            <button id="button-id" type="submit">Search</button>
         </form>
 
         <div class="btn-group" style="margin-left: 15px">

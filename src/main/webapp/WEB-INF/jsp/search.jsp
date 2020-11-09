@@ -25,14 +25,6 @@
         Overzicht Bordspellen
     </h1>
     <div class="col-md-8 table-responsive ">
-        <form class="form-inline my-2 my-md-2" method="get" action="/search">
-            <input class="form-control" type="text" placeholder="Geef naam" name="searchString">
-            <button class="btn btn-info" id="button-id" type="submit">Zoeken
-                <img src="/icons/search.svg" width="20" height="20"  fill="none"/>
-
-            </button>
-        </form>
-        <br />
 
             <%
                 List<Product> products = (List<Product>) request.getAttribute("products");

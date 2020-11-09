@@ -13,9 +13,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -35,10 +37,20 @@ public class MainController {
     }
 
     @RequestMapping("/products")
-    public String dataProduct(Model model) {
+    public String productList(Model model) {
         List<Product> products = productService.getProducts();
         model.addAttribute("products", products);
         return "products";
+    }
+    @RequestMapping(value= "/search")
+    public String productSearch(Model model, HttpSession session, @RequestParam("searchString") String searchString) {
+
+        if(searchString != null){
+            model.addAttribute("products", productService.getProductByNameContains(searchString));
+            return "products";
+        }
+        return "index";
+
     }
 
     @RequestMapping("/publishers")
@@ -58,6 +70,9 @@ public class MainController {
         return "login";
     }
 
+
+
+
     @RequestMapping("/genres")
     public String dataGenre(Model model) {
         List<Genre> genres = genreService.getGenres();
@@ -65,6 +80,7 @@ public class MainController {
         return "genres";
     }
 
+    /* Werkt niet */
     @PostMapping("/genres")
     public String postGenre(Model model, HttpServletRequest request) {
         String name = request.getParameter("name");
