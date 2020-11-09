@@ -56,13 +56,14 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Aanbod</a>
                 <div class="dropdown-menu" aria-labelledby="Aanbod">
-                    <a class="dropdown-item" href="/genres">Genres page</a>
+                    <a class="dropdown-item" href="/products">Overzicht Bordspellen</a>
+                    <a class="dropdown-item" href="/genres">Genres</a>
                 </div>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/contact">Contact</a>
             </li>
-            <%--<sec:authorize access="hasAnyAuthority('USER','ADMIN')">--%>
+          <%--  &lt;%&ndash;<sec:authorize access="hasAnyAuthority('USER','ADMIN')">&ndash;%&gt;
             <sec:authorize access="isAuthenticated()">
             <li class="nav-item">
                 <a class="nav-link" href="#">USER PRIVILEGE</a>
@@ -86,7 +87,7 @@
                     <a class="dropdown-item" href="#">Something else here</a>
                 </div>
             </li>
-
+--%>
 
         </ul>
         <form class="form-inline my-2 my-md-0">

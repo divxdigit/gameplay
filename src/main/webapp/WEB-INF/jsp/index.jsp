@@ -8,7 +8,7 @@
     <!-- Bootstrap CSS -->
     <link href="/css/bootstrap.css" rel="stylesheet">
     <link href="/css/styles.css" rel="stylesheet">
-    <title>Index</title>
+    <title>GamePlay - Online webshop</title>
 
     <jsp:include page="navigation.jsp" />
 

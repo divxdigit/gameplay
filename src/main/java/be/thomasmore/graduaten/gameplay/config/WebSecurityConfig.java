@@ -50,7 +50,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 //AUTHENTICATION
                 .authorizeRequests()
-                .antMatchers("/", "/contact","/genres").permitAll()
+                .antMatchers("/", "/contact","/genres","/products").permitAll()
                 .antMatchers("/admin", "/admin/**").hasAnyAuthority("ADMIN")
                 .antMatchers("/publishers","/logout").hasAnyAuthority("USER","ADMIN")
                 .antMatchers("/css/**", "/js/**", "/images/**").permitAll()

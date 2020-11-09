@@ -3,9 +3,11 @@ package be.thomasmore.graduaten.gameplay.controller;
 
 
 import be.thomasmore.graduaten.gameplay.entity.Genre;
+import be.thomasmore.graduaten.gameplay.entity.Product;
 import be.thomasmore.graduaten.gameplay.entity.Publisher;
 import be.thomasmore.graduaten.gameplay.service.GenreService;
 import be.thomasmore.graduaten.gameplay.service.PublisherService;
+import be.thomasmore.graduaten.gameplay.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,12 +26,20 @@ public class MainController {
 
     @Autowired
     GenreService genreService;
+    @Autowired
+    ProductService productService;
 
     @RequestMapping("/")
     public String index() {
         return "index";
     }
 
+    @RequestMapping("/products")
+    public String dataProduct(Model model) {
+        List<Product> products = productService.getProducts();
+        model.addAttribute("products", products);
+        return "products";
+    }
 
     @RequestMapping("/publishers")
     public String dataMultiple(Model model) {
