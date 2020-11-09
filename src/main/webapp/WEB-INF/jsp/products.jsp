@@ -50,7 +50,7 @@
                     out.print("<td>" + product.getAgeCategory() + "</td>" );
                     out.print("<td>" + product.getGenre() + "</td>" );
                     out.print("<td>" + product.getLanguage() + "</td>" );
-                    out.print("<td>Edit | Delete</td>" );
+                    out.print("<td><a href=\"edit-product.jsp?id="+product.getId()+"\">Edit | <a href=\"delete-product.jsp?id="+product.getId()+"\"> Delete</a></td>" );
                     out.print("</tr>");
                 }
                 out.print("</table>");
