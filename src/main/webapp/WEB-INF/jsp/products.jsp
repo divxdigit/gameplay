@@ -37,17 +37,25 @@
             <%
                 List<Product> products = (List<Product>) request.getAttribute("products");
                 out.print("<table border='1' class=\"table table-md table-light table-hover table-bordered  \" >");
-                out.print("<tr><th>Id</th><th>Naam</th><th>Leeftijdscategorie</th><th>Genre</th><th>Taal</th></tr>");
+                out.print("<tr><th>Id</th><th>Naam</th><th>Leeftijdscategorie</th><th>Genre</th><th>Taal</th><th>Acties</th></tr>");
+
+                //Als er geen producten beschikbaar zijn of wanneer de search-string geen resultaten oplevert.
+                if (products.isEmpty()) {
+                    out.print("<tr><td colspan = \"5\" class=\"error\"> Er werden geen producten gevonden.</td>");
+                }
+                //Wanneer er wel producten zijn gegeven, wordt de tabel opgebouwd met de verkregen gegevens.
                 for (Product product: products) {
                     out.print("<tr><td>" + product.getId() + "</td>");
                     out.print("<td>" + product.getName() + "</td>" );
                     out.print("<td>" + product.getAgeCategory() + "</td>" );
                     out.print("<td>" + product.getGenre() + "</td>" );
                     out.print("<td>" + product.getLanguage() + "</td>" );
+                    out.print("<td>Edit | Delete</td>" );
                     out.print("</tr>");
                 }
                 out.print("</table>");
             %>
+
             <%--this.id = id;
             this.name = name;
             this.description = description;
