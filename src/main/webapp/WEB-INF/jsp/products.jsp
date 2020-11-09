@@ -21,10 +21,15 @@
 </head>
 <body>
 <div class="container" style="margin-top: 25px ">
+    <div class="col-md-8">
     <h1>
         Overzicht Bordspellen
     </h1>
-    <div class="col-md-8 table-responsive ">
+        <p>
+            Hieronder vind u een lijst met alle beschikbare bordspellen. U kan ook de zoekfunctie gebruiken voor het zoeken op naam.
+        </p>
+    </div>
+    <div class="col-md-10 table-responsive ">
         <form class="form-inline my-2 my-md-2" method="get" action="/search">
             <input class="form-control" type="text" placeholder="Geef naam" name="searchString">
             <button class="btn btn-info" id="button-id" type="submit">Zoeken
@@ -37,11 +42,11 @@
             <%
                 List<Product> products = (List<Product>) request.getAttribute("products");
                 out.print("<table border='1' class=\"table table-md table-light table-hover table-bordered  \" >");
-                out.print("<tr><th>Id</th><th>Naam</th><th>Leeftijdscategorie</th><th>Genre</th><th>Taal</th><th>Acties</th></tr>");
+                out.print("<tr><th>Id</th><th>Naam</th><th>Leeftijdscategorie</th><th>Genre</th><th>Taal</th><th>Verkooprijs</th><th>Huurprijs (per week)</th><th>Acties</th></tr>");
 
                 //Als er geen producten beschikbaar zijn of wanneer de search-string geen resultaten oplevert.
                 if (products.isEmpty()) {
-                    out.print("<tr><td colspan = \"5\" class=\"error\"> Er werden geen producten gevonden.</td>");
+                    out.print("<tr><td colspan = \"7\" class=\"error\"> Er werden geen producten gevonden.</td>");
                 }
                 //Wanneer er wel producten zijn gegeven, wordt de tabel opgebouwd met de verkregen gegevens.
                 for (Product product: products) {
@@ -50,6 +55,8 @@
                     out.print("<td>" + product.getAgeCategory() + "</td>" );
                     out.print("<td>" + product.getGenre() + "</td>" );
                     out.print("<td>" + product.getLanguage() + "</td>" );
+                    out.print("<td>" + product.getBuyPrice() + " euro</td>" );
+                    out.print("<td>" + product.getRentPrice() + " euro</td>" );
                     out.print("<td><a href=\"edit-product.jsp?id="+product.getId()+"\">Edit | <a href=\"delete-product.jsp?id="+product.getId()+"\"> Delete</a></td>" );
                     out.print("</tr>");
                 }
