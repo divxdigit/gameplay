@@ -190,9 +190,22 @@
                     <br /><b>Taal:</b> <%=product.getLanguage() %></p>
                     <%--<a href=/products/search?id=<%=product.getId()%>>Meer info </a>--%>
                 </div>
-                <div class="card-body">
+                <%--<div class="card-body">--%>
+                    <div>
                     <a href=/products/search?id=<%=product.getId()%> class="card-link" >Meer info </a>
                     <a href=/products/search?id=<%=product.getId()%> class="card-link" >Meer info </a>
+                    <hr />
+                    <% if (product.getRentStock() > 0) {%>
+                    <p>Leen dit spel - <%=product.getRentStock()%> stuk(s) beschikbaar</p>
+                    <%   } else  { %>
+                    <p>Er is geen spel beschikbaar voor uitleen.</p>
+                    <% } %>
+                    <hr />
+                    <% if (product.getBuyStock() > 0) {%>
+                    <p>Koop dit spel voor <%=product.getBuyPrice()%> euro.</p>
+                    <%   } else  { %>
+                    <p>Het spel is niet in voorraad voor verkoop.</p>
+                    <% } %>
                 </div>
             </div>
         </div>
