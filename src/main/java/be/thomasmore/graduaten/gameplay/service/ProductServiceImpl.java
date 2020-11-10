@@ -33,7 +33,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product getAgeCategoryById(Long id) {
+    public Product getProductById(Long id) {
         return productRepository.getOne(id);
     }
 }

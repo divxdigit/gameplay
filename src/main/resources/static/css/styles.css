@@ -18,3 +18,40 @@
     background-color: #9fcdff;
 
 }
+
+/* On mouse-over, add a deeper shadow */
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+.price {
+    color: grey;
+    font-size: 22px;
+}
+.card button {
+    border: none;
+    outline: 0;
+    padding: 12px;
+    color: white;
+    background-color: #000;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    font-size: 18px;
+}
+
+.card button:hover {
+    opacity: 0.7;
+}
+
+div.scrollmenu {
+    overflow: auto;
+    white-space: nowrap;
+    border-top: 5px solid black;
+    padding: 25px;
+    width: 100%;
+    display:flex;
+    flex-wrap:nowrap;
+}
+div.scrollmenu .card {
+    flex: 0 0 auto;
+}

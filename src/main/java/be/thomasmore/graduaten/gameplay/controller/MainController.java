@@ -14,7 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -23,35 +22,53 @@ import java.util.List;
 @Controller
 public class MainController {
 
-    @Autowired
-    PublisherService publisherService;
-
-    @Autowired
-    GenreService genreService;
-    @Autowired
-    ProductService productService;
-
+    // BASE
+    //-----------------
     @RequestMapping("/")
     public String index() {
         return "index";
     }
 
-    @RequestMapping("/products")
+    // PRODUCTS
+    //-----------------
+    @Autowired
+    ProductService productService;
+
+    @RequestMapping("/products/lst")
     public String productList(Model model) {
         List<Product> products = productService.getProducts();
         model.addAttribute("products", products);
-        return "products";
+        return "/products/lst";
     }
-    @RequestMapping(value= "/search")
+
+    // Method with multiple different parameters:
+    // You can have multiple controller methods use the same URI so long as you provide Spring enough additional information on which one it should use.
+    // https://stackoverflow.com/questions/34587254/accessing-multiple-controllers-with-same-request-mapping/34590355
+    @RequestMapping(value= "/products/search", params = {"id"})
+    public String productSearchId(Model model, HttpSession session, @RequestParam("id") Long id) {
+
+        if(id != 0){
+            model.addAttribute("productRecord", productService.getProductById(id));
+            return "/products/detail";
+        }
+        return "index";
+    }
+
+    @RequestMapping(value= "/products/search", params = {"searchString"})
     public String productSearch(Model model, HttpSession session, @RequestParam("searchString") String searchString) {
 
         if(searchString != null){
             model.addAttribute("products", productService.getProductByNameContains(searchString));
-            return "products";
+            return "/products/lst";
         }
         return "index";
-
     }
+
+
+    // PUBLISHERS
+    //-----------------
+    @Autowired
+    PublisherService publisherService;
 
     @RequestMapping("/publishers")
     public String dataMultiple(Model model) {
@@ -70,8 +87,10 @@ public class MainController {
         return "login";
     }
 
-
-
+    // GENRES
+    //-----------------
+    @Autowired
+    GenreService genreService;
 
     @RequestMapping("/genres")
     public String dataGenre(Model model) {
@@ -89,7 +108,8 @@ public class MainController {
         return "genres";
     }
 
-
+    // ADMIN
+    //-----------------
     @RequestMapping("/admin")
     public String admin() {
         return "admin";

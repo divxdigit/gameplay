@@ -9,6 +9,6 @@ public interface ProductService {
     List<Product> getProductByName(String name);
     List<Product> getProductByNameContains(String name);
 
-    Product getAgeCategoryById(Long id);
+    Product getProductById(Long id);
     Product addProduct(Product product);
 }

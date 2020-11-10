@@ -56,7 +56,7 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Aanbod</a>
                 <div class="dropdown-menu" aria-labelledby="Aanbod">
-                    <a class="dropdown-item" href="/products">Overzicht Bordspellen</a>
+                    <a class="dropdown-item" href="/products/lst">Overzicht Bordspellen</a>
                     <a class="dropdown-item" href="/genres">Genres</a>
                 </div>
             </li>
@@ -97,27 +97,61 @@
 
         <div class="btn-group" style="margin-left: 15px">
             <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Leden
+                <svg  width="20" height="20" fill="currentColor">
+                    <use xlink:href="/icons/bootstrap-icons.svg#person-circle" />
+                </svg> Leden
             </button>
             <div class="dropdown-menu dropdown-menu-right">
                 <sec:authorize access="hasAnyAuthority('ADMIN')">
-                    <a class="dropdown-item" href="/genres">Manage Genres</a>
-                    <a class="dropdown-item" href="#">Manage Games</a>
-                    <a class="dropdown-item" href="#">Manage Orders</a>
+                    <a class="dropdown-item" href="/genres">
+                        <svg  width="20" height="20" fill="currentColor">
+                            <use xlink:href="/icons/bootstrap-icons.svg#signpost-split" />
+                        </svg> Beheer Genres
+                    </a>
+                    <a class="dropdown-item" href="#">
+                        <svg  width="20" height="20" fill="currentColor">
+                            <use xlink:href="/icons/bootstrap-icons.svg#shield-check" />
+                        </svg> Beheer Leeftijdscategorieën
+                    </a>
+                    <a class="dropdown-item" href="#">
+                        <svg  width="20" height="20" fill="currentColor">
+                            <use xlink:href="/icons/bootstrap-icons.svg#dice-5" />
+                        </svg> Beheer Bordspellen
+                    </a>
+                    <a class="dropdown-item" href="#">
+                        <svg  width="20" height="20" fill="currentColor">
+                            <use xlink:href="/icons/bootstrap-icons.svg#reception-4" />
+                        </svg> Beheer Orders
+                    </a>
+                    <a class="dropdown-item" href="#">
+                        <svg  width="20" height="20" fill="currentColor">
+                            <use xlink:href="/icons/bootstrap-icons.svg#people-fill" />
+                        </svg> Beheer Gebruikers
+                    </a>
                     <hr>
                 </sec:authorize>
                 <sec:authorize access="hasAnyAuthority('USER')">
-                    <a class="dropdown-item" href="#">My orders</a>
+                    <a class="dropdown-item" href="#">
+                        <svg  width="20" height="20" fill="currentColor">
+                            <use xlink:href="/icons/bootstrap-icons.svg#receipt" />
+                        </svg> Mijn orders
+                    </a>
                     <hr>
                 </sec:authorize>
 
                 <sec:authorize access="!isAuthenticated()">
-                    <a class="dropdown-item" href="/login">Login</a>
+                    <a class="dropdown-item" href="/login">
+                        <svg  width="20" height="20" fill="currentColor">
+                            <use xlink:href="/icons/bootstrap-icons.svg#unlock" />
+                        </svg> Login
+                    </a>
 
                 </sec:authorize>
                 <%--<sec:authorize access="hasAnyAuthority('USER','ADMIN')">--%>
                 <sec:authorize access="isAuthenticated()">
-                    <a class="dropdown-item" href="/logout">Logout</a>
+                    <a class="dropdown-item" href="/logout"><svg  width="20" height="20" fill="currentColor">
+                        <use xlink:href="/icons/bootstrap-icons.svg#power" />
+                    </svg>Logout</a>
                 </sec:authorize>
             </div>
         </div>

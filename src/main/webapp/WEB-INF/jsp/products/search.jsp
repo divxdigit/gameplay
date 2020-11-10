@@ -12,17 +12,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link href="/css/bootstrap.css" rel="stylesheet">
+    <link href="/static/css/bootstrap.css" rel="stylesheet">
 
     <title>GamePlay - Bordspellen</title>
 
-    <jsp:include page="navigation.jsp" />
+    <jsp:include page="../navigation.jsp" />
 
 </head>
 <body>
 <div class="container" style="margin-top: 25px ">
     <h1>
-        Overzicht Bordspellen
+        Overzicht Bordspellen lalalaa - wordt niet gebruikt
     </h1>
     <div class="col-md-8 table-responsive ">
 
