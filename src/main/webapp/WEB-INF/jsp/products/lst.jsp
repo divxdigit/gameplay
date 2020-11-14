@@ -1,6 +1,7 @@
 <%@ page import="be.thomasmore.graduaten.gameplay.entity.Product" %>
 <%@ page import="java.util.List" %>
 <%@ page import="javax.swing.*" %>
+<%@ page import="be.thomasmore.graduaten.gameplay.entity.Genre" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%@taglib uri = "http://www.springframework.org/tags/form" prefix = "form"%>
@@ -39,7 +40,10 @@
             </button>
         </form>
         <br />
-
+        <%--<%  List<Genre> genres = (List<Genre>) request.getAttribute("genres");
+            for (Genre genre: genres) { %>
+                <p><%=genre.getName()%></p>
+             <%} %>--%>
 
             <%
                 List<Product> products = (List<Product>) request.getAttribute("products");
@@ -65,6 +69,7 @@
                 }
                 out.print("</table>");
             %>
+
 
             <%--this.id = id;
             this.name = name;

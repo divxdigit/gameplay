@@ -37,7 +37,9 @@ public class MainController {
     @RequestMapping("/products/lst")
     public String productList(Model model) {
         List<Product> products = productService.getProducts();
+        List<Genre> genres = genreService.getGenres();
         model.addAttribute("products", products);
+        model.addAttribute("genres", genres);
         return "/products/lst";
     }
 
@@ -59,6 +61,16 @@ public class MainController {
 
         if(searchString != null){
             model.addAttribute("products", productService.getProductByNameContainsIgnoreCase(searchString));
+            return "/products/lst";
+
+        }
+        return "index";
+    }
+
+    @RequestMapping(value= "/products/search", params = {"genreId"})
+    public String genreSearch(Model model, HttpSession session, @RequestParam("genreId") Long genreId) {
+        if(genreId >0 ){
+            model.addAttribute("genres", genreService.getGenreById(genreId));
             return "/products/lst";
         }
         return "index";
