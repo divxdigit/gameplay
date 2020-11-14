@@ -28,8 +28,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> getProductByNameContains(String name) {
-        return productRepository.findByNameContains(name);
+    public List<Product> getProductByNameContainsIgnoreCase(String name) {
+        return productRepository.findByNameContainsIgnoreCase(name);
     }
 
     @Override

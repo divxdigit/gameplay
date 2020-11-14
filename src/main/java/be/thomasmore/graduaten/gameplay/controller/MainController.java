@@ -58,7 +58,7 @@ public class MainController {
     public String productSearch(Model model, HttpSession session, @RequestParam("searchString") String searchString) {
 
         if(searchString != null){
-            model.addAttribute("products", productService.getProductByNameContains(searchString));
+            model.addAttribute("products", productService.getProductByNameContainsIgnoreCase(searchString));
             return "/products/lst";
         }
         return "index";

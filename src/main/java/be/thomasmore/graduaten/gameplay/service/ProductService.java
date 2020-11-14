@@ -7,7 +7,7 @@ import java.util.List;
 public interface ProductService {
     List<Product> getProducts();
     List<Product> getProductByName(String name);
-    List<Product> getProductByNameContains(String name);
+    List<Product> getProductByNameContainsIgnoreCase(String name);
 
     Product getProductById(Long id);
     Product addProduct(Product product);
