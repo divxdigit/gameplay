@@ -33,6 +33,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public List<Product> getProductByGenreId(Integer genre) {
+        return productRepository.findByGenreId(genre);
+    }
+
+
+    @Override
     public Product getProductById(Long id) {
         return productRepository.getOne(id);
     }

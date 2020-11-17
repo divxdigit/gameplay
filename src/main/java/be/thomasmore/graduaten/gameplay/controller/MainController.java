@@ -68,9 +68,9 @@ public class MainController {
     }
 
     @RequestMapping(value= "/products/search", params = {"genreId"})
-    public String genreSearch(Model model, HttpSession session, @RequestParam("genreId") Long genreId) {
+    public String genreSearch(Model model, HttpSession session, @RequestParam("genreId") Integer genreId) {
         if(genreId >0 ){
-            model.addAttribute("genres", genreService.getGenreById(genreId));
+            model.addAttribute("products", productService.getProductByGenreId(genreId));
             return "/products/lst";
         }
         return "index";

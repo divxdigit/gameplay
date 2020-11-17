@@ -38,7 +38,23 @@
                 <img src="/icons/search.svg" width="20" height="20" fill="none"/>
 
             </button>
+
         </form>
+<%--        <div>--%>
+<%--            <form class="form-inline my-2 my-md-2" method="get" action="/products/search">--%>
+<%--                <select name="genreId">--%>
+<%--                    <%  List<Genre> genres2 = (List<Genre>) request.getAttribute("genres");--%>
+<%--                        for (Genre genre: genres2) { %>--%>
+<%--                    <option value="<%= genre.getId() %>"><%= genre.getName() %></option>--%>
+<%--                    <%} %>--%>
+<%--                </select>--%>
+<%--                <button class="btn btn-info" id="button=id2" type="submit">Zoeken--%>
+<%--                    <img src="/icons/search.svg" width="20" height="20" fill="none"/>--%>
+
+<%--                </button>--%>
+<%--            </form>--%>
+<%--        </div>--%>
+
         <br />
         <%--<%  List<Genre> genres = (List<Genre>) request.getAttribute("genres");
             for (Genre genre: genres) { %>
