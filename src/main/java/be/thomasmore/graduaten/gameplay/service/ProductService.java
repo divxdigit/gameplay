@@ -8,7 +8,7 @@ public interface ProductService {
     List<Product> getProducts();
     List<Product> getProductByName(String name);
     List<Product> getProductByNameContainsIgnoreCase(String name);
-    List<Product> getProductByGenreId(Integer genre);
+    List<Product> getProductByGenreId(Long genre);
 
     Product getProductById(Long id);
     Product addProduct(Product product);

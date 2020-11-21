@@ -61,6 +61,7 @@ public class MainController {
 
         if(searchString != null){
             model.addAttribute("products", productService.getProductByNameContainsIgnoreCase(searchString));
+            model.addAttribute("genres", genreService.getGenres());
             return "/products/lst";
 
         }
@@ -68,9 +69,12 @@ public class MainController {
     }
 
     @RequestMapping(value= "/products/search", params = {"genreId"})
-    public String genreSearch(Model model, HttpSession session, @RequestParam("genreId") Integer genreId) {
+    public String genreSearch(Model model, HttpSession session, @RequestParam("genreId") Long genreId) {
         if(genreId >0 ){
+
             model.addAttribute("products", productService.getProductByGenreId(genreId));
+            model.addAttribute("genres", genreService.getGenres());
+
             return "/products/lst";
         }
         return "index";
