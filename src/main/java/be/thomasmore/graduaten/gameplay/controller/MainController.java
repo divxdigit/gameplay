@@ -1,13 +1,8 @@
 package be.thomasmore.graduaten.gameplay.controller;
 
 
-
-import be.thomasmore.graduaten.gameplay.entity.Genre;
-import be.thomasmore.graduaten.gameplay.entity.Product;
-import be.thomasmore.graduaten.gameplay.entity.Publisher;
-import be.thomasmore.graduaten.gameplay.service.GenreService;
-import be.thomasmore.graduaten.gameplay.service.PublisherService;
-import be.thomasmore.graduaten.gameplay.service.ProductService;
+import be.thomasmore.graduaten.gameplay.entity.*;
+import be.thomasmore.graduaten.gameplay.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -118,6 +113,21 @@ public class MainController {
         List<Genre> genres = genreService.getGenres();
         model.addAttribute("genres", genres);
         return "genres";
+    }
+
+    @Autowired
+    UserService userService;
+
+    @Autowired
+    UserTypeService userTypeService;
+
+    @RequestMapping("/users")
+    public String dataUser(Model model) {
+        List<User> users = userService.getUsers();
+        List<UserType> usertypes = userTypeService.getUserTypes();
+        model.addAttribute("users", users);
+        model.addAttribute("userTypes", usertypes);
+        return "users/users";
     }
 
     /* Werkt niet */

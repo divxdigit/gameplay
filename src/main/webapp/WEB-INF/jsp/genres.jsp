@@ -32,7 +32,7 @@
             out.print("</table>");
         %>
     </div>
-    <div class="col-md-6>
+    <div class="col-md-6">
         <form action="/genres" method="post">
             <p>
                 <label for="name">Genre</label>

@@ -31,6 +31,7 @@ public class User {
     }
 
     public User(String email, String password, boolean active, boolean deleted, Integer wrongpasswordcounter, String lastname, String firstname, String street, String number, Integer postalcode, String city, UserType userType) {
+        this.id = id;
         this.email = email;
         this.password = password;
         this.active = active;
