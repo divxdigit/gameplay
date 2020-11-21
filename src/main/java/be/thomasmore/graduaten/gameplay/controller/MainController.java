@@ -27,6 +27,13 @@ public class MainController {
         return "index";
     }
 
+    // REGISTRATION
+    //-----------------
+    @RequestMapping("/users/registration")
+    public String registration() {
+        return "/users/registration";
+    }
+
     // PRODUCTS
     //-----------------
     @Autowired

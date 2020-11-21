@@ -156,8 +156,16 @@
                             <use xlink:href="/icons/bootstrap-icons.svg#unlock" />
                         </svg> Login
                     </a>
-
                 </sec:authorize>
+
+                <sec:authorize access="!isAuthenticated()">
+                    <a class="dropdown-item" href="/users/registration">
+                        <svg  width="20" height="20" fill="currentColor">
+                            <use xlink:href="/icons/bootstrap-icons.svg#person-plus" />
+                        </svg> Account aanmaken
+                    </a>
+                </sec:authorize>
+
                 <%--<sec:authorize access="hasAnyAuthority('USER','ADMIN')">--%>
                 <sec:authorize access="isAuthenticated()">
                     <a class="dropdown-item" href="/logout"><svg  width="20" height="20" fill="currentColor">
