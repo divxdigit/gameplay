@@ -11,8 +11,9 @@
     <title>GamePlay - Online webshop</title>
 
     <jsp:include page="navigation.jsp" />
+    <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
-    <%--<style>
+<%--<style>
         .bd-placeholder-img {
             font-size: 1.125rem;
             text-anchor: middle;
@@ -35,7 +36,13 @@
     <div class="row">
         <div class="col-md-8">
             <h2>
-                Welkom bij Gameplay
+                Welkom
+                        <sec:authorize access="isAuthenticated()">
+<%--                            <sec:authentication property="principal.username" />--%>
+                            <sec:authentication property="principal.firstname" />
+                            <sec:authentication property="principal.lastname" />
+                        </sec:authorize>
+                bij Gameplay
             </h2>
             <p>GamePlay is opgericht als schoolproject en uitgegroeid tot een webshop met een zeer groot aanbod.
             </p>

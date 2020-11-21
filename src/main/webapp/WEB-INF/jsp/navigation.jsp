@@ -63,6 +63,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="/contact">Contact</a>
             </li>
+
           <%--  &lt;%&ndash;<sec:authorize access="hasAnyAuthority('USER','ADMIN')">&ndash;%&gt;
             <sec:authorize access="isAuthenticated()">
             <li class="nav-item">
@@ -99,7 +100,17 @@
             <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <svg  width="20" height="20" fill="currentColor">
                     <use xlink:href="/icons/bootstrap-icons.svg#person-circle" />
-                </svg> Leden
+                </svg>
+
+                <sec:authorize access="isAuthenticated()">
+                    <sec:authentication property="principal.firstname" />
+                    <sec:authentication property="principal.lastname" />
+                </sec:authorize>
+
+                <sec:authorize access="!isAuthenticated()">
+                    Leden
+                </sec:authorize>
+
             </button>
             <div class="dropdown-menu dropdown-menu-right">
                 <sec:authorize access="hasAnyAuthority('ADMIN')">
