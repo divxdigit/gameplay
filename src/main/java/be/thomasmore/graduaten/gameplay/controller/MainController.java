@@ -56,32 +56,6 @@ public class MainController {
 
     }
 
-/*    @PostMapping(value = "/users/registration/submit", produces = {MediaType.APPLICATION_JSON_VALUE})
-    @ResponseBody
-    public UserResponse addUser(@ModelAttribute @Valid User user, BindingResult result) {
-
-        UserResponse response = new UserResponse();
-
-        if (result.hasErrors()) {
-
-            Map<String, String> errors = result.getFieldErrors().stream()
-                    .collect(
-                            Collectors.toMap(
-                                    FieldError::getField,
-                                    FieldError::getDefaultMessage,
-                                    (field1, field2) -> {
-                                    System.out.println("duplicate key found!");
-                                    return field1;}));
-
-            response.setValidated(false);
-            response.setErrorMessages(errors);
-        } else {
-
-            response.setValidated(true);
-        }
-        return response;
-    }*/
-
     // PRODUCTS
     //-----------------
     @Autowired
