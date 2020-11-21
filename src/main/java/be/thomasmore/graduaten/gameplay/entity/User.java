@@ -1,6 +1,10 @@
 package be.thomasmore.graduaten.gameplay.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "Users")
@@ -9,14 +13,24 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message="Veld mag niet leeg zijn")
+    @Email(message ="Email moet geldig zijn")
     private String email;
+
+    @NotBlank(message ="Wachtwoord is een verplicht veld")
+    @Size(min=5, message ="Wachtwoord moet min. 5 karakters hebben")
     private String password;
+
     private boolean active;  // flag: user is not active after # amount false password input
     private boolean deleted; // this is a soft delete of a user. This is needed for history queries
     private Integer wrongpasswordcounter;
 
+    @NotBlank(message="Achternaam mag niet leeg zijn")
     private String lastname;
+
+    @NotBlank(message="Voornaam mag niet leeg zijn")
     private String firstname;
+
     private String street;
     private String number;
     private Integer postalcode;

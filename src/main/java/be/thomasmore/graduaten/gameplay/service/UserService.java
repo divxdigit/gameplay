@@ -17,6 +17,8 @@ public interface UserService {
     List<User> getUsersIsActive(Boolean bool);
     List<User> getUsersByFirstnameLastname(String firstname, String lastname);
 
-    User addUser(User user);
+    Boolean existsByEmail(String email);
+    Boolean addUser(User user);
+
 
 }

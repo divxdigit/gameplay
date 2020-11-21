@@ -1,16 +1,28 @@
 package be.thomasmore.graduaten.gameplay.controller;
 
-
 import be.thomasmore.graduaten.gameplay.entity.*;
 import be.thomasmore.graduaten.gameplay.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Controller
 public class MainController {
@@ -25,9 +37,50 @@ public class MainController {
     // REGISTRATION
     //-----------------
     @RequestMapping("/users/registration")
-    public String registration() {
+    public String registration(ModelMap model) {
+        User user = new User();
+        model.addAttribute("user",user);
         return "/users/registration";
     }
+
+    @PostMapping("/users/registration/submit")
+    public String addUser(@Valid @ModelAttribute("user") User user, BindingResult result, ModelMap model) {
+
+        if (result.hasErrors()){ return "/users/registration"; }
+
+        if (userService.existsByEmail(user.getEmail())==true){ return "/users/registration-fail"; }
+
+        if(userService.addUser(user)==true){ return "/users/registration-success"; };
+
+        return "/users/registration-fail";
+
+    }
+
+/*    @PostMapping(value = "/users/registration/submit", produces = {MediaType.APPLICATION_JSON_VALUE})
+    @ResponseBody
+    public UserResponse addUser(@ModelAttribute @Valid User user, BindingResult result) {
+
+        UserResponse response = new UserResponse();
+
+        if (result.hasErrors()) {
+
+            Map<String, String> errors = result.getFieldErrors().stream()
+                    .collect(
+                            Collectors.toMap(
+                                    FieldError::getField,
+                                    FieldError::getDefaultMessage,
+                                    (field1, field2) -> {
+                                    System.out.println("duplicate key found!");
+                                    return field1;}));
+
+            response.setValidated(false);
+            response.setErrorMessages(errors);
+        } else {
+
+            response.setValidated(true);
+        }
+        return response;
+    }*/
 
     // PRODUCTS
     //-----------------
