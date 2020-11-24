@@ -40,20 +40,29 @@ public class MainController {
     public String registration(ModelMap model) {
         User user = new User();
         model.addAttribute("user",user);
+        model.addAttribute("success",true);
         return "/users/registration";
     }
 
     @PostMapping("/users/registration/submit")
     public String addUser(@Valid @ModelAttribute("user") User user, BindingResult result, ModelMap model) {
 
+        model.addAttribute("emailMessage",null);
+        model.addAttribute("success",true);
+
         if (result.hasErrors()){ return "/users/registration"; }
 
-        if (userService.existsByEmail(user.getEmail())==true){ return "/users/registration-fail"; }
+        if (userService.existsByEmail(user.getEmail())==true){
 
-        if(userService.addUser(user)==true){ return "/users/registration-success"; };
+            model.addAttribute("emailMessage","Het emailadres dat je hebt opgegeven bestaat al.");
+            return "/users/registration"; }
 
-        return "/users/registration-fail";
+        if(userService.addUser(user)==true){
 
+            return "/users/registration-summary"; };
+
+        model.addAttribute("success",false);
+        return "/users/registration";
     }
 
     // PRODUCTS
@@ -107,7 +116,6 @@ public class MainController {
         return "index";
     }
 
-
     // PUBLISHERS
     //-----------------
     @Autowired
@@ -141,6 +149,17 @@ public class MainController {
         model.addAttribute("genres", genres);
         return "genres";
     }
+    /* Werkt niet */
+    @PostMapping("/genres")
+    public String postGenre(Model model, HttpServletRequest request) {
+        String name = request.getParameter("name");
+
+        model.addAttribute("genre", new Genre(name));
+        return "genres";
+    }
+
+    // USERS
+    //-----------------
 
     @Autowired
     UserService userService;
@@ -157,13 +176,16 @@ public class MainController {
         return "users/users";
     }
 
-    /* Werkt niet */
-    @PostMapping("/genres")
-    public String postGenre(Model model, HttpServletRequest request) {
-        String name = request.getParameter("name");
+    // ORDERS
+    //-----------------
+    @Autowired
+    OrderService orderService;
 
-        model.addAttribute("genre", new Genre(name));
-        return "genres";
+    @RequestMapping("/orders/edit")
+    public String dataOrder(Model model) {
+        List<Order> orders = orderService.getOrders();
+        model.addAttribute("orders", orders);
+        return "orders/edit";
     }
 
     // ADMIN

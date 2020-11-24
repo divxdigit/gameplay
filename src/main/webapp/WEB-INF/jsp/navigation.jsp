@@ -91,10 +91,10 @@
 --%>
 
         </ul>
-        <form class="form-inline my-2 my-md-0" method="get" action="/search">
+<%--        <form class="form-inline my-2 my-md-0" method="get" action="/search">
             <input class="form-control" type="text" placeholder="Zoeken naar" name="searchString">
             <button id="button-id" type="submit">Search</button>
-        </form>
+        </form>--%>
 
         <div class="btn-group" style="margin-left: 15px">
             <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -129,7 +129,7 @@
                             <use xlink:href="/icons/bootstrap-icons.svg#dice-5" />
                         </svg> Beheer Bordspellen
                     </a>
-                    <a class="dropdown-item" href="#">
+                    <a class="dropdown-item" href="/orders/edit">
                         <svg  width="20" height="20" fill="currentColor">
                             <use xlink:href="/icons/bootstrap-icons.svg#reception-4" />
                         </svg> Beheer Orders

@@ -1,10 +1,11 @@
 package be.thomasmore.graduaten.gameplay.entity;
 
+import org.hibernate.validator.constraints.Range;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "Users")
@@ -13,27 +14,40 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message="Veld mag niet leeg zijn")
-    @Email(message ="Email moet geldig zijn")
+    @NotBlank(message="Veld mag niet leeg zijn.")
+    @Email(message ="Email moet geldig zijn.")
     private String email;
 
-    @NotBlank(message ="Wachtwoord is een verplicht veld")
-    @Size(min=5, message ="Wachtwoord moet min. 5 karakters hebben")
+    @NotBlank(message ="Wachtwoord is een verplicht veld.")
+    @Size(min=5, message ="Wachtwoord moet min. 5 karakters hebben.")
     private String password;
 
     private boolean active;  // flag: user is not active after # amount false password input
     private boolean deleted; // this is a soft delete of a user. This is needed for history queries
     private Integer wrongpasswordcounter;
 
-    @NotBlank(message="Achternaam mag niet leeg zijn")
+    @NotBlank(message="Achternaam mag niet leeg zijn.")
     private String lastname;
 
-    @NotBlank(message="Voornaam mag niet leeg zijn")
+    @NotBlank(message="Voornaam mag niet leeg zijn.")
     private String firstname;
 
+    @NotNull(message="Geboortedatum mag niet leeg zijn.")
+    @Past(message="Uw geboortedatum kan geen toekomstige datum zijn.")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date birthdate;
+
+    @NotBlank(message="Straat mag niet leeg zijn.")
     private String street;
+
+    @NotBlank(message="Huisnummer mag niet leeg zijn.")
     private String number;
+
+    @NotNull(message="Postcode mag niet leeg zijn.")
+    @Range(min=1000,max=9999,message="Postcode betreft een waarde tussen 1000-9999 in België.")
     private Integer postalcode;
+
+    @NotBlank(message="Gemeente mag niet leeg zijn.")
     private String city;
 
     @ManyToOne
@@ -44,7 +58,7 @@ public class User {
     public User() {
     }
 
-    public User(String email, String password, boolean active, boolean deleted, Integer wrongpasswordcounter, String lastname, String firstname, String street, String number, Integer postalcode, String city, UserType userType) {
+    public User(String email, String password, boolean active, boolean deleted, Integer wrongpasswordcounter, String lastname, String firstname,Date birthdate, String street, String number, Integer postalcode, String city, UserType userType) {
         this.id = id;
         this.email = email;
         this.password = password;
@@ -53,6 +67,7 @@ public class User {
         this.wrongpasswordcounter = wrongpasswordcounter;
         this.lastname = lastname;
         this.firstname = firstname;
+        this.birthdate = birthdate;
         this.street = street;
         this.number = number;
         this.postalcode = postalcode;
@@ -60,7 +75,6 @@ public class User {
         this.userType = userType;
     }
     //Get & Set
-
 
     public Long getId() {
         return id;
@@ -124,6 +138,13 @@ public class User {
     }
     public void setFirstname(String firstname) {
         this.firstname = firstname;
+    }
+
+    public Date getBirthdate() {
+        return birthdate;
+    }
+    public void setBirthdate(Date birthdate) {
+        this.birthdate = birthdate;
     }
 
     public String getStreet() {

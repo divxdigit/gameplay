@@ -2,13 +2,19 @@ package be.thomasmore.graduaten.gameplay.entity;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name = "Products")
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id")
     private Long id;
+
+    @OneToMany(mappedBy = "product")
+    Set<OrderProduct> orderProducts;
+
     private String name;
 
     private String description;
@@ -36,8 +42,9 @@ public class Product {
     public Product() {
     }
 
-    public Product(Long id, String name, String description, Genre genre, AgeCategory ageCategory, Integer playersMinimum, Integer playersMaximum, Integer rating, Integer rentStock, Integer buyStock, Publisher publisher, String picture, Double rentPrice, Double buyPrice, Language language, Date dateLaunch, Boolean active) {
+    public Product(Long id, Set<OrderProduct> orderProducts, String name, String description, Genre genre, AgeCategory ageCategory, Integer playersMinimum, Integer playersMaximum, Integer rating, Integer rentStock, Integer buyStock, Publisher publisher, String picture, Double rentPrice, Double buyPrice, Language language, Date dateLaunch, Boolean active) {
         this.id = id;
+        this.orderProducts = orderProducts;
         this.name = name;
         this.description = description;
         this.genre = genre;
@@ -56,7 +63,7 @@ public class Product {
         this.active = active;
     }
 
-    // get/set
+// get/set
 
     public Long getId() {
         return id;
@@ -179,6 +186,8 @@ public class Product {
         this.active = active;
     }
 
+    public Set<OrderProduct> getOrderProducts() { return orderProducts; }
+    public void setOrderProducts(Set<OrderProduct> orderProducts) { this.orderProducts = orderProducts; }
 
     //methodes
 

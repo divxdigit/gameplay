@@ -11,8 +11,8 @@ public interface OrderService {
     Order getOrderById(Long id);
 
     List<Order> getOrdersByUser(User user);
-    List<Order> getOrdersByDateCreated(Date datecreated);
-    List<Order> getOrdersByDateCollect(Date datecollect);
+    List<Order> getOrdersByDateCreated(Date dateCreated);
+    List<Order> getOrdersByDateCollect(Date dateCollect);
 
 
     List<Order> getOrdersCreatedBetweenDate(Date dateStart, Date dateEnd);

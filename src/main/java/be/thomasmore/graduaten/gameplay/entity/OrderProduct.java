@@ -1,18 +1,23 @@
 package be.thomasmore.graduaten.gameplay.entity;
 
-import org.hibernate.criterion.Order;
-
 import javax.persistence.*;
 
 
-@Table(name = "OrderProducts")
+@Table(name = "Order_Products")
+@Entity
 public class OrderProduct {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToOne
+    @JoinColumn(name ="order_id")
+    private Order order;
+
+    @ManyToOne
+    @JoinColumn(name ="product_id")
     private Product product;
 
-    private Order order;
     private Integer rentDurationWeeks;
     private Integer orderType;
     private Double price;
@@ -22,10 +27,10 @@ public class OrderProduct {
     public OrderProduct() {
     }
 
-    public OrderProduct(Long id, Product product, Order order, Integer rentDurationWeeks, Integer orderType, Double price, Double discountPrice) {
+    public OrderProduct(Long id, Order order, Product product, Integer rentDurationWeeks, Integer orderType, Double price, Double discountPrice) {
         this.id = id;
-        this.product = product;
         this.order = order;
+        this.product = product;
         this.rentDurationWeeks = rentDurationWeeks;
         this.orderType = orderType;
         this.price = price;
@@ -85,7 +90,6 @@ public class OrderProduct {
     //methods
 
     //overrides
-
 
     @Override
     public String toString() {

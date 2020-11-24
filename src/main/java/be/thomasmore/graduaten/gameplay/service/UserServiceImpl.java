@@ -51,13 +51,15 @@ public class UserServiceImpl implements UserService {
         return userRepository.existsByEmail(email);
     }
 
-
     @Override
     public Boolean addUser(User user) {
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setType(userTypeService.getUserTypeById((long)1));
         user.setId(userRepository.findTopByOrderByIdDesc().getId() +1);
+        user.setActive(true);
+        user.setDeleted(false);
+        user.setWrongPasswordcounter(0);
         User insert = userRepository.save(user);
 
         return userRepository.existsById(user.getId());  }
