@@ -2,6 +2,15 @@ package be.thomasmore.graduaten.gameplay.controller;
 
 import be.thomasmore.graduaten.gameplay.entity.*;
 import be.thomasmore.graduaten.gameplay.service.*;
+
+
+import be.thomasmore.graduaten.gameplay.entity.*;
+import be.thomasmore.graduaten.gameplay.repository.ProductRepository;
+import be.thomasmore.graduaten.gameplay.service.GenreService;
+import be.thomasmore.graduaten.gameplay.service.LanguageService;
+import be.thomasmore.graduaten.gameplay.service.PublisherService;
+import be.thomasmore.graduaten.gameplay.service.ProductService;
+import be.thomasmore.graduaten.gameplay.service.AgeCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
@@ -16,10 +25,18 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.HashMap;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -116,6 +133,69 @@ public class MainController {
         return "index";
     }
 
+    @RequestMapping("/products/create")
+    public String productCreate(Model model) {
+        List<Product> products = productService.getProducts();
+        List<Genre> genres = genreService.getGenres();
+        List<Language> languages = languageService.getLanguage();
+        List<AgeCategory> ageCategories = ageCategoryService.getAgeCategories();
+        List<Publisher> publishers = publisherService.getPublishers();
+        model.addAttribute("products", products);
+        model.addAttribute("genres", genres);
+        model.addAttribute("languages", languages);
+        model.addAttribute("ageCategories", ageCategories);
+        model.addAttribute("publishers", publishers);
+        int x =0;
+        return "/products/create";
+    }
+
+    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    private Date date;
+
+    @PostMapping("/products/do-create")
+    public String addProduct(Model model, HttpServletRequest request) {
+        Product product = new Product();
+            product.setName(request.getParameter("name"));
+            product.setDescription(request.getParameter("description"));
+            product.setGenre(genreService.getGenreById(Long.parseLong(request.getParameter("genreId"))));
+            product.setAgeCategory(ageCategoryService.getAgeCategoryById(Long.parseLong(request.getParameter("ageCategoryId"))));
+            product.setPublisher(publisherService.getPublisherById(Long.parseLong(request.getParameter("publisherId"))));
+            product.setLanguage(languageService.getLanguageById(Long.parseLong(request.getParameter("languageId"))));
+            product.setPlayersMinimum(Integer.parseInt(request.getParameter("playersMinimum")));
+            product.setPlayersMaximum(Integer.parseInt(request.getParameter("playersMaximum")));
+            product.setRentStock(Integer.parseInt(request.getParameter("rentStock")));
+            product.setRentPrice(Double.parseDouble(request.getParameter("rentPrice")));
+            product.setBuyStock(Integer.parseInt(request.getParameter("buyStock")));
+            product.setBuyPrice(Double.parseDouble(request.getParameter("buyPrice")));
+            product.setPicture(request.getParameter("picture"));
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+            LocalDate dateLaunch = LocalDate.parse(request.getParameter("dateLaunch"), formatter);
+            product.setDateLaunch(dateLaunch);
+        /*String name = request.getParameter("name");
+        String description = request.getParameter("name");
+        Genre genre = genreService.getGenreById(Long.parseLong(request.getParameter("genreId")));
+        AgeCategory ageCategory = ageCategoryService.getAgeCategoryById(Long.parseLong(request.getParameter("ageCategoryId")));
+        Publisher publisher = publisherService.getPublisherById(Long.parseLong(request.getParameter("publisherId")));
+        Language language = languageService.getLanguageById(Long.parseLong(request.getParameter("languageId")));
+        Integer playersMinimum = Integer.parseInt(request.getParameter("playersMinimum"));
+        Integer playersMaximum = Integer.parseInt(request.getParameter("playersMaximum"));
+        Integer rentStock = Integer.parseInt(request.getParameter("rentStock"));
+        Integer buyStock = Integer.parseInt(request.getParameter("buyStock"));
+        String picture = request.getParameter("picture");
+
+
+        */
+
+        productService.addProduct(product);
+
+        List<Product> products = productService.getProducts();
+        List<Genre> genres = genreService.getGenres();
+        model.addAttribute("products", products);
+        model.addAttribute("genres", genres);
+        return "/products/lst";
+    }
+
     // PUBLISHERS
     //-----------------
     @Autowired
@@ -149,6 +229,7 @@ public class MainController {
         model.addAttribute("genres", genres);
         return "genres";
     }
+
     /* Werkt niet */
     @PostMapping("/genres")
     public String postGenre(Model model, HttpServletRequest request) {
@@ -157,6 +238,18 @@ public class MainController {
         model.addAttribute("genre", new Genre(name));
         return "genres";
     }
+
+    // LANGUAGES
+    //-----------------
+    @Autowired
+    LanguageService languageService;
+
+
+    // AGE CATEGORY
+    //-----------------
+    @Autowired
+    AgeCategoryService ageCategoryService;
+
 
     // USERS
     //-----------------

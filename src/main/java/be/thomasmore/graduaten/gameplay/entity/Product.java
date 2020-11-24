@@ -1,6 +1,7 @@
 package be.thomasmore.graduaten.gameplay.entity;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Set;
 
@@ -34,7 +35,7 @@ public class Product {
     private Double buyPrice;
     @ManyToOne
     private Language language;
-    private Date dateLaunch;
+    private LocalDate dateLaunch;
     private Boolean active;
 
     ///constructors
@@ -42,6 +43,8 @@ public class Product {
     public Product() {
     }
 
+    public Product(String name, String description, Genre genre, AgeCategory ageCategory, Integer playersMinimum, Integer playersMaximum, Integer rating, Integer rentStock, Integer buyStock, Publisher publisher, String picture, Double rentPrice, Double buyPrice, Language language, LocalDate dateLaunch, Boolean active) {
+        /*this.id = id;*/
     public Product(Long id, Set<OrderProduct> orderProducts, String name, String description, Genre genre, AgeCategory ageCategory, Integer playersMinimum, Integer playersMaximum, Integer rating, Integer rentStock, Integer buyStock, Publisher publisher, String picture, Double rentPrice, Double buyPrice, Language language, Date dateLaunch, Boolean active) {
         this.id = id;
         this.orderProducts = orderProducts;
@@ -172,10 +175,10 @@ public class Product {
         this.language = language;
     }
 
-    public Date getDateLaunch() {
+    public LocalDate getDateLaunch() {
         return dateLaunch;
     }
-    public void setDateLaunch(Date dateLaunch) {
+    public void setDateLaunch(LocalDate dateLaunch) {
         this.dateLaunch = dateLaunch;
     }
 

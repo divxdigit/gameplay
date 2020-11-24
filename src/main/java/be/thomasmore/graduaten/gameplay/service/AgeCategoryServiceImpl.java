@@ -1,6 +1,7 @@
 package be.thomasmore.graduaten.gameplay.service;
 
 import be.thomasmore.graduaten.gameplay.entity.AgeCategory;
+import be.thomasmore.graduaten.gameplay.entity.Publisher;
 import be.thomasmore.graduaten.gameplay.repository.AgeCategoryRepository;
 import be.thomasmore.graduaten.gameplay.repository.PublisherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +15,8 @@ public class AgeCategoryServiceImpl implements AgeCategoryService {
     AgeCategoryRepository ageCategoryRepository;
 
     @Override
-    public List<AgeCategory> getAgeCategory() {
-        return ageCategoryRepository.findAll();
+    public List<AgeCategory> getAgeCategories() {
+        return ageCategoryRepository.findAll() ;
     }
 
     @Override

@@ -42,4 +42,5 @@ public class ProductServiceImpl implements ProductService {
     public Product getProductById(Long id) {
         return productRepository.getOne(id);
     }
+
 }

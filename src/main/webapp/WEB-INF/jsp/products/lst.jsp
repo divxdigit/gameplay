@@ -13,8 +13,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link href="/static/css/styles.css" rel="stylesheet">
-    <link href="/static/css/bootstrap.css" rel="stylesheet">
+    <link href="/css/styles.css" rel="stylesheet">
+    <link href="/css/bootstrap.css" rel="stylesheet">
 
     <title>GamePlay - Bordspellen</title>
 
