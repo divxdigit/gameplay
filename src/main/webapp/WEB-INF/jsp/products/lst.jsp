@@ -192,7 +192,7 @@
         for (Product product: products2) {
     %>
 
-        <div class="col-sm-4 scrollmenu ">
+        <div class="col-sm-4  ">
             <div class="card shadow p-3  bg-white rounded" style="margin-bottom: 15px; " >
                 <%--<img class="card-img-top"  src="/icons/image.svg" alt="Card image cap" width="70%" />--%>
                 <%--<svg class="text-success" width="150" height="150" fill="currentColor">--%>

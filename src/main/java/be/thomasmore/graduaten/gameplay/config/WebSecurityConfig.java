@@ -3,6 +3,7 @@ package be.thomasmore.graduaten.gameplay.config;
 import be.thomasmore.graduaten.gameplay.service.UserDetailsServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -54,6 +55,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin", "/admin/**").hasAnyAuthority("ADMIN")
                 .antMatchers("/publishers","/logout").hasAnyAuthority("USER","ADMIN")
                 .antMatchers("/css/**", "/js/**", "/images/**","/icons/**").permitAll()
+                .antMatchers(HttpMethod.POST,"/products/do-create").permitAll()
                 .antMatchers("/login").anonymous()
                 .anyRequest().authenticated()
                 .and()
@@ -76,7 +78,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
 
                 .exceptionHandling().accessDeniedPage("/403");
-
+        http.csrf().disable();
     }
 
 }

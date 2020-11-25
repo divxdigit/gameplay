@@ -31,13 +31,14 @@
         <%
             if (request.getAttribute("productRecord") != null) {
                 Product product = (Product) request.getAttribute("productRecord");
-                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                /*SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");*/
         %>
         <h1><%= product.getName()%></h1>
        <%-- <div>ID: <%= product.getId()%></div>
         <div>Naam: <%= product.getName()%></div>--%>
         <div>Uitgever: <%= product.getPublisher()%></div>
-        <div>Launch datum: <%= format.format(product.getDateLaunch())%></div>
+        <%--<div>Launch datum: <%= format.format(product.getDateLaunch())%></div>--%>
+        <div>Launch datum: <%= product.getDateLaunch()%></div>
         <div>Leeftijdscategory: <%= product.getAgeCategory()%></div>
 
         <div>Taal: <%= product.getLanguage()%></div>

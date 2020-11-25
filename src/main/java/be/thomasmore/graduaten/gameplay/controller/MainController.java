@@ -149,7 +149,7 @@ public class MainController {
         return "/products/create";
     }
 
-    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
     private Date date;
 
     @PostMapping("/products/do-create")
@@ -169,7 +169,7 @@ public class MainController {
             product.setBuyPrice(Double.parseDouble(request.getParameter("buyPrice")));
             product.setPicture(request.getParameter("picture"));
 
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             LocalDate dateLaunch = LocalDate.parse(request.getParameter("dateLaunch"), formatter);
             product.setDateLaunch(dateLaunch);
         /*String name = request.getParameter("name");
