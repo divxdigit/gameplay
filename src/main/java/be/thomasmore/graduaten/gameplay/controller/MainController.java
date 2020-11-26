@@ -133,6 +133,26 @@ public class MainController {
         return "index";
     }
 
+    @RequestMapping(value= "/products/buy", params = {"id"})
+    public String productBuyId(Model model, HttpSession session, @RequestParam("id") Long id) {
+
+        if(id != 0){
+            model.addAttribute("productRecord", productService.getProductById(id));
+            return "/products/buy";
+        }
+        return "index";
+    }
+    @RequestMapping(value= "/products/rent", params = {"id"})
+    public String productRentId(Model model, HttpSession session, @RequestParam("id") Long id) {
+
+        if(id != 0){
+            model.addAttribute("productRecord", productService.getProductById(id));
+            model.addAttribute("userRecord", userService.getUserById(id));   //werkt niet - koppeling met authenticated user missed
+            return "/products/rent";
+        }
+        return "index";
+    }
+
     @RequestMapping("/products/create")
     public String productCreate(Model model) {
         List<Product> products = productService.getProducts();
@@ -152,9 +172,10 @@ public class MainController {
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
     private Date date;
 
+
     @PostMapping("/products/do-create")
     public String addProduct(Model model, HttpServletRequest request) {
-        Product product = new Product();
+       Product product = new Product();
             product.setName(request.getParameter("name"));
             product.setDescription(request.getParameter("description"));
             product.setGenre(genreService.getGenreById(Long.parseLong(request.getParameter("genreId"))));
@@ -172,20 +193,9 @@ public class MainController {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             LocalDate dateLaunch = LocalDate.parse(request.getParameter("dateLaunch"), formatter);
             product.setDateLaunch(dateLaunch);
-        /*String name = request.getParameter("name");
-        String description = request.getParameter("name");
-        Genre genre = genreService.getGenreById(Long.parseLong(request.getParameter("genreId")));
-        AgeCategory ageCategory = ageCategoryService.getAgeCategoryById(Long.parseLong(request.getParameter("ageCategoryId")));
-        Publisher publisher = publisherService.getPublisherById(Long.parseLong(request.getParameter("publisherId")));
-        Language language = languageService.getLanguageById(Long.parseLong(request.getParameter("languageId")));
-        Integer playersMinimum = Integer.parseInt(request.getParameter("playersMinimum"));
-        Integer playersMaximum = Integer.parseInt(request.getParameter("playersMaximum"));
-        Integer rentStock = Integer.parseInt(request.getParameter("rentStock"));
-        Integer buyStock = Integer.parseInt(request.getParameter("buyStock"));
-        String picture = request.getParameter("picture");
 
 
-        */
+
 
         productService.addProduct(product);
 

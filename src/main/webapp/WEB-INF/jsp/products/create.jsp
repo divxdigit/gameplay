@@ -60,6 +60,9 @@
             <div class="form-group col-md-6">
                 <label for="name">Naam</label>
                 <input class="form-control" type="text" name="name" id="name" placeholder="Naam bordspel">
+                <div class="invalid-feedback d-block">
+                    <errors path ="name"/>
+                </div>
             </div>
             <div class="form-group col-md-6">
                 <label for="genre">Genre</label>
