@@ -1,5 +1,7 @@
 package be.thomasmore.graduaten.gameplay.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -20,8 +22,11 @@ public class Order {
     @ManyToOne
     private User user;
 
-    private Date dateCreated;
-    private Date dateCollect;
+    @DateTimeFormat(pattern = "MM/dd/yyyy")
+    private LocalDate dateCreated;
+
+    @DateTimeFormat(pattern = "MM/dd/yyyy")
+    private LocalDate dateCollect;
 
     private int status;
 
@@ -30,7 +35,7 @@ public class Order {
     public Order() {
     }
 
-    public Order(Long id, Set<OrderProduct> orderProducts, User user, Date dateCreated, Date dateCollect, int status) {
+    public Order(Long id, Set<OrderProduct> orderProducts, User user, LocalDate dateCreated, LocalDate dateCollect, int status) {
         this.id = id;
         this.orderProducts = orderProducts;
         this.user = user;
@@ -57,19 +62,19 @@ public class Order {
         this.user = user;
     }
 
-    public Date getDateCreated() {
+    public LocalDate getDateCreated() {
         return dateCreated;
     }
 
-    public void setDateCreated(Date dateCreated) {
+    public void setDateCreated(LocalDate dateCreated) {
         this.dateCreated = dateCreated;
     }
 
-    public Date getDateCollect() {
+    public LocalDate getDateCollect() {
         return dateCollect;
     }
 
-    public void setDateCollect(Date dateCollect) {
+    public void setDateCollect(LocalDate dateCollect) {
         this.dateCollect = dateCollect;
     }
 

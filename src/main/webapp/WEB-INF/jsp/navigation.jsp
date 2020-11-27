@@ -16,8 +16,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 --%>
 
+<%--    <!-- Bootstrap CSS -->
+    <link href="/css/bootstrap.css" rel="stylesheet">--%>
+
     <!-- Bootstrap CSS -->
-    <link href="/css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 
 <%--    <title>Index</title>--%>
 
@@ -48,14 +51,15 @@
         <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarsExample03">
+    <div class="collapse navbar-collapse" id="aanbodDropdown">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/">Home <span class="sr-only" >(current)</span></a>
             </li>
+
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Aanbod</a>
-                <div class="dropdown-menu" aria-labelledby="Aanbod">
+                <a class="nav-link dropdown-toggle" href="#" id="aanbodDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Aanbod</a>
+                <div class="dropdown-menu" aria-labelledby="aanbodDropdownMenuLink">
                     <a class="dropdown-item" href="/products/lst">Overzicht Bordspellen</a>
                     <a class="dropdown-item" href="/genres">Genres</a>
                 </div>
@@ -114,7 +118,7 @@
             </button>
             <div class="dropdown-menu dropdown-menu-right">
                 <sec:authorize access="hasAnyAuthority('ADMIN')">
-                    <a class="dropdown-item" href="/genres">
+                    <a class="dropdown-item" href="/genres" >
                         <svg  width="20" height="20" fill="currentColor">
                             <use xlink:href="/icons/bootstrap-icons.svg#signpost-split" />
                         </svg> Beheer Genres

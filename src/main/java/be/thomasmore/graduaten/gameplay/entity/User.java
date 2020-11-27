@@ -5,7 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "Users")
@@ -35,7 +35,7 @@ public class User {
     @NotNull(message="Geboortedatum mag niet leeg zijn.")
     @Past(message="Uw geboortedatum kan geen toekomstige datum zijn.")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date birthdate;
+    private LocalDate birthdate;
 
     @NotBlank(message="Straat mag niet leeg zijn.")
     private String street;
@@ -58,8 +58,7 @@ public class User {
     public User() {
     }
 
-    public User(String email, String password, boolean active, boolean deleted, Integer wrongpasswordcounter, String lastname, String firstname,Date birthdate, String street, String number, Integer postalcode, String city, UserType userType) {
-        this.id = id;
+    public User(String email, String password, boolean active, boolean deleted, Integer wrongpasswordcounter, String lastname, String firstname,LocalDate birthdate, String street, String number, Integer postalcode, String city, UserType userType) {
         this.email = email;
         this.password = password;
         this.active = active;
@@ -140,10 +139,10 @@ public class User {
         this.firstname = firstname;
     }
 
-    public Date getBirthdate() {
+    public LocalDate getBirthdate() {
         return birthdate;
     }
-    public void setBirthdate(Date birthdate) {
+    public void setBirthdate(LocalDate birthdate) {
         this.birthdate = birthdate;
     }
 

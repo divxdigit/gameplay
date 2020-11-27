@@ -181,7 +181,7 @@ values (1,'Maarten', 'Celen','1989-02-8','$2y$12$6eh76MVXh9JnigU5Crsg7OZYMRf3FLp
 insert into Users(user_type_id, firstname, lastname, birthdate, password, email, street, number, postalcode, city, active, deleted, wrongpasswordcounter)
 values (2,'Eve', 'Ravignot','1990-03-8','$2y$12$NgrX/SSjH8bF.4jpQtPsruWmkZOGQDU8zuQaaszp1xvZclT6bG8si','Eve@test.com','Teststraat','69',2300,'Turnhout',TRUE,FALSE,0);
 insert into Users(user_type_id, firstname, lastname, birthdate, password, email, street, number, postalcode, city, active, deleted, wrongpasswordcounter)
-values (1,'Ruben', 'Van Hout','1991-09-04','$2y$12$L5MWSKjMiyLC63KLsEEWEOawtiKRDJz59AvOgG3oORUj3tJrqKS9K','Ruben@test.com','Demostraat','15',2300,'Turnhout',TRUE,FALSE,0);
+values (1,'Ruben', 'Van Hout','1991-09-04','$2y$12$L5MWSKjMiyLC63KLsEEWEOawtiKRDJz59AvOgG3oORUj3tJrqKS9K','Ruben@test.com','Kathovestraat','12/1',2260,'Westerlo',TRUE,FALSE,0);
 
 
 CREATE TABLE IF NOT EXISTS Orders(

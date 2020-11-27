@@ -10,6 +10,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <html lang="en" >
 <head>
     <!-- Required meta tags -->
@@ -34,7 +35,7 @@
         </h1>
     </div>
 
-    <form action="/products/do-create" method="post">
+    <form:form action="/products/do-create" method="POST">
         <div class="form-row">
 
             <div class="form-group col-md-6 ">
@@ -137,7 +138,7 @@
         </div>--%>
         <button type="submit" class="btn btn-primary">Nieuw bordspel registreren</button>
 
-    </form>
+    </form:form>
 
 
 </div>

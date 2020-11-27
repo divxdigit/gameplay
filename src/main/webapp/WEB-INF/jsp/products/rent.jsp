@@ -35,7 +35,7 @@
             <h1>Verhuur</h1>
             Beste <sec:authentication property="principal.firstname" /> <sec:authentication property="principal.lastname" />,
             <br/>
-            Alvorens de reservatie te bevestigen, gelieve eerst te controlleren of de gegevens in orde zijn.
+            Alvorens de reservatie te bevestigen, gelieve eerst te controleren of de gegevens in orde zijn.
             <br/><br/>
         </div>
     </div>
@@ -43,7 +43,7 @@
     <div class="row">
         <div class="col-md-6 table-responsive ">
             <h2>Gegevens over het spel</h2>
-            <% if(product.getPicture() =="") { %>
+            <% if(product.getPicture().equals("")) { %>
                 <svg  height="200" fill="currentColor">
                     <use xlink:href="/icons/bootstrap-icons.svg#image" />
                 </svg>
@@ -88,11 +88,11 @@
                 <tbody>
                 <tr>
                     <th scope="row">Voornaam</th>
-                    <td><sec:authentication property="principal.firstname" /></td>
+                    <td><%=user.getFirstname()%></td>
                 </tr>
                 <tr>
                     <th scope="row">Achternaam</th>
-                    <td><sec:authentication property="principal.lastname" /></td>
+                    <td><%=user.getLastname()%></td>
                 </tr>
                 <tr>
                     <th scope="row">Geboortedatum</th>
@@ -140,6 +140,7 @@
     <% } else { %>
     <div>No output</div>
     <% } %>
+    </div>
 </div>
 </body>
 

@@ -15,6 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -25,6 +28,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -136,8 +140,17 @@ public class MainController {
     @RequestMapping(value= "/products/buy", params = {"id"})
     public String productBuyId(Model model, HttpSession session, @RequestParam("id") Long id) {
 
+        User user = new User();
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
+            String currentUserName = authentication.getName();
+            user = userService.getUserByEmail(currentUserName);
+        }
+
         if(id != 0){
             model.addAttribute("productRecord", productService.getProductById(id));
+            model.addAttribute("userRecord", user);
             return "/products/buy";
         }
         return "index";
@@ -145,11 +158,20 @@ public class MainController {
     @RequestMapping(value= "/products/rent", params = {"id"})
     public String productRentId(Model model, HttpSession session, @RequestParam("id") Long id) {
 
+        User user = new User();
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
+            String currentUserName = authentication.getName();
+            user = userService.getUserByEmail(currentUserName);
+        }
+
         if(id != 0){
             model.addAttribute("productRecord", productService.getProductById(id));
-            model.addAttribute("userRecord", userService.getUserById(id));   //werkt niet - koppeling met authenticated user missed
+            model.addAttribute("userRecord", user);
             return "/products/rent";
         }
+
         return "index";
     }
 
@@ -193,9 +215,6 @@ public class MainController {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             LocalDate dateLaunch = LocalDate.parse(request.getParameter("dateLaunch"), formatter);
             product.setDateLaunch(dateLaunch);
-
-
-
 
         productService.addProduct(product);
 
