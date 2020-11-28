@@ -55,6 +55,12 @@ public class MainController {
         return "index";
     }
 
+    @RequestMapping("/index")
+    public String index2() {
+        return "index";
+    }
+
+    /*
     // REGISTRATION
     //-----------------
     @RequestMapping("/users/registration")
@@ -259,7 +265,7 @@ public class MainController {
         return "genres";
     }
 
-    /* Werkt niet */
+    *//* Werkt niet *//*
     @PostMapping("/genres")
     public String postGenre(Model model, HttpServletRequest request) {
         String name = request.getParameter("name");
@@ -315,6 +321,6 @@ public class MainController {
     @RequestMapping("/admin")
     public String admin() {
         return "admin";
-    }
+    }*/
 }
 
