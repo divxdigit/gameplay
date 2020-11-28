@@ -21,9 +21,9 @@ public class OrderServiceImpl implements OrderService{
     }
 
     @Override
-    public Order addOrder(Order order) {
-
-            return orderRepository.save(order);
+    public Boolean addOrder(Order order) {
+        orderRepository.save(order);
+        return true;
     }
 
     @Override
@@ -34,6 +34,11 @@ public class OrderServiceImpl implements OrderService{
     @Override
     public List<Order> getOrdersByUser(User user) {
         return orderRepository.findByUser(user);
+    }
+
+    @Override
+    public Order getOrderByUserByStatus(User user, Integer status) {
+        return orderRepository.findByUserAndStatus(user, status);
     }
 
     @Override

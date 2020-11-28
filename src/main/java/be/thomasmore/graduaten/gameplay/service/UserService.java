@@ -1,6 +1,5 @@
 package be.thomasmore.graduaten.gameplay.service;
 
-import be.thomasmore.graduaten.gameplay.entity.Publisher;
 import be.thomasmore.graduaten.gameplay.entity.User;
 
 import java.util.List;

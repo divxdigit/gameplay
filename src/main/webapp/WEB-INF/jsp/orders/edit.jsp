@@ -49,7 +49,7 @@
                     </tr>
                 </thead>
 
-            <%
+            <%--<%
                 List<Order> orders = (List<Order>) request.getAttribute("orders");
                 for (Order order: orders) {
                     out.print("<tr class='clickable-row' data-href='/products/create' style=\"cursor: pointer\" >");
@@ -60,7 +60,18 @@
                     out.print("</tr>");
 
                 }
-            %>
+            %>--%>
+                <%
+                    List<Order> orders = (List<Order>) request.getAttribute("orders");
+                    for (Order order: orders) { %>
+                        <tr class='clickable-row' data-href='/products/create' style="cursor: pointer" >
+                        <td><%=order.getId()%></td>
+                        <td><%=order.getUser().getFirstname()%> <%=order.getUser().getLastname()%></td>
+                        <td><%=order.getDateCreated()%> </td>
+                        <td><%=order.getDateCollect()%> </td>
+                        </tr>
+
+                <%    } %>
 
             </table>
 </div>

@@ -1,15 +1,13 @@
 package be.thomasmore.graduaten.gameplay.service;
 
 import be.thomasmore.graduaten.gameplay.entity.User;
-import be.thomasmore.graduaten.gameplay.config.*;
 import be.thomasmore.graduaten.gameplay.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import be.thomasmore.graduaten.gameplay.service.*;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -27,7 +25,16 @@ public class UserServiceImpl implements UserService {
     public List<User> getUsers() { return userRepository.findAll();}
 
     @Override
-    public User getUserById(Long id) { return userRepository.getOne(id);}
+    public User getUserById(Long id) {
+        Optional<User> user = userRepository.findById(id);
+        if (user.isPresent()) {
+            return user.get();
+        }
+        else {
+            return null;
+        }
+    }
+
 
     @Override
     public List<User> getUsersByLastname(String name) { return userRepository.findByLastname(name);  }

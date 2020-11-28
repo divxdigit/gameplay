@@ -11,6 +11,7 @@ public interface OrderService {
     Order getOrderById(Long id);
 
     List<Order> getOrdersByUser(User user);
+    Order getOrderByUserByStatus(User user, Integer state);
     List<Order> getOrdersByDateCreated(Date dateCreated);
     List<Order> getOrdersByDateCollect(Date dateCollect);
 
@@ -19,6 +20,6 @@ public interface OrderService {
     List<Order> getOrdersCollectedBetweenDate(Date dateStart, Date dateEnd);
 
     // CRUD
-    Order addOrder(Order order);
+    Boolean addOrder(Order order);
 
 }
