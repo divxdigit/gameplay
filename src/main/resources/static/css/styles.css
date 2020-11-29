@@ -55,3 +55,8 @@ div.scrollmenu {
 div.scrollmenu .card {
     flex: 0 0 auto;
 }
+
+td a {
+    display:block;
+    width:100%;
+}

@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public interface OrderProductService {
     List<OrderProduct> getOrderProducts();
-    Optional<OrderProduct> getOrderProductsById(Long id);
+    OrderProduct getOrderProductById(Long id);
 
     List<OrderProduct> getOrderProductsByOrder(Order order);
     List<OrderProduct> getOrderProductsByProduct(Product product);
@@ -17,5 +17,7 @@ public interface OrderProductService {
 
     // CRUD
     Boolean addOrderProduct(OrderProduct orderProduct);
-
+    Boolean deleteOrderProductsByOrder(Order order);
+    Boolean updateOrderProduct(OrderProduct orderProduct);
+    Boolean deleteOrderProductByID(Long orderProductID);
 }

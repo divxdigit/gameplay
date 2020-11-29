@@ -3,6 +3,8 @@ package be.thomasmore.graduaten.gameplay.entity;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
@@ -22,10 +24,12 @@ public class Order {
     @ManyToOne
     private User user;
 
-    @DateTimeFormat(pattern = "MM/dd/yyyy")
+    @NotNull(message = "Veld moet verplicht ingevuld worden met formaat yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateCreated;
 
-    @DateTimeFormat(pattern = "MM/dd/yyyy")
+    @NotNull(message = "Veld moet verplicht ingevuld worden met formaat yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateCollect;
 
     private int status;
@@ -42,6 +46,7 @@ public class Order {
         this.dateCreated = dateCreated;
         this.dateCollect = dateCollect;
         this.status = status;
+
     }
 
 // get/set
@@ -62,6 +67,10 @@ public class Order {
         this.user = user;
     }
 
+    public int getStatus() { return status;  }
+
+    public void setStatus(int status) { this.status = status; }
+
     public LocalDate getDateCreated() {
         return dateCreated;
     }
@@ -78,12 +87,9 @@ public class Order {
         this.dateCollect = dateCollect;
     }
 
-    public int getStatus() { return status;  }
-
-    public void setStatus(int status) { this.status = status; }
-
     public Set<OrderProduct> getOrderProducts() { return orderProducts; }
 
     public void setOrderProducts(Set<OrderProduct> orderProducts) { this.orderProducts = orderProducts; }
+
 }
 

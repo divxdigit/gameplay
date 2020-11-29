@@ -55,7 +55,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin", "/admin/**").hasAnyAuthority("ADMIN")
                 .antMatchers("/publishers","/logout").hasAnyAuthority("USER","ADMIN")
 
-                .antMatchers("/", "/index","/contact","/genres","/products/*","/search","/users/*","/users/registration/*","/orders/*").permitAll()
+                .antMatchers("/", "/index","/contact","/genres","/products/*","/search","/users/*","/users/registration/*","/orders/**","/orderproducts/**").permitAll()
 
 
 
@@ -68,7 +68,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 //LOG IN
                 .formLogin().permitAll()
-                //.loginPage("/login")
+                .loginPage("/login")
+                .failureUrl("/login?error=true")
                 //.loginProcessingUrl("/perform_login")
                 //.defaultSuccessUrl("/publishers", true)
                 //.failureHandler(authenticationFailureHandler())

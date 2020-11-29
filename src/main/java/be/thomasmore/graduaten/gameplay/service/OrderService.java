@@ -21,5 +21,7 @@ public interface OrderService {
 
     // CRUD
     Boolean addOrder(Order order);
+    Boolean updateOrder(Order order);
+    Boolean deleteOrderByID(Long orderID);
 
 }

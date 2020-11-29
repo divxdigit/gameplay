@@ -22,13 +22,21 @@ public class OrderProductServiceImpl implements OrderProductService{
     }
 
     @Override
-    public Optional<OrderProduct> getOrderProductsById(Long id) {
-        return orderProductRepository.findById(id);
+    public OrderProduct getOrderProductById(Long id) {
+
+
+        Optional<OrderProduct> orderProduct = orderProductRepository.findById(id);
+        if (orderProduct.isPresent()) {
+            return orderProduct.get();
+        }
+        else {
+            return null;
+        }
     }
 
     @Override
     public List<OrderProduct> getOrderProductsByOrder(Order order) {
-        return null;
+        return orderProductRepository.findByOrder(order);
     }
 
     @Override
@@ -45,6 +53,30 @@ public class OrderProductServiceImpl implements OrderProductService{
     @Override
     public Boolean addOrderProduct(OrderProduct orderProduct) {
         orderProductRepository.save(orderProduct);
+        return true;
+    }
+
+    @Override
+    public Boolean deleteOrderProductsByOrder(Order order) {
+
+        List<OrderProduct> orderProducts = orderProductRepository.findByOrder(order);
+        if(orderProducts != null){
+            for(OrderProduct orderProduct : orderProducts){
+                orderProductRepository.deleteById(orderProduct.getId());
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public Boolean updateOrderProduct(OrderProduct orderProduct) {
+        orderProductRepository.save(orderProduct);
+        return true;
+    }
+
+    @Override
+    public Boolean deleteOrderProductByID(Long orderProductID) {
+        orderProductRepository.deleteById(orderProductID);
         return true;
     }
 }

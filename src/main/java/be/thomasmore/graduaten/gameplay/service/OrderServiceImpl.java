@@ -9,11 +9,15 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class OrderServiceImpl implements OrderService{
     @Autowired
     OrderRepository orderRepository;
+
+    @Autowired
+    OrderProductService orderProductService;
 
         @Override
     public List<Order> getOrders() {
@@ -27,8 +31,35 @@ public class OrderServiceImpl implements OrderService{
     }
 
     @Override
+    public Boolean updateOrder(Order order) {
+        orderRepository.save(order);
+        return true;
+    }
+
+    @Override
+    public Boolean deleteOrderByID(Long orderID) {
+
+        Optional<Order> searchOrder = orderRepository.findById(orderID);
+        if (searchOrder.isPresent()) {
+            Order order = searchOrder.get();
+            orderProductService.deleteOrderProductsByOrder(order);
+            orderRepository.delete(order);
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    @Override
     public Order getOrderById(Long id) {
-        return orderRepository.getOne(id);
+        Optional<Order> order = orderRepository.findById(id);
+        if (order.isPresent()) {
+            return order.get();
+        }
+        else {
+            return null;
+        }
     }
 
     @Override
