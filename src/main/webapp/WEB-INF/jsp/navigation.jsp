@@ -128,7 +128,7 @@
                             <use xlink:href="/icons/bootstrap-icons.svg#shield-check" />
                         </svg> Beheer Leeftijdscategorieën
                     </a>
-                    <a class="dropdown-item" href="#">
+                    <a class="dropdown-item" href="/products/lst">
                         <svg  width="20" height="20" fill="currentColor">
                             <use xlink:href="/icons/bootstrap-icons.svg#dice-5" />
                         </svg> Beheer Bordspellen

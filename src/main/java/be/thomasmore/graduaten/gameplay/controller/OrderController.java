@@ -118,8 +118,73 @@ public class OrderController {
         return dataOrder(model);
     }
 
+
+/*    @RequestMapping(method=RequestMethod.POST, value= "/products/do-rent")*/
+    @PostMapping("/products/do-orderproduct")
+    public String addOrderProduct(Model model, HttpServletRequest request) {
+        Integer x = 0;
+        User user = userService.getUserById(Long.valueOf(request.getParameter("userid")));
+        Product product = productService.getProductById(Long.valueOf(request.getParameter("productid")));
+
+
+
+
+
+        Integer typeid= Integer.valueOf(request.getParameter("typeid"));
+
+        //check order for user with status 0
+        Order order = new Order();
+
+        if (orderService.getOrderByUserByStatus(user, 0) == null){
+            //User heeft geen winkelmandje open. Basisinfo opgeven op het order
+            order.setStatus(0);
+            order.setUser(user);
+            order.setDateCreated(LocalDate.now());
+            order.setDateCollect(LocalDate.now());
+            if(! orderService.addOrder(order)) {
+                //foutmelding geven
+            };
+        }
+
+        order = orderService.getOrderByUserByStatus(user, 0);
+        order.setDeliveryStreet(request.getParameter("deliveryStreet"));
+        order.setDeliveryNumber(request.getParameter("deliveryNumber"));
+        order.setDeliveryPostalcode(Integer.valueOf(request.getParameter("deliveryPostalcode")));
+        order.setDeliveryCity(request.getParameter("deliveryCity"));
+
+        //Create orderproduct object
+        OrderProduct orderProduct = new OrderProduct();
+
+        orderProduct.setOrder(order);
+        orderProduct.setOrderType(typeid);
+        orderProduct.setProduct(product);
+
+        if (typeid == 1) {
+            orderProduct.setPrice(product.getBuyPrice());
+        } else {
+            Integer weeks= Integer.valueOf(request.getParameter("weeks"));
+            orderProduct.setPrice(product.getRentPrice()* weeks);
+            orderProduct.setRentDurationWeeks(weeks);
+        }
+
+        // Add orderproduct to wishlist (order)
+        orderProductService.addOrderProduct(orderProduct);
+
+        Set<OrderProduct> orderProductList = new HashSet<OrderProduct>() ;
+        orderProductList.add(orderProduct);
+
+        // Generate list for return view
+        List<Order> orders = orderService.getOrders();
+        Order selectedOrder = new Order();
+        model.addAttribute("orders", orders);
+        model.addAttribute("selectedOrder", selectedOrder );
+        return "orders/edit";
+    }
+
     @RequestMapping("/orders/add")
     public String addOrder(Model model) {
+
+
         //input
         User user = userService.getUserById(Long.valueOf(3));
         Integer product1 = 1;

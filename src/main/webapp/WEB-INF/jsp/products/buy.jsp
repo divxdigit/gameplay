@@ -32,10 +32,10 @@
 <div class="container" style="margin-top: 25px ">
     <div class="row">
         <div class="col-md-8 table-responsive ">
-            <h1>Verhuur</h1>
+            <h1>Verkoop</h1>
             Beste <sec:authentication property="principal.firstname" /> <sec:authentication property="principal.lastname" />,
             <br/>
-            Alvorens de reservatie te bevestigen, gelieve eerst te controleren of de gegevens in orde zijn.
+            Alvorens de aankoop te bevestigen, gelieve eerst te controleren of de gegevens in orde zijn.
             <br/><br/>
         </div>
     </div>
@@ -57,7 +57,7 @@
             <br/>Spelers: <%=product.getPlayersMinimum()%> - <%=product.getPlayersMaximum()%>
             <br/>Leeftijdscategorie: <%=product.getAgeCategory()%>
             <br/>
-            <br/>Prijs: <%=product.getRentPrice()%> €/week
+            <br/>Prijs: <%=product.getBuyPrice()%>
             <br/>
             <br/>
         </div>
@@ -109,9 +109,9 @@
         <div class="row">
             <div class="col-md-12 table-responsive ">
                 <h2>Bevestig</h2>
-                <% if (product.getRentStock() < 0) { %>
-                Momenteel is er geen artikel in stock voor verhuur.
-                <% } else if (product.getRentStock() == 1)  { %>
+                <% if (product.getBuyStock() < 0) { %>
+                Momenteel is er geen artikel in stock voor verkoop.
+                <% } else if (product.getBuyStock() == 1)  { %>
                 <form action="/products/do-orderproduct" method="post">
                     <div>
                         <%--<label for="productid">productid</label>--%>
@@ -123,7 +123,7 @@
                     </div>
                     <div>
                         <%--<label for="userid">typeid</label>--%>
-                        <input class="form-control" type="hidden" name="typeid" id="typeid" value="2" /> <%-- 2 : rent--%>
+                        <input class="form-control" type="hidden" name="typeid" id="typeid" value="1" /> <%-- 1 : buy--%>
                     </div>
                     <div><b>Facturatie adres:</b></div>
                     <div>
@@ -143,12 +143,9 @@
                         <input class="form-control" type="text" name="deliveryCity" id="deliveryCity" value="<%=user.getCity()%>" />
                     </div>
 
-                    <div>
-                        <label for="weeks">Aantal weken</label>
-                        <input class="form-control" type="text" name="weeks" id="weeks" value="1" />
-                    </div>
-                    <button type="submit" class="btn btn-primary">Huur nu</button>
-                    Haast je, er is nog <%=product.getRentStock()%> stuk beschikbaar om uit te lenen - <%=product.getRentPrice()%> €/week
+
+                    <button type="submit" class="btn btn-primary">Koop nu voor <%=product.getBuyPrice()%> €</button>
+                    Haast je, er is nog <%=product.getBuyStock()%> stuk beschikbaar.
                 </form>
 
 
@@ -164,7 +161,7 @@
                     </div>
                     <div>
                         <%--<label for="userid">typeid</label>--%>
-                        <input class="form-control" type="hidden" name="typeid" id="typeid" value="2" /> <%-- 2 : rent--%>
+                        <input class="form-control" type="hidden" name="typeid" id="typeid" value="1" /> <%-- 1 : buy--%>
                     </div>
                     <div><b>Facturatie adres:</b></div>
                     <div>
@@ -183,13 +180,9 @@
                         <label for="deliveryCity">Gemeente</label>
                         <input class="form-control" type="text" name="deliveryCity" id="deliveryCity" value="<%=user.getCity()%>" />
                     </div>
-                    <div>
-                        <label for="weeks">Aantal weken</label>
-                        <input class="form-control" type="text" name="weeks" id="weeks" value="1"/>
-                    </div>
 
-                    <button type="submit" class="btn btn-primary">Huur nu</button>
-                    Er zijn nog <%=product.getRentStock()%> stuks beschikbaar om uit te lenen - <%=product.getRentPrice()%> €/week.
+                    <button type="submit" class="btn btn-primary">Koop nu voor <%=product.getBuyPrice()%> €</button>
+                    Er zijn nog <%=product.getRentStock()%> stuks beschikbaar.
                 </form>
                 <% } %>
             </div>
