@@ -1,5 +1,6 @@
 package be.thomasmore.graduaten.gameplay.controller;
 
+import be.thomasmore.graduaten.gameplay.config.FileUploadUtil;
 import be.thomasmore.graduaten.gameplay.entity.*;
 import be.thomasmore.graduaten.gameplay.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,15 +15,22 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
+
+
+//afbeeldingen
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class ProductController {
@@ -146,8 +154,11 @@ public class ProductController {
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
     private Date date;
 
+
+
     @PostMapping("/products/do-create")
-    public String addProduct(Model model, HttpServletRequest request) {
+    public String addProduct(Model model, HttpServletRequest request, @RequestParam("image") MultipartFile multipartFile) throws IOException {
+    //public String addProduct(Model model, HttpServletRequest request) {
         Product product = new Product();
         product.setName(request.getParameter("name"));
         product.setDescription(request.getParameter("description"));
@@ -161,13 +172,19 @@ public class ProductController {
         product.setRentPrice(Double.parseDouble(request.getParameter("rentPrice")));
         product.setBuyStock(Integer.parseInt(request.getParameter("buyStock")));
         product.setBuyPrice(Double.parseDouble(request.getParameter("buyPrice")));
-        product.setPicture(request.getParameter("picture"));
+        //product.setPicture(request.getParameter("picture"));
+
+        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+        product.setPicture("/images/GameImages/" + fileName);
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate dateLaunch = LocalDate.parse(request.getParameter("dateLaunch"), formatter);
         product.setDateLaunch(dateLaunch);
 
         productService.addProduct(product);
+
+        String uploadDir = "target/classes/static/images/GameImages";
+        FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
 
         List<Product> products = productService.getProducts();
         List<Genre> genres = genreService.getGenres();

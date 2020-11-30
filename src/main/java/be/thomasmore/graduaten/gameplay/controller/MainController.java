@@ -1,5 +1,6 @@
 package be.thomasmore.graduaten.gameplay.controller;
 
+import be.thomasmore.graduaten.gameplay.config.FileUploadUtil;
 import be.thomasmore.graduaten.gameplay.entity.*;
 import be.thomasmore.graduaten.gameplay.repository.UserRepository;
 import be.thomasmore.graduaten.gameplay.service.*;
@@ -25,12 +26,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.security.Principal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -44,6 +47,10 @@ import javax.validation.Valid;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.stream.Collectors;
+
+//afbeeldingen
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class MainController {
@@ -219,7 +226,7 @@ public class MainController {
 
 
     @PostMapping("/products/do-create")
-    public String addProduct(Model model, HttpServletRequest request) {
+    public String addProduct(Model model, HttpServletRequest request, @RequestParam("image") MultipartFile multipartFile) throws IOException {
        Product product = new Product();
             product.setName(request.getParameter("name"));
             product.setDescription(request.getParameter("description"));
@@ -233,13 +240,19 @@ public class MainController {
             product.setRentPrice(Double.parseDouble(request.getParameter("rentPrice")));
             product.setBuyStock(Integer.parseInt(request.getParameter("buyStock")));
             product.setBuyPrice(Double.parseDouble(request.getParameter("buyPrice")));
-            product.setPicture(request.getParameter("picture"));
+            //product.setPicture(request.getParameter("picture"));
+
+            String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+            product.setPicture("/images/GameImages/" + fileName);
 
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             LocalDate dateLaunch = LocalDate.parse(request.getParameter("dateLaunch"), formatter);
             product.setDateLaunch(dateLaunch);
 
         productService.addProduct(product);
+
+        String uploadDir = "/images/GameImages/" + product.getId();
+        FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
 
         List<Product> products = productService.getProducts();
         List<Genre> genres = genreService.getGenres();

@@ -35,7 +35,7 @@
         </h1>
     </div>
 
-    <form:form action="/products/do-create" method="POST">
+    <form:form action="/products/do-create" method="POST" enctype="multipart/form-data">
         <div class="form-row">
 
             <div class="form-group col-md-6 ">
@@ -126,9 +126,13 @@
         </div>
         <div class="form-row">
             <div class="form-group col-md-6">
+                <label>Afbeelding</label>
+                <input type="file" name="image" accept="image/png, image/jpeg" />
+            </div>
+            <%--<div class="form-group col-md-6">
                 <label for="picture">Afbeelding</label>
                 <input class="form-control" type="text" name="picture" id="picture">
-            </div>
+            </div>--%>
             <%--<div class="form-group col-md-6">
                 <input class="form-check-input" type="checkbox" name="active" id="active" value="true" disabled><label for="active">Spel in omloop</label>
             </div>--%>
