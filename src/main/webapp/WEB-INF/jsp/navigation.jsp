@@ -61,7 +61,7 @@
                 <a class="nav-link dropdown-toggle" href="#" id="aanbodDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Aanbod</a>
                 <div class="dropdown-menu" aria-labelledby="aanbodDropdownMenuLink">
                     <a class="dropdown-item" href="/products/lst">Overzicht Bordspellen</a>
-                    <a class="dropdown-item" href="/genres">Genres</a>
+                    <a class="dropdown-item" href="/genres/list">Genres</a>
                 </div>
             </li>
             <li class="nav-item">
@@ -118,7 +118,7 @@
             </button>
             <div class="dropdown-menu dropdown-menu-right">
                 <sec:authorize access="hasAnyAuthority('ADMIN')">
-                    <a class="dropdown-item" href="/genres" >
+                    <a class="dropdown-item" href="/genres/list" >
                         <svg  width="20" height="20" fill="currentColor">
                             <use xlink:href="/icons/bootstrap-icons.svg#signpost-split" />
                         </svg> Beheer Genres

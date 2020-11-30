@@ -18,8 +18,11 @@ public class GenreServiceImpl implements GenreService{
     }
 
     @Override
-    public Genre addGenre(Genre genre) {
-        return genreRepository.save(genre);
+    public Boolean addGenre(Genre genre) {
+
+        genreRepository.save(genre);
+        return true;
+
     }
 
     @Override

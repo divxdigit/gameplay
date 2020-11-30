@@ -61,9 +61,8 @@
             </div>
         </div>
 
-
-        <%--<div class="form-group col-md-6">
-            <label for="deliveryStreet">Straat/label>
+        <div class="form-group col-md-6">
+            <label for="deliveryStreet">Straat van leveradres</label>
             <form:input type="text" class="form-control" id="deliveryStreet" path="deliveryStreet" placeholder="Straat van leveringsadres" value="<%=selectedOrder.getDeliveryStreet()%>"/>
             <div class="invalid-feedback d-block">
                 <form:errors path ="deliveryStreet"/>
@@ -71,7 +70,7 @@
         </div>
 
         <div class="form-group col-md-6">
-            <label for="deliveryNumber">Huisnummer</label>
+            <label for="deliveryNumber">Huisnummer van leveradres</label>
             <form:input type="text" class="form-control" id="deliveryNumber" path="deliveryNumber" placeholder="Huisnummer van leveringsadres" value="<%=selectedOrder.getDeliveryNumber()%>"/>
             <div class="invalid-feedback d-block">
                 <form:errors path ="deliveryNumber"/>
@@ -79,7 +78,7 @@
         </div>
 
         <div class="form-group col-md-6">
-            <label for="deliveryPostalcode">Postcode</label>
+            <label for="deliveryPostalcode">Postcode van leveradres</label>
             <form:input type="text" class="form-control" id="deliveryPostalcode" path="deliveryPostalcode" placeholder="Postcode van leveringsadres" value="<%=selectedOrder.getDeliveryPostalcode()%>"/>
             <div class="invalid-feedback d-block">
                 <form:errors path ="deliveryPostalcode"/>
@@ -87,12 +86,12 @@
         </div>
 
         <div class="form-group col-md-6">
-            <label for="deliveryCity">Gemeente</label>
+            <label for="deliveryCity">Gemeente van leveradres</label>
             <form:input type="text" class="form-control" id="deliveryCity" path="deliveryCity" placeholder="Gemeente van leveringsadres" value="<%=selectedOrder.getDeliveryCity()%>"/>
             <div class="invalid-feedback d-block">
                 <form:errors path ="deliveryCity"/>
             </div>
-        </div>--%>
+        </div>
 
     </div>
 

@@ -9,5 +9,5 @@ public interface GenreService {
     List<Genre> getGenres();
     List<Genre> getGenreByName(String name);
     Genre getGenreById(Long id);
-    Genre addGenre(Genre genre);
+    Boolean addGenre(Genre genre);
 }

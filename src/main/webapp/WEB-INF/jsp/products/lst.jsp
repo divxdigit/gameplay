@@ -83,7 +83,7 @@
                     out.print("<td>" + product.getBuyPrice() + " euro</td>" );
                     out.print("<td>" + product.getRentPrice() + " euro</td>" );
                     out.print("<td> <a href=\"/products/search?id="+product.getId()+"\">Meer info </a></td>" );
-                    out.print("<td><a href=\"/products/edit.jsp?id="+product.getId()+"\">Edit | <a href=\"delete-product.jsp?id="+product.getId()+"\"> Delete</a></td>" );
+                    out.print("<td><a href=\"/products/list.jsp?id="+product.getId()+"\">Edit | <a href=\"delete-product.jsp?id="+product.getId()+"\"> Delete</a></td>" );
                     out.print("</tr>");
                 }
                 out.print("</table>");
