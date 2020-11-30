@@ -47,7 +47,7 @@
 
         <div class="form-group col-md-6">
             <label for="dateCreated">Besteldatum</label>
-            <form:input type="text" class="form-control" id="dateCreated" path="dateCreated" placeholder="Besteldatum" value="<%=selectedOrder.getDateCreated()%>"/>
+            <form:input type="date" class="form-control" id="dateCreated" path="dateCreated" placeholder="Besteldatum" value="<%=selectedOrder.getDateCreated()%>"/>
             <div class="invalid-feedback d-block">
                 <form:errors path ="dateCreated"/>
             </div>
@@ -55,7 +55,7 @@
 
         <div class="form-group col-md-6">
             <label for="dateCollect">Leverdatum</label>
-            <form:input type="text" class="form-control" id="dateCollect" path="dateCollect" placeholder="Leverdatum" value="<%=selectedOrder.getDateCollect()%>"/>
+            <form:input type="date" class="form-control" id="dateCollect" path="dateCollect" placeholder="Leverdatum" value="<%=selectedOrder.getDateCollect()%>"/>
             <div class="invalid-feedback d-block">
                 <form:errors path ="dateCollect"/>
             </div>
