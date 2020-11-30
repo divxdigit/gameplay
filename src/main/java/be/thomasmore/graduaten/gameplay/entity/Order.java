@@ -33,23 +33,63 @@ public class Order {
     private LocalDate dateCollect;
 
     private int status;
+    private String deliveryStreet;
+    private String deliveryNumber;
+    private int deliveryPostalcode;
+    private String deliveryCity;
 
     ///constructors
 
     public Order() {
     }
 
-    public Order(Long id, Set<OrderProduct> orderProducts, User user, LocalDate dateCreated, LocalDate dateCollect, int status) {
+    public Order(Long id, Set<OrderProduct> orderProducts, User user, @NotNull(message = "Veld moet verplicht ingevuld worden met formaat yyyy-MM-dd") LocalDate dateCreated, @NotNull(message = "Veld moet verplicht ingevuld worden met formaat yyyy-MM-dd") LocalDate dateCollect, int status, String deliveryStreet, String deliveryNumber, int deliveryPostalcode, String deliveryCity) {
         this.id = id;
         this.orderProducts = orderProducts;
         this.user = user;
         this.dateCreated = dateCreated;
         this.dateCollect = dateCollect;
         this.status = status;
-
+        this.deliveryStreet = deliveryStreet;
+        this.deliveryNumber = deliveryNumber;
+        this.deliveryPostalcode = deliveryPostalcode;
+        this.deliveryCity = deliveryCity;
     }
 
-// get/set
+    // get/set
+
+
+    public String getDeliveryStreet() {
+        return deliveryStreet;
+    }
+
+    public void setDeliveryStreet(String deliveryStreet) {
+        this.deliveryStreet = deliveryStreet;
+    }
+
+    public String getDeliveryNumber() {
+        return deliveryNumber;
+    }
+
+    public void setDeliveryNumber(String deliveryNumber) {
+        this.deliveryNumber = deliveryNumber;
+    }
+
+    public int getDeliveryPostalcode() {
+        return deliveryPostalcode;
+    }
+
+    public void setDeliveryPostalcode(int deliveryPostalcode) {
+        this.deliveryPostalcode = deliveryPostalcode;
+    }
+
+    public String getDeliveryCity() {
+        return deliveryCity;
+    }
+
+    public void setDeliveryCity(String deliveryCity) {
+        this.deliveryCity = deliveryCity;
+    }
 
     public Long getId() {
         return id;

@@ -16,13 +16,15 @@ Alter table Products
 alter column description longtext;
 
 Alter table Orders
-ADD  delivery_street text;
+ADD if not exists delivery_street text;
 Alter table Orders
-ADD  delivery_number text;
+ADD if not exists delivery_number text;
 Alter table Orders
-ADD  delivery_postalcode text;
+ADD if not exists delivery_postalcode text;
 Alter table Orders
-ADD  delivery_city text;
+ADD if not exists delivery_city text;
+Alter table Orders
+alter column  delivery_postalcode int;
 
 CREATE TABLE IF NOT EXISTS Publishers(
      id int not null AUTO_INCREMENT,
@@ -206,7 +208,7 @@ CREATE TABLE IF NOT EXISTS Orders(
      status int,
      delivery_street text,
      delivery_number text,
-     delivery_postalcode text,
+     delivery_postalcode int,
      delivery_city text,
      foreign key (user_id) references Users (id),
      primary key (id)
