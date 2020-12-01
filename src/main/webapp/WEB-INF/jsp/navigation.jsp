@@ -118,6 +118,11 @@
             </button>
             <div class="dropdown-menu dropdown-menu-right">
                 <sec:authorize access="hasAnyAuthority('ADMIN')">
+                    <a class="dropdown-item" href="/languages/list" >
+                        <svg  width="20" height="20" fill="currentColor">
+                            <use xlink:href="/icons/bootstrap-icons.svg#signpost-split" />
+                        </svg> Beheer Languages
+                    </a>
                     <a class="dropdown-item" href="/genres/list" >
                         <svg  width="20" height="20" fill="currentColor">
                             <use xlink:href="/icons/bootstrap-icons.svg#signpost-split" />

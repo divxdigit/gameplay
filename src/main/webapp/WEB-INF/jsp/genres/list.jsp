@@ -9,7 +9,7 @@
     <!-- Bootstrap CSS -->
     <link href="/static/css/bootstrap.css" rel="stylesheet">
     <link href="/static/css/styles.css" rel="stylesheet">
-    <title>Genres - edit</title>
+    <title>Overzicht van genres</title>
 
 <%@ page import="java.util.List" %>
 <%@ page import="be.thomasmore.graduaten.gameplay.entity.Genre" %>

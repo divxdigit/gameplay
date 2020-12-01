@@ -139,7 +139,7 @@ public class ProductController {
     public String productCreate(Model model) {
         List<Product> products = productService.getProducts();
         List<Genre> genres = genreService.getGenres();
-        List<Language> languages = languageService.getLanguage();
+        List<Language> languages = languageService.getLanguages();
         List<AgeCategory> ageCategories = ageCategoryService.getAgeCategories();
         List<Publisher> publishers = publisherService.getPublishers();
         model.addAttribute("products", products);
@@ -156,7 +156,7 @@ public class ProductController {
 
         if (id != 0) {
             List<Genre> genres = genreService.getGenres();
-            List<Language> languages = languageService.getLanguage();
+            List<Language> languages = languageService.getLanguages();
             List<AgeCategory> ageCategories = ageCategoryService.getAgeCategories();
             List<Publisher> publishers = publisherService.getPublishers();
             model.addAttribute("productRecord", productService.getProductById(id));

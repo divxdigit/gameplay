@@ -16,7 +16,7 @@ public class LanguageServiceImpl implements LanguageService{
     LanguageRepository languageRepository;
 
     @Override
-    public List<Language> getLanguage() {
+    public List<Language> getLanguages() {
         return languageRepository.findAll();
     }
 
@@ -31,7 +31,13 @@ public class LanguageServiceImpl implements LanguageService{
     }
 
     @Override
-    public Language addLanguage(Language language) {
-        return languageRepository.save(language);
+    public Boolean addLanguage(Language language) {
+
+        try {
+
+            languageRepository.save(language);
+            return true;
+        }
+        catch (Exception e){ return false; }
     }
 }

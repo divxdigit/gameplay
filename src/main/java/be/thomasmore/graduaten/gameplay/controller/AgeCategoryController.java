@@ -1,9 +1,7 @@
 package be.thomasmore.graduaten.gameplay.controller;
 
 import be.thomasmore.graduaten.gameplay.entity.AgeCategory;
-import be.thomasmore.graduaten.gameplay.entity.Genre;
 import be.thomasmore.graduaten.gameplay.service.AgeCategoryService;
-import be.thomasmore.graduaten.gameplay.service.LanguageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,12 +31,12 @@ public class AgeCategoryController {
     }
 
     @PostMapping(value = "/agecategory/add")
-    public String EditAgeCategory(@Valid @ModelAttribute("ageCategories") AgeCategory ageCategory, BindingResult result, ModelMap model) {
+    public String EditAgeCategory(@Valid @ModelAttribute("ageCategory") AgeCategory ageCategory, BindingResult result, ModelMap model) {
 
         if (result.hasErrors()) {
             List<AgeCategory> ageCategories = ageCategoryService.getAgeCategories();
             model.addAttribute("ageCategories", ageCategories);
-            model.addAttribute("ageCategory", new AgeCategory());
+            model.addAttribute("ageCategory", ageCategory);
             return "/agecategory/lst";
         }
 
@@ -53,7 +51,6 @@ public class AgeCategoryController {
 
         List<AgeCategory> ageCategories = ageCategoryService.getAgeCategories();
         model.addAttribute("ageCategories", ageCategories);
-
         model.addAttribute("ageCategory", new AgeCategory());
         return "/agecategory/lst";
     }

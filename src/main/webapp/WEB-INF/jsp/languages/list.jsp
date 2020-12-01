@@ -9,42 +9,42 @@
     <!-- Bootstrap CSS -->
     <link href="/static/css/bootstrap.css" rel="stylesheet">
     <link href="/static/css/styles.css" rel="stylesheet">
-    <title>Overzicht van leeftijdscategorieën</title>
+    <title>Overzicht van talen</title>
 
-    <%@ page import="java.util.List" %>
-    <%@ page import="be.thomasmore.graduaten.gameplay.entity.AgeCategory" %>
+<%@ page import="java.util.List" %>
+<%@ page import="be.thomasmore.graduaten.gameplay.entity.Language" %>
 
     <jsp:include page="../navigation.jsp" />
 </head>
 <body>
 <div class="container" style="margin-top: 25px ">
-    <h1>
-        Overzicht van Leeftijdscategorieën
-    </h1>
+<h1>
+    Overzicht van Languages
+</h1>
 
     <div class="col-md-6 table-responsive">
 
         <table border='1' class="table table-striped table-bordered table-hover">
             <tr scope="col"><th>Id</th><th>Naam</th></tr>
 
-            <% List<AgeCategory> ageCategories = (List<AgeCategory>) request.getAttribute("ageCategories");
-                for (AgeCategory ageCategory: ageCategories) { %>
-            <tr>
-                <td><%=ageCategory.getId()%></td>
-                <td><%=ageCategory.getName()%></td>
-            </tr>
+            <% List<Language> languages = (List<Language>) request.getAttribute("languages");
+                for (Language language: languages) { %>
+                    <tr>
+                        <td><%=language.getId()%></td>
+                        <td><%=language.getName()%></td>
+                    </tr>
 
-            <%};%>
+                <%};%>
 
-        </table>
+         </table>
     </div>
 
     <div class="col-md-6">
-        <form:form action="/agecategory/add" method="post" modelAttribute="ageCategory">
+        <form:form action="/languages/add" method="post" modelAttribute="language">
             <div class="form-row">
 
                 <div class="form-group col-md-6">
-                    <label for="name">Leeftijdscategorie</label>
+                    <label for="name">Language</label>
                     <form:input type="text" class="form-control" id="name" path="name" placeholder="Naam"/>
                     <div class="invalid-feedback d-block">
                         <form:errors path="name"/>
@@ -52,7 +52,7 @@
                 </div>
 
             </div>
-            <button type="submit" name="submit" value="submit" class="btn btn-primary">Leeftijdscategorie toevoegen</button>
+            <button type="submit" name="submit" value="submit" class="btn btn-primary">Language toevoegen</button>
         </form:form>
 
         <%

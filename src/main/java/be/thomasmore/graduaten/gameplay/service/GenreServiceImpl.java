@@ -19,11 +19,12 @@ public class GenreServiceImpl implements GenreService{
 
     @Override
     public Boolean addGenre(Genre genre) {
-
-        genreRepository.save(genre);
-        return true;
-
-    }
+        try {
+            genreRepository.save(genre);
+            return true;
+        }
+        catch (Exception e){ return false; }
+     }
 
     @Override
     public List<Genre> getGenreByName(String name) {
