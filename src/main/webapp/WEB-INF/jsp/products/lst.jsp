@@ -73,28 +73,73 @@
     <div class="row">
             <%
                 List<Product> products = (List<Product>) request.getAttribute("products");
-                out.print("<table border='1' class=\"table table-md table-light table-hover table-bordered  \" >");
-                out.print("<tr><th>Id</th><th>Naam</th><th>Leeftijdscategorie</th><th>Genre</th><th>Taal</th><th>Verkooprijs</th><th>Huurprijs (per week)</th><th>Detail</th><th>Acties</th></tr>");
-
-                //Als er geen producten beschikbaar zijn of wanneer de search-string geen resultaten oplevert.
-                if (products.isEmpty()) {
-                    out.print("<tr><td colspan = \"7\" class=\"error\"> Er werden geen producten gevonden.</td>");
-                }
-                //Wanneer er wel producten zijn gegeven, wordt de tabel opgebouwd met de verkregen gegevens.
-                for (Product product: products) {
-                    out.print("<tr><td>" + product.getId() + "</td>");
-                    out.print("<td>" + product.getName() + "</td>" );
-                    out.print("<td>" + product.getAgeCategory() + "</td>" );
-                    out.print("<td>" + product.getGenre() + "</td>" );
-                    out.print("<td>" + product.getLanguage() + "</td>" );
-                    out.print("<td>" + product.getBuyPrice() + " euro</td>" );
-                    out.print("<td>" + product.getRentPrice() + " euro</td>" );
-                    out.print("<td> <a href=\"/products/search?id="+product.getId()+"\">Meer info </a></td>" );
-                    out.print("<td><a href=\"/products/edit?id="+product.getId()+"\">Edit | <a href=\"/products/delete?id="+product.getId()+"\"> Delete</a></td>" );
-                    out.print("</tr>");
-                }
-                out.print("</table>");
             %>
+                <table border='1' class="table table-md table-light table-hover table-bordered  " >
+                    <tr>
+                        <th>Id</th>
+                        <th>Info</th>
+                        <th>Naam</th>
+                        <th>Leeftijdscategorie</th>
+                        <%--<th>Genre</th>
+                        <th>Taal</th>--%>
+                        <th>Prijs Verkoop</th>
+                        <th>Stock Verkoop</th>
+                        <th>Prijs Verhuur</th>
+                        <th>Stock Verhuur</th>
+                        <%--<th>Detail</th>--%>
+                        <th>Acties</th></tr>
+
+                <%--//Als er geen producten beschikbaar zijn of wanneer de search-string geen resultaten oplevert.--%>
+                <% if (products.isEmpty()) {
+                %>
+                    <tr>
+                        <td colspan = "7" class="error"> Er werden geen producten gevonden.</td>
+                    </tr>
+                <% } else {%>
+                <%--//Wanneer er wel producten zijn gegeven, wordt de tabel opgebouwd met de verkregen gegevens.--%>
+                    <% for (Product product: products) {
+                    %>
+                    <tr >
+                        <td><%=product.getId()%></td>
+                        <td><a href="/products/search?id=<%=product.getId()%>">
+                                <img src="/icons/info-circle.svg" width="15" height="15" fill="none"/>
+                            </a>
+                        </td>
+                        <td>
+                            <b><%=product.getName()%></b>
+                            <br/><%=product.getLanguage()%> - <%=product.getGenre()%>
+                        </td>
+                        <td><%=product.getAgeCategory()%></td>
+                        <%--<td><%=product.getGenre()%></td>
+                        <td><%=product.getLanguage()%></td>--%>
+                        <td><%=product.getBuyPrice()%> euro</td>
+                        <% if (product.getBuyStock() ==0 ) {%>
+                            <td style="color:darkred;">
+                                <b><%=product.getBuyStock()%></b>
+                                <%--<a href="/products/search?id=<%=product.getId()%>">
+                                    <img src="/icons/plus-circle-fill.svg" width="15" height="15" fill="none"/>
+                                </a>--%>
+                            </td>
+                        <% } else { %>
+                            <td><%=product.getBuyStock()%>
+                                <%--<a href="/products/search?id=<%=product.getId()%>">
+                                    <img src="/icons/plus-circle-fill.svg" width="15" height="15" fill="none"/>
+                                </a>--%>
+                            </td>
+                        <% } %>
+                            <td><%=product.getRentPrice()%> euro</td>
+                        <% if (product.getRentStock() ==0 ) {%>
+                        <td style="color:darkred;"><b><%=product.getRentStock()%></b></td>
+                        <% } else { %>
+                            <td><%=product.getRentStock()%></td>
+                        <% } %>
+                        <%--<td> <a href="/products/search?id=<%=product.getId()%>">Meer info </a></td>--%>
+                        <td><a href="/products/edit?id=<%=product.getId()%>">Edit | <a href="/products/delete?id=<%=product.getId()%>"> Delete</a></td>
+                    </tr>
+                    <% } %>
+                <% } %>
+                </table>
+
     </div>
     <div class="row">
         <a href=/products/create>Nieuws spel toevoegen</a>
