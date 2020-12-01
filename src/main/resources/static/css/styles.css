@@ -60,3 +60,8 @@ td a {
     display:block;
     width:100%;
 }
+
+#map {
+    height: 400px;
+    width: 750px;
+}
