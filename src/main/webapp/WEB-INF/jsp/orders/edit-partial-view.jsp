@@ -20,8 +20,6 @@
 <form:form action="/orders/edit/submit" method="POST" modelAttribute="selectedOrder" >
 
     <div class="row"><h3>Geselecteerde Order</h3></div>
-    <div class="row"><h4> OrderID = <%=selectedOrder.getId()%></h4></div>
-    <div class="row"><h4>User = <%=selectedOrder.getUser().getFirstname()%> <%=selectedOrder.getUser().getLastname()%></h4></div>
 
     <div class="form-row">
 

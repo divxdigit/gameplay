@@ -21,7 +21,6 @@
 <form:form action="/orderproducts/edit/submit" method="POST" modelAttribute="selectedOrderProduct" >
 
     <div class="row"><h3>Geselecteerde OrderProduct</h3></div>
-    <div class="row"><h4> OrderProductID = <%=selectedOrderProduct.getId()%></h4></div>
 
     <div class="form-row">
 

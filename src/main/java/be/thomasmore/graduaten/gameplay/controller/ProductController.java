@@ -50,6 +50,10 @@ public class ProductController {
     @Autowired
     PublisherService publisherService;
 
+    @Autowired
+    FileService fileService;
+
+
     @RequestMapping("/products/lst")
     public String productList(Model model) {
         List<Product> products = productService.getProducts();
@@ -204,7 +208,11 @@ public class ProductController {
         productService.addProduct(product);
 
         String uploadDir = "target/classes/static/images/GameImages";
-        FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+        fileService.saveFile(uploadDir, fileName, multipartFile);
+
+        //Als fileService is getest en correct werkt dan mag onderstaande en ook de klasse FileUploadUtil in map config weg!
+/*        String uploadDir = "target/classes/static/images/GameImages";
+        FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);*/
 
         List<Product> products = productService.getProducts();
         List<Genre> genres = genreService.getGenres();
@@ -239,6 +247,8 @@ public class ProductController {
 
         productService.addProduct(product);
         //productService.updateProduct(product);
+
+
 
         /*String uploadDir = "target/classes/static/images/GameImages";
         FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);*/
