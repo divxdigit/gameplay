@@ -55,6 +55,13 @@
                 </button>
             </form>
         </div>
+        <div class="col-sm-4 table-responsive ">
+            <form class="form-inline my-2 my-md-2" method="get" action="/products/lst">
+                <button class="btn btn-info" id="button-id3" type="submit">Toon Alles
+                    <img src="/icons/search.svg" width="20" height="20" fill="none"/>
+                </button>
+            </form>
+        </div>
     </div>
 
         <br />
@@ -83,11 +90,15 @@
                     out.print("<td>" + product.getBuyPrice() + " euro</td>" );
                     out.print("<td>" + product.getRentPrice() + " euro</td>" );
                     out.print("<td> <a href=\"/products/search?id="+product.getId()+"\">Meer info </a></td>" );
-                    out.print("<td><a href=\"/products/list.jsp?id="+product.getId()+"\">Edit | <a href=\"delete-product.jsp?id="+product.getId()+"\"> Delete</a></td>" );
+                    out.print("<td><a href=\"/products/edit?id="+product.getId()+"\">Edit | <a href=\"/products/delete?id="+product.getId()+"\"> Delete</a></td>" );
                     out.print("</tr>");
                 }
                 out.print("</table>");
             %>
+    </div>
+    <div class="row">
+        <a href=/products/create>Nieuws spel toevoegen</a>
+        <br/><br/>
     </div>
 </sec:authorize>
 

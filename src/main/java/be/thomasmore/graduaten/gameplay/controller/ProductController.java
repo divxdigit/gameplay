@@ -151,6 +151,26 @@ public class ProductController {
         return "/products/create";
     }
 
+    @RequestMapping(value = "/products/edit", params = {"id"})
+    public String productEdit(Model model, HttpSession session, @RequestParam("id") Long id) {
+
+        if (id != 0) {
+            List<Genre> genres = genreService.getGenres();
+            List<Language> languages = languageService.getLanguage();
+            List<AgeCategory> ageCategories = ageCategoryService.getAgeCategories();
+            List<Publisher> publishers = publisherService.getPublishers();
+            model.addAttribute("productRecord", productService.getProductById(id));
+            model.addAttribute("genres", genres);
+            model.addAttribute("languages", languages);
+            model.addAttribute("ageCategories", ageCategories);
+            model.addAttribute("publishers", publishers);
+            return "/products/edit";
+        }
+        return "index";
+    }
+
+
+
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
     private Date date;
 
@@ -185,6 +205,43 @@ public class ProductController {
 
         String uploadDir = "target/classes/static/images/GameImages";
         FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+
+        List<Product> products = productService.getProducts();
+        List<Genre> genres = genreService.getGenres();
+        model.addAttribute("products", products);
+        model.addAttribute("genres", genres);
+        return "/products/lst";
+    }
+    @PostMapping("/products/do-update")
+    public String editProduct(Model model, HttpServletRequest request, @RequestParam("productid") Long productid) throws IOException {
+        //public String addProduct(Model model, HttpServletRequest request) {
+        Product product = productService.getProductById(productid);
+        product.setName(request.getParameter("name"));
+        product.setDescription(request.getParameter("description"));
+        product.setGenre(genreService.getGenreById(Long.parseLong(request.getParameter("genreId"))));
+        product.setAgeCategory(ageCategoryService.getAgeCategoryById(Long.parseLong(request.getParameter("ageCategoryId"))));
+        product.setPublisher(publisherService.getPublisherById(Long.parseLong(request.getParameter("publisherId"))));
+        product.setLanguage(languageService.getLanguageById(Long.parseLong(request.getParameter("languageId"))));
+        product.setPlayersMinimum(Integer.parseInt(request.getParameter("playersMinimum")));
+        product.setPlayersMaximum(Integer.parseInt(request.getParameter("playersMaximum")));
+        product.setRentStock(Integer.parseInt(request.getParameter("rentStock")));
+        product.setRentPrice(Double.parseDouble(request.getParameter("rentPrice")));
+        product.setBuyStock(Integer.parseInt(request.getParameter("buyStock")));
+        product.setBuyPrice(Double.parseDouble(request.getParameter("buyPrice")));
+        //product.setPicture(request.getParameter("picture"));
+
+        /*String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());*/
+        /*product.setPicture("/images/GameImages/" + fileName);*/
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate dateLaunch = LocalDate.parse(request.getParameter("dateLaunch"), formatter);
+        product.setDateLaunch(dateLaunch);
+
+        productService.addProduct(product);
+        //productService.updateProduct(product);
+
+        /*String uploadDir = "target/classes/static/images/GameImages";
+        FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);*/
 
         List<Product> products = productService.getProducts();
         List<Genre> genres = genreService.getGenres();
