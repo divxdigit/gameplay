@@ -134,7 +134,7 @@
                             <td><%=product.getRentStock()%></td>
                         <% } %>
                         <%--<td> <a href="/products/search?id=<%=product.getId()%>">Meer info </a></td>--%>
-                        <td><a href="/products/edit?id=<%=product.getId()%>">Edit | <a href="/products/delete?id=<%=product.getId()%>"> Delete</a></td>
+                        <td><a href="/products/edit?id=<%=product.getId()%>">Edit</a> | <a href="/products/delete?id=<%=product.getId()%>"> Delete</a>                        </td>
                     </tr>
                     <% } %>
                 <% } %>
