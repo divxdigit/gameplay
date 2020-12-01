@@ -57,7 +57,7 @@
             <br/>Spelers: <%=product.getPlayersMinimum()%> - <%=product.getPlayersMaximum()%>
             <br/>Leeftijdscategorie: <%=product.getAgeCategory()%>
             <br/>
-            <br/>Prijs: <%=product.getBuyPrice()%>
+            <br/>Prijs: <%=product.getBuyPrice()%>€/stuk
             <br/>
             <br/>
         </div>

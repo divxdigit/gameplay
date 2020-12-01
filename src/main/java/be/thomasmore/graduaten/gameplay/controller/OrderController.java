@@ -118,23 +118,16 @@ public class OrderController {
         return dataOrder(model);
     }
 
-
-/*    @RequestMapping(method=RequestMethod.POST, value= "/products/do-rent")*/
     @PostMapping("/products/do-orderproduct")
     public String addOrderProduct(Model model, HttpServletRequest request) {
-        Integer x = 0;
         User user = userService.getUserById(Long.valueOf(request.getParameter("userid")));
         Product product = productService.getProductById(Long.valueOf(request.getParameter("productid")));
 
-
-
-
-
         Integer typeid= Integer.valueOf(request.getParameter("typeid"));
 
-        //check order for user with status 0
-        Order order = new Order();
 
+        Order order = new Order();
+        //check if an order for user exists with order_status 0 : wishlist
         if (orderService.getOrderByUserByStatus(user, 0) == null){
             //User heeft geen winkelmandje open. Basisinfo opgeven op het order
             order.setStatus(0);
@@ -159,9 +152,9 @@ public class OrderController {
         orderProduct.setOrderType(typeid);
         orderProduct.setProduct(product);
 
-        if (typeid == 1) {
+        if (typeid == 1) {  //buy product
             orderProduct.setPrice(product.getBuyPrice());
-        } else {
+        } else {            //rent product
             Integer weeks= Integer.valueOf(request.getParameter("weeks"));
             orderProduct.setPrice(product.getRentPrice()* weeks);
             orderProduct.setRentDurationWeeks(weeks);

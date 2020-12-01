@@ -54,24 +54,30 @@
             <% } %>
             <br/>
             <div class="row">
-                <div class="col-md-4 table-responsive ">
+                <div class="col-md-6 table-responsive ">
                 <% if (product.getBuyStock() >0) { %>
-                    <a href=/products/buy?id=<%=product.getId()%> class="card-link" >Koop dit spel</a>
+                    <form action="/products/buy" method="post">
+                        <input class="form-control" type="hidden" name="id" id="id" value="<%=product.getId()%>" />
+                        <button type="submit" class="btn btn-primary">Koop nu voor <%=product.getBuyPrice()%>€</button>
+
+                    </form>
+                   <%-- <a href=/products/buy?id=<%=product.getId()%> class="card-link" >Koop dit spel</a>--%>
                 <% } else { %>
                     Momenteel is er geen artikel in stock voor aankoop.
                 <% } %>
                 </div>
-                <div class="col-md-8 table-responsive ">
+                <div class="col-md-6 table-responsive ">
                 <% if (product.getRentStock() < 0) { %>
                     Momenteel is er geen artikel in stock voor verhuur.
                 <% } else if (product.getRentStock() == 1)  { %>
                     <form action="/products/rent" method="post">
-                        <button type="submit" class="btn btn-primary">Huur nu</button>
-                        Haast je, er is nog <%=product.getRentStock()%> stuk beschikbaar om uit te lenen - <%=product.getRentPrice()%> €/week
+                        <input class="form-control" type="hidden" name="id" id="id" value="<%=product.getId()%>" />
+                        <button type="submit" class="btn btn-primary">Huur nu voor <%=product.getRentPrice()%> €/week</button>
+                        <i>Haast je, er is nog <%=product.getRentStock()%> stuk beschikbaar om uit te lenen</i>
                     </form>
 
                     <br/>
-                    <a href=/products/rent?id=<%=product.getId()%> class="card-link" >Huur dit spel</a>
+                    <%--<a href=/products/rent?id=<%=product.getId()%> class="card-link" >Huur dit spel</a>--%>
                 <% } else { %>
                 <form action="/products/rent" method="post">
                     <button type="submit" class="btn btn-primary">Huur nu</button>
@@ -80,19 +86,6 @@
                 <% } %>
                 </div>
             </div>
-            <%--<div>
-                <form action="/products/rent" method="post">
-                    <button type="submit" class="btn btn-primary">Huur nu</button>
-                    <% if (product.getRentStock() < 0) { %>
-                    Momenteel is er geen artikel in stock voor verhuur.
-                    <% } else if (product.getRentStock() == 1)  { %>
-                    Haast je, er is nog <%=product.getRentStock()%> stuk beschikbaar om uit te lenen - <%=product.getRentPrice()%> €/week
-                    <% } else { %>
-                    Er zijn nog <%=product.getRentStock()%> stuks beschikbaar om uit te lenen - <%=product.getRentPrice()%> €/week
-                    <% } %>
-                </form>
-            </div>--%>
-
 
         </div>
         <div class="col-md-8 table-responsive ">
@@ -119,14 +112,7 @@
             <div>Genre: <%= product.getGenre()%></div>
             <div>Omschrijving:
                 <br/> <%= product.getDescription()%></div>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <%--<svg height="20" fill="Yellow" style="margin:0;"><use href="/icons/bootstrap-icons.svg#star-fill" /></svg>
-                <svg height="20" fill="Yellow" style="margin:0;"><use href="/icons/bootstrap-icons.svg#star-fill" /></svg>
-                <svg height="20" fill="Yellow" style="margin:0;"><use xlink:href="/icons/bootstrap-icons.svg#star-fill" /></svg>
-                <svg height="20" fill="Yellow" style="margin:0;"><use xlink:href="/icons/bootstrap-icons.svg#star-fill" /></svg>--%>
-            <div>Beoordeling: <%= product.getRating()%></div>
+            <%--<div>Beoordeling: <%= product.getRating()%></div>--%>
 
 
 

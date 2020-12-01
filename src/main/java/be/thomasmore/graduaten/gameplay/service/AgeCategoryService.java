@@ -10,5 +10,5 @@ public interface AgeCategoryService {
     List<AgeCategory> getAgeCategories();
     List<AgeCategory> getAgeCategoryByName(String name);
     AgeCategory getAgeCategoryById(Long id);
-    AgeCategory addAgeCategory(AgeCategory ageCategory);
+    Boolean addAgeCategory(AgeCategory ageCategory);
 }

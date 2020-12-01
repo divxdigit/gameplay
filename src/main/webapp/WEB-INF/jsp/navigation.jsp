@@ -123,7 +123,7 @@
                             <use xlink:href="/icons/bootstrap-icons.svg#signpost-split" />
                         </svg> Beheer Genres
                     </a>
-                    <a class="dropdown-item" href="#">
+                    <a class="dropdown-item" href="/agecategory/lst">
                         <svg  width="20" height="20" fill="currentColor">
                             <use xlink:href="/icons/bootstrap-icons.svg#shield-check" />
                         </svg> Beheer Leeftijdscategorieën

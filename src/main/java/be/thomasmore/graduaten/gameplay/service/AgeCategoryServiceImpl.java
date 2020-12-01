@@ -20,8 +20,9 @@ public class AgeCategoryServiceImpl implements AgeCategoryService {
     }
 
     @Override
-    public AgeCategory addAgeCategory(AgeCategory ageCategory) {
-        return ageCategoryRepository.save(ageCategory);
+    public Boolean addAgeCategory(AgeCategory ageCategory) {
+            ageCategoryRepository.save(ageCategory);
+             return true;
     }
 
     @Override
