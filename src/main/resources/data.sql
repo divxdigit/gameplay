@@ -220,6 +220,8 @@ insert into Orders(user_id, date_created, date_collect, status, delivery_street,
 VALUES (3,'2020-08-10','2020-08-11',1,'Teststraat','18','2440','Geel');
 insert into Orders(user_id, date_created, date_collect, status, delivery_street, delivery_number, delivery_postalcode, delivery_city)
 VALUES (1,'2020-09-10','2020-12-11',0,'Dorpsplein','24','2230','Herselt');
+insert into Orders(user_id, date_created, date_collect, status, delivery_street, delivery_number, delivery_postalcode, delivery_city)
+VALUES (2,'2020-10-10','2020-10-11',1,'Langeweg','36','2230','Herselt');
 
 -- insert into Orders(user_id, date_created, date_collect, status)
 -- VALUES (1,'2020-10-10','2020-10-11',1);
@@ -244,10 +246,14 @@ CREATE TABLE IF NOT EXISTS Order_Products(
 
 insert into Order_Products(product_id,order_id, rent_duration_weeks, order_type, price, discount_price)
 VALUES (1,1,null,1,34.95,5);
-
-/*insert into OrderProducts(product_id,order_id, rent_duration_weeks, order_type, price, discount_price)
+insert into Order_Products(product_id,order_id, rent_duration_weeks, order_type, price, discount_price)
 VALUES (2,1,null,1,20.10,0);
-insert into OrderProducts(product_id,order_id, rent_duration_weeks, order_type, price, discount_price)
-VALUES (2,2,2,2,4,0);*/
-
+insert into Order_Products(product_id,order_id, rent_duration_weeks, order_type, price, discount_price)
+VALUES (2,2,2,2,4,0);
+insert into Order_Products(product_id,order_id, rent_duration_weeks, order_type, price, discount_price)
+VALUES (3,2,2,2,4,0);
+insert into Order_Products(product_id,order_id, rent_duration_weeks, order_type, price, discount_price)
+VALUES (3,3,1,2,2,0);
+insert into Order_Products(product_id,order_id, rent_duration_weeks, order_type, price, discount_price)
+VALUES (4,4,null,1,25.00,20.00);
 
