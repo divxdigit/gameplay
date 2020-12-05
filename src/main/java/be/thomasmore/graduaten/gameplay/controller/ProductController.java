@@ -197,9 +197,14 @@ public class ProductController {
         product.setBuyStock(Integer.parseInt(request.getParameter("buyStock")));
         product.setBuyPrice(Double.parseDouble(request.getParameter("buyPrice")));
         //product.setPicture(request.getParameter("picture"));
-
-        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-        product.setPicture("/images/GameImages/" + fileName);
+        String fileName = "";
+        if (!multipartFile.getOriginalFilename().isEmpty()){
+            fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+            product.setPicture("/images/GameImages/" + fileName);
+        }
+        else {
+            product.setPicture("");
+        }
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate dateLaunch = LocalDate.parse(request.getParameter("dateLaunch"), formatter);
@@ -207,8 +212,10 @@ public class ProductController {
 
         productService.addProduct(product);
 
-        String uploadDir = "target/classes/static/images/GameImages";
-        fileService.saveFile(uploadDir, fileName, multipartFile);
+        if (fileName != ""){
+            String uploadDir = "target/classes/static/images/GameImages";
+            fileService.saveFile(uploadDir, fileName, multipartFile);
+        }
 
         //Als fileService is getest en correct werkt dan mag onderstaande en ook de klasse FileUploadUtil in map config weg!
 /*        String uploadDir = "target/classes/static/images/GameImages";
@@ -221,7 +228,7 @@ public class ProductController {
         return "/products/lst";
     }
     @PostMapping("/products/do-update")
-    public String editProduct(Model model, HttpServletRequest request, @RequestParam("productid") Long productid) throws IOException {
+    public String editProduct(Model model, HttpServletRequest request, @RequestParam("productid") Long productid, @RequestParam("image") MultipartFile multipartFile) throws IOException {
         //public String addProduct(Model model, HttpServletRequest request) {
         Product product = productService.getProductById(productid);
         product.setName(request.getParameter("name"));
@@ -240,12 +247,23 @@ public class ProductController {
 
         /*String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());*/
         /*product.setPicture("/images/GameImages/" + fileName);*/
+        String fileName = "";
+        if (!multipartFile.getOriginalFilename().isEmpty()){
+            fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+            product.setPicture("/images/GameImages/" + fileName);
+        }
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate dateLaunch = LocalDate.parse(request.getParameter("dateLaunch"), formatter);
         product.setDateLaunch(dateLaunch);
 
         productService.addProduct(product);
+
+        if (fileName != ""){
+            String uploadDir = "target/classes/static/images/GameImages";
+            fileService.saveFile(uploadDir, fileName, multipartFile);
+        }
+
         //productService.updateProduct(product);
 
 
