@@ -140,13 +140,14 @@
             </div>
             <div class="form-group col-md-2">
                 <label for="buyPrice">Aankoopprijs</label>
-                <input class="form-control" type="number" name="buyPrice" id="buyPrice" value="<%=product.getBuyStock()%>">
+                <input class="form-control" type="number" name="buyPrice" id="buyPrice" value="<%=product.getBuyPrice()%>">
             </div>
         </div>
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label>Afbeelding</label>
-                <input type="file" name="image" accept="image/png, image/jpeg" value="<%=product.getPicture()%>" />
+                <input type="file" name="image" accept="image/png, image/jpeg" />
+                <label>Indien geen afbeelding wordt toegevoegd, zal de oude afbeelding blijven staan.</label>
             </div>
             <div class="form-group col-md-2">
 

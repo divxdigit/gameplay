@@ -127,7 +127,8 @@
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label>Afbeelding</label>
-                <input type="file" name="image" accept="image/png, image/jpeg" />
+                <input type="file" name="image" accept="image/png, image/jpeg"/>
+                <label>Opgepast, afbeelding maximum 1mb!</label>
             </div>
             <%--<div class="form-group col-md-6">
                 <label for="picture">Afbeelding</label>
