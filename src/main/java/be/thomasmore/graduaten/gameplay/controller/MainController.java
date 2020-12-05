@@ -64,11 +64,6 @@ public class MainController {
         return "index";
     }
 
-    @RequestMapping("/test")
-    public String test() {
-        return "test";
-    }
-
     @RequestMapping("/index")
     public String index2() {
         return "index";
