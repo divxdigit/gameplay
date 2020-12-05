@@ -19,8 +19,13 @@ public class PublisherServiceImpl implements PublisherService {
     }
 
     @Override
-    public Publisher addPublisher(Publisher publisher) {
-        return publisherRepository.save(publisher);
+    public Boolean addPublisher(Publisher publisher) {
+
+        try {
+            publisherRepository.save(publisher);
+            return true;
+        }
+        catch (Exception e){ return false; }
     }
 
     @Override

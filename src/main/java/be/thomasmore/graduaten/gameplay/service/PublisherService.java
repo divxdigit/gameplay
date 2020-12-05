@@ -9,6 +9,6 @@ public interface PublisherService {
     List<Publisher> getPublishers();
     List<Publisher> getPublisherByName(String name);
     Publisher getPublisherById(Long id);
-    Publisher addPublisher(Publisher publisher);
+    Boolean addPublisher(Publisher publisher);
 
 }

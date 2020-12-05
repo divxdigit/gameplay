@@ -70,6 +70,12 @@ public class MainController {
     }
 
 
+    @RequestMapping("/contact")
+    public String contact() {
+        return "contact";
+    }
+
+
     //https://stackoverflow.com/questions/3705282/spring-mvc-binding-a-date-field
     //put this in your Controller
     //(if you have a superclass for your controllers
