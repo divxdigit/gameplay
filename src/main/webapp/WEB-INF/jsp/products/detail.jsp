@@ -96,13 +96,14 @@
             <div><%= product.getPlayersMinimum()%> tot <%= product.getPlayersMaximum()%> spelers| <%= product.getAgeCategory()%> | <%= product.getLanguage()%></div>
 
             <div>
-                <%
+                <% if (product.getRating() != null){
+
                     int count = 0;
                     while (count < product.getRating()) {
                 %>
                 <img src="/images/star.png" alt="<%= count %>" height="20" />
                 <% count++;
-                } %>
+                }; }; %>
             </div>
             <br />
             <%--<div>Launch datum: <%= product.getDateLaunch()%></div>--%>
