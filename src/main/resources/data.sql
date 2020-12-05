@@ -26,6 +26,12 @@ ADD if not exists delivery_city text;
 Alter table Orders
 alter column  delivery_postalcode int;
 
+Alter table Order_Products
+ADD if not exists returned boolean;
+Alter table Order_Products
+ADD if not exists amount int;
+
+
 CREATE TABLE IF NOT EXISTS Publishers(
      id int not null AUTO_INCREMENT,
      name varchar(50) not null,
@@ -246,21 +252,23 @@ CREATE TABLE IF NOT EXISTS Order_Products(
      order_type int,
      price double,
      discount_price double,
+     returned boolean,
+     amount int,
      foreign key (product_id) references Products (id),
      foreign key (order_id) references Orders (id),
      primary key (id)
 );
 
-insert into Order_Products(product_id,order_id, rent_duration_weeks, order_type, price, discount_price)
-VALUES (1,1,null,1,34.95,5);
-insert into Order_Products(product_id,order_id, rent_duration_weeks, order_type, price, discount_price)
-VALUES (2,1,null,1,20.10,0);
-insert into Order_Products(product_id,order_id, rent_duration_weeks, order_type, price, discount_price)
-VALUES (2,2,2,2,4,0);
-insert into Order_Products(product_id,order_id, rent_duration_weeks, order_type, price, discount_price)
-VALUES (3,2,2,2,4,0);
-insert into Order_Products(product_id,order_id, rent_duration_weeks, order_type, price, discount_price)
-VALUES (3,3,1,2,2,0);
-insert into Order_Products(product_id,order_id, rent_duration_weeks, order_type, price, discount_price)
-VALUES (4,4,null,1,25.00,20.00);
+insert into Order_Products(product_id,order_id, rent_duration_weeks, order_type, price, discount_price ,returned ,amount)
+VALUES (1,1,null,1,34.95,5,0,1);
+insert into Order_Products(product_id,order_id, rent_duration_weeks, order_type, price, discount_price ,returned ,amount)
+VALUES (2,1,null,1,20.10,0,1,1);
+insert into Order_Products(product_id,order_id, rent_duration_weeks, order_type, price, discount_price ,returned ,amount)
+VALUES (2,2,2,2,4,0,0,2);
+insert into Order_Products(product_id,order_id, rent_duration_weeks, order_type, price, discount_price ,returned ,amount)
+VALUES (3,2,2,2,4,0,0,1);
+insert into Order_Products(product_id,order_id, rent_duration_weeks, order_type, price, discount_price ,returned ,amount)
+VALUES (3,3,1,2,2,0,1,1);
+insert into Order_Products(product_id,order_id, rent_duration_weeks, order_type, price, discount_price ,returned ,amount)
+VALUES (4,4,null,1,25.00,20.00,0,2);
 

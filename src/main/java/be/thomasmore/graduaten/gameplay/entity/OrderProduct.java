@@ -22,12 +22,15 @@ public class OrderProduct {
     private Integer orderType;
     private Double price;
     private Double discountPrice;
+    private Boolean returned;
+    private Integer amount;
+
 
     //constructors
     public OrderProduct() {
     }
 
-    public OrderProduct(Long id, Order order, Product product, Integer rentDurationWeeks, Integer orderType, Double price, Double discountPrice) {
+    public OrderProduct(Long id, Order order, Product product, Integer rentDurationWeeks, Integer orderType, Double price, Double discountPrice, Boolean returned, Integer amount) {
         this.id = id;
         this.order = order;
         this.product = product;
@@ -35,6 +38,8 @@ public class OrderProduct {
         this.orderType = orderType;
         this.price = price;
         this.discountPrice = discountPrice;
+        this.returned = returned;
+        this.amount = amount;
     }
 
     //getters and setters
@@ -87,20 +92,29 @@ public class OrderProduct {
         this.discountPrice = discountPrice;
     }
 
+    public Boolean getReturned() { return returned; }
+    public void setReturned(Boolean returned) { this.returned = returned; }
+
+    public Integer getAmount() { return amount; }
+    public void setAmount(Integer amount) { this.amount = amount; }
+
     //methods
 
     //overrides
 
     @Override
     public String toString() {
-        return "UserProduct{" +
+        return "OrderProduct{" +
                 "id=" + id +
-                ", product=" + product +
                 ", order=" + order +
+                ", product=" + product +
                 ", rentDurationWeeks=" + rentDurationWeeks +
                 ", orderType=" + orderType +
                 ", price=" + price +
                 ", discountPrice=" + discountPrice +
+                ", returned=" + returned +
+                ", amount=" + amount +
                 '}';
     }
+
 }
