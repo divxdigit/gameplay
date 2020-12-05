@@ -32,6 +32,7 @@
                 </p>
                 <p>BTW: 000-5555-66666
                     <br/>Telefoon: 014/14.14.14
+                    <br/>E-mail: info@gameplay.be
                 </p>
             <br/><br/>
                 <h2>
