@@ -18,6 +18,7 @@ public interface UserService {
 
     Boolean existsByEmail(String email);
     Boolean addUser(User user);
+    Boolean updateUser(User user);
 
 
 }

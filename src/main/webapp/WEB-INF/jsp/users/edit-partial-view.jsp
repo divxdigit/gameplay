@@ -6,39 +6,51 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Orders - edit - partial view</title>
+    <title>Users - edit - partial view</title>
 
-    <%@ page import="be.thomasmore.graduaten.gameplay.entity.Order" %>
+    <%@ page import="be.thomasmore.graduaten.gameplay.entity.User" %>
+    <%@ page import="be.thomasmore.graduaten.gameplay.entity.UserType" %>
+    <%@ page import="java.util.List" %>
 
 </head>
 <body>
 
-<% Order selectedOrder = (Order) request.getAttribute("selectedOrder");
-    if(selectedOrder.getId()!=null){
+<% User selectedUser = (User) request.getAttribute("selectedUser");
+    if(selectedUser.getId()!=null){
 %>
 
-<form:form action="/orders/edit/submit" method="POST" modelAttribute="selectedOrder" >
+<form:form action="/Users/edit/submit" method="POST" modelAttribute="selectedUser" >
 
-    <div class="row"><h3>Geselecteerde Order</h3></div>
+    <div class="row"><h3>Geselecteerde Gebruiker</h3></div>
 
     <div class="form-row">
 
         <div class="form-group col-md-6">
-            <label for="id">OrderID</label>
-            <form:input readonly="true" type="text" class="form-control" id="id" path="id" placeholder="OrderID" value="<%=selectedOrder.getId()%>"/>
+            <label for="id">UserID</label>
+            <form:input readonly="true" type="text" class="form-control" id="id" path="id" placeholder="UserID" value="<%=selectedUser.getId()%>"/>
+        </div>
+
+<%--        <div class="form-group col-md-6">
+            <label for="userType.name">Type</label>
+            <form:input readonly="true" type="text" class="form-control" id="userType.name" path="userType.name" placeholder="Type" value="<%=selectedUser.getType().getName()%>"/>
+        </div>--%>
+
+        <div class="form-group col-md-6">
+            <label for="userType.id">Usertype</label>
+            <form:select class="form-control" name="userTypeId" id="userType" path="userType.id">
+                <%  List<UserType> userTypeList = (List<UserType>) request.getAttribute("userType");
+                    for (UserType userType: userTypeList) { %>
+                <option value="<%= userType.getId() %>"><%= userType.getName() %></option>
+                <%} %>
+            </form:select>
         </div>
 
         <div class="form-group col-md-6">
-            <label for="user.id">UserID</label>
-            <form:input readonly="true" type="text" class="form-control" id="user.id" path="user.id" placeholder="UserID" value="<%=selectedOrder.getUser().getId()%>"/>
+            <label for="firstName">FirstName</label>
+            <form:input readonly="true" type="text" class="form-control" id="firstName" path="firstName" placeholder="FirstName" value="<%=selectedUser.getFirstname()%>"/>
         </div>
 
-        <div class="form-group col-md-6">
-            <label for="user.firstname">Voornaam</label>
-            <form:input readonly="true" type="text" class="form-control" id="user.firstname" path="user.firstname" placeholder="Voornaam" value="<%=selectedOrder.getUser().getFirstname()%>"/>
-        </div>
-
-        <div class="form-group col-md-6">
+        <<%--div class="form-group col-md-6">
             <label for="user.lastname">Achternaam</label>
             <form:input readonly="true" type="text" class="form-control" id="user.lastname" path="user.lastname" placeholder="Achternaam" value="<%=selectedOrder.getUser().getLastname()%>"/>
         </div>
@@ -89,7 +101,7 @@
             <div class="invalid-feedback d-block">
                 <form:errors path ="deliveryCity"/>
             </div>
-        </div>
+        </div>--%>
 
     </div>
 

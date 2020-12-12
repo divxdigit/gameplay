@@ -25,13 +25,13 @@
 <div class="container mb-3 mt-3" style="margin-top: 25px ">
     <div class="row">
         <h1>
-            Users
+            Gebruikers
         </h1>
     </div>
 
     <div class="row">
         <h1>
-            <h2>Userlijst</h2>
+            <h2>Gebruikerslijst</h2>
         </h1>
     </div>
 
@@ -50,7 +50,7 @@
                     <tr scope=\"col\">
                         <th>Id</th>
                         <th>Naam</th>
-                        <th>Actief</th>
+                        <th>Acties</th>
                     </tr>
                 </thead>
 

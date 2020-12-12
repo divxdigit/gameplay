@@ -1,5 +1,6 @@
 package be.thomasmore.graduaten.gameplay.service;
 
+import be.thomasmore.graduaten.gameplay.entity.Order;
 import be.thomasmore.graduaten.gameplay.entity.User;
 import be.thomasmore.graduaten.gameplay.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,4 +71,11 @@ public class UserServiceImpl implements UserService {
         User insert = userRepository.save(user);
 
         return userRepository.existsById(user.getId());  }
+
+    @Override
+    public Boolean updateUser(User user) {
+        userRepository.save(user);
+        return true;
+    }
+
 }

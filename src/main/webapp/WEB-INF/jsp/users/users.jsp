@@ -24,6 +24,9 @@
     <div class="row">
         <div class="col-md-6 table-responsive">
             <h2>Gebruikerslijst</h2>
+
+
+
         <%
             List<User> users = (List<User>) request.getAttribute("users");
             out.print("<table border='0' class=\"table table-md table-light table-hover  \">");
