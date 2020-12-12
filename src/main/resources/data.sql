@@ -256,6 +256,7 @@ CREATE TABLE IF NOT EXISTS Order_Products(
      amount int,
      foreign key (product_id) references Products (id),
      foreign key (order_id) references Orders (id),
+     foreign key (order_type) references OrderTypes (id),
      primary key (id)
 );
 
