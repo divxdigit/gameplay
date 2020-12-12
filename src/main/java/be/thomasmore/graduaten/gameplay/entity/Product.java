@@ -1,6 +1,9 @@
 package be.thomasmore.graduaten.gameplay.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
@@ -17,9 +20,12 @@ public class Product {
     @OneToMany(mappedBy = "product")
     Set<OrderProduct> orderProducts;
 
+    @NotBlank(message="Naam moet verplicht ingevuld worden.")
     private String name;
 
+    @NotBlank(message = "Omschrijving moet verplicht ingevuld worden.")
     private String description;
+
     @ManyToOne
     private Genre genre;
 
@@ -38,19 +44,48 @@ public class Product {
 
     @ManyToOne
     private AgeCategory ageCategory;
+
+    @NotNull(message = "Minimum aantal spelers moet verplicht ingevuld worden.")
+    @Positive(message="Minimum aantal spelers moet minstens 1 zijn.")
     private Integer playersMinimum;
+
+    @NotNull(message = "Maximum aantal spelers moet verplicht ingevuld worden.")
+    @Positive(message="Maximum aantal spelers moet minstens 1 zijn.")
     private Integer playersMaximum;
+
+    @NotNull(message = "Rating moet verplicht ingevuld worden.")
+    @Min(value=1, message ="Minimum rating van een spel is 1.")
+    @Max(value=5, message ="Maximum rating van een spel is 5.")
     private Integer rating;
+
+    @NotNull(message = "Stock spellen te huur moet verplicht ingevuld worden.")
+    @PositiveOrZero(message="Stock spellen te huur mag niet negatief zijn.")
     private Integer rentStock;
+
+    @NotNull(message = "Stock spellen te koop moet verplicht ingevuld worden.")
+    @PositiveOrZero(message="Stock spellen te koop mag niet negatief zijn.")
     private Integer buyStock;
+
     @ManyToOne
     private Publisher publisher;
+
     private String picture;
+
+    @NotNull(message = "Huurprijs moet verplicht ingevuld worden.")
+    @Positive(message="Huurprijs mag niet negatief of 0 zijn.")
     private Double rentPrice;
+
+    @NotNull(message = "Aankoopprijs moet verplicht ingevuld worden.")
+    @Positive(message="Aankoopprijs mag niet negatief of 0 zijn.")
     private Double buyPrice;
+
     @ManyToOne
     private Language language;
+
+    @NotNull(message = "Veld moet verplicht ingevuld worden met formaat yyyy-MM-dd.")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateLaunch;
+
     private Boolean active;
 
     ///constructors

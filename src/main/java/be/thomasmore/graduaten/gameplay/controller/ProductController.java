@@ -139,19 +139,22 @@ public class ProductController {
         return "index";
     }
 
-    @RequestMapping("/products/create")
-    public String productCreate(Model model) {
-        List<Product> products = productService.getProducts();
+    public void loadCreateParameters(Model model){
         List<Genre> genres = genreService.getGenres();
         List<Language> languages = languageService.getLanguages();
         List<AgeCategory> ageCategories = ageCategoryService.getAgeCategories();
         List<Publisher> publishers = publisherService.getPublishers();
-        model.addAttribute("products", products);
         model.addAttribute("genres", genres);
         model.addAttribute("languages", languages);
         model.addAttribute("ageCategories", ageCategories);
         model.addAttribute("publishers", publishers);
-        int x = 0;
+    }
+
+    @RequestMapping("/products/create")
+    public String productCreate(Model model) {
+
+        loadCreateParameters(model);
+        model.addAttribute("inputProduct", new Product());
         return "/products/create";
     }
 
@@ -159,44 +162,32 @@ public class ProductController {
     public String productEdit(Model model, HttpSession session, @RequestParam("id") Long id) {
 
         if (id != 0) {
-            List<Genre> genres = genreService.getGenres();
-            List<Language> languages = languageService.getLanguages();
-            List<AgeCategory> ageCategories = ageCategoryService.getAgeCategories();
-            List<Publisher> publishers = publisherService.getPublishers();
-            model.addAttribute("productRecord", productService.getProductById(id));
-            model.addAttribute("genres", genres);
-            model.addAttribute("languages", languages);
-            model.addAttribute("ageCategories", ageCategories);
-            model.addAttribute("publishers", publishers);
+            loadCreateParameters(model);
+            model.addAttribute("inputProduct", productService.getProductById(id));
             return "/products/edit";
         }
         return "index";
     }
 
-
-
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
     private Date date;
 
-
-
     @PostMapping("/products/do-create")
-    public String addProduct(Model model, HttpServletRequest request, @RequestParam("image") MultipartFile multipartFile) throws IOException {
-    //public String addProduct(Model model, HttpServletRequest request) {
-        Product product = new Product();
-        product.setName(request.getParameter("name"));
-        product.setDescription(request.getParameter("description"));
-        product.setGenre(genreService.getGenreById(Long.parseLong(request.getParameter("genreId"))));
-        product.setAgeCategory(ageCategoryService.getAgeCategoryById(Long.parseLong(request.getParameter("ageCategoryId"))));
-        product.setPublisher(publisherService.getPublisherById(Long.parseLong(request.getParameter("publisherId"))));
-        product.setLanguage(languageService.getLanguageById(Long.parseLong(request.getParameter("languageId"))));
-        product.setPlayersMinimum(Integer.parseInt(request.getParameter("playersMinimum")));
-        product.setPlayersMaximum(Integer.parseInt(request.getParameter("playersMaximum")));
-        product.setRentStock(Integer.parseInt(request.getParameter("rentStock")));
-        product.setRentPrice(Double.parseDouble(request.getParameter("rentPrice")));
-        product.setBuyStock(Integer.parseInt(request.getParameter("buyStock")));
-        product.setBuyPrice(Double.parseDouble(request.getParameter("buyPrice")));
-        //product.setPicture(request.getParameter("picture"));
+    public String addProduct(Model model, HttpServletRequest request, @RequestParam("image") MultipartFile multipartFile,@Valid @ModelAttribute("inputProduct") Product inputProduct, BindingResult result) throws IOException {
+
+        if (result.hasErrors()) {
+            loadCreateParameters(model);
+            model.addAttribute("inputProduct", inputProduct);
+            return "/products/create";
+        }
+
+        Product product = inputProduct;
+
+        product.setGenre(genreService.getGenreById(inputProduct.getGenre().getId()));
+        product.setAgeCategory(ageCategoryService.getAgeCategoryById(inputProduct.getAgeCategory().getId()));
+        product.setPublisher(publisherService.getPublisherById(inputProduct.getPublisher().getId()));
+        product.setLanguage(languageService.getLanguageById(inputProduct.getLanguage().getId()));
+
         String fileName = "";
         if (!multipartFile.getOriginalFilename().isEmpty()){
             fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
@@ -217,40 +208,35 @@ public class ProductController {
             fileService.saveFile(uploadDir, fileName, multipartFile);
         }
 
-        //Als fileService is getest en correct werkt dan mag onderstaande en ook de klasse FileUploadUtil in map config weg!
-/*        String uploadDir = "target/classes/static/images/GameImages";
-        FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);*/
-
         List<Product> products = productService.getProducts();
         List<Genre> genres = genreService.getGenres();
         model.addAttribute("products", products);
         model.addAttribute("genres", genres);
         return "/products/lst";
     }
-    @PostMapping("/products/do-update")
-    public String editProduct(Model model, HttpServletRequest request, @RequestParam("productid") Long productid, @RequestParam("image") MultipartFile multipartFile) throws IOException {
-        //public String addProduct(Model model, HttpServletRequest request) {
-        Product product = productService.getProductById(productid);
-        product.setName(request.getParameter("name"));
-        product.setDescription(request.getParameter("description"));
-        product.setGenre(genreService.getGenreById(Long.parseLong(request.getParameter("genreId"))));
-        product.setAgeCategory(ageCategoryService.getAgeCategoryById(Long.parseLong(request.getParameter("ageCategoryId"))));
-        product.setPublisher(publisherService.getPublisherById(Long.parseLong(request.getParameter("publisherId"))));
-        product.setLanguage(languageService.getLanguageById(Long.parseLong(request.getParameter("languageId"))));
-        product.setPlayersMinimum(Integer.parseInt(request.getParameter("playersMinimum")));
-        product.setPlayersMaximum(Integer.parseInt(request.getParameter("playersMaximum")));
-        product.setRentStock(Integer.parseInt(request.getParameter("rentStock")));
-        product.setRentPrice(Double.parseDouble(request.getParameter("rentPrice")));
-        product.setBuyStock(Integer.parseInt(request.getParameter("buyStock")));
-        product.setBuyPrice(Double.parseDouble(request.getParameter("buyPrice")));
-        //product.setPicture(request.getParameter("picture"));
 
-        /*String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());*/
-        /*product.setPicture("/images/GameImages/" + fileName);*/
+    @PostMapping("/products/do-update")
+    public String editProduct(Model model, HttpServletRequest request, @RequestParam("image") MultipartFile multipartFile,@Valid @ModelAttribute("inputProduct") Product inputProduct, BindingResult result) throws IOException {
+        if (result.hasErrors()) {
+            loadCreateParameters(model);
+            model.addAttribute("inputProduct", inputProduct);
+            return "/products/edit";
+        }
+
+        Product product = inputProduct;
+
+        product.setGenre(genreService.getGenreById(inputProduct.getGenre().getId()));
+        product.setAgeCategory(ageCategoryService.getAgeCategoryById(inputProduct.getAgeCategory().getId()));
+        product.setPublisher(publisherService.getPublisherById(inputProduct.getPublisher().getId()));
+        product.setLanguage(languageService.getLanguageById(inputProduct.getLanguage().getId()));
+
         String fileName = "";
         if (!multipartFile.getOriginalFilename().isEmpty()){
             fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
             product.setPicture("/images/GameImages/" + fileName);
+        }
+        else {
+            product.setPicture(productService.getProductById(product.getId()).getPicture());
         }
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -263,13 +249,6 @@ public class ProductController {
             String uploadDir = "target/classes/static/images/GameImages";
             fileService.saveFile(uploadDir, fileName, multipartFile);
         }
-
-        //productService.updateProduct(product);
-
-
-
-        /*String uploadDir = "target/classes/static/images/GameImages";
-        FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);*/
 
         List<Product> products = productService.getProducts();
         List<Genre> genres = genreService.getGenres();
