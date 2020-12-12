@@ -35,7 +35,7 @@
 
             <sec:authorize access="isAuthenticated()">
             <li class="nav-item">
-                <a class="nav-link" href="/contact">
+                <a class="nav-link" href="/orderproducts/basket">
 
                     <button type="button" class="btn btn-primary">
                         <svg  width="20" height="20" fill="currentColor">

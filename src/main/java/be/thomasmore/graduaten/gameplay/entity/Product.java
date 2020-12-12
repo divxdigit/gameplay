@@ -3,6 +3,7 @@ package be.thomasmore.graduaten.gameplay.entity;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -21,6 +22,20 @@ public class Product {
     private String description;
     @ManyToOne
     private Genre genre;
+
+    @Override
+    public boolean equals(Object o) {
+////        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return id.equals(product.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
     @ManyToOne
     private AgeCategory ageCategory;
     private Integer playersMinimum;

@@ -18,6 +18,7 @@
     <%@ page import="be.thomasmore.graduaten.gameplay.entity.OrderProduct" %>
 
 
+
     <jsp:include page="../navigation.jsp" />
 
 </head>
@@ -25,7 +26,7 @@
 
 <div class="container mb-3 mt-3" style="margin-top: 25px ">
     <div class="row">
-        <h1>Orderproductenlijst</h1>
+        <h1><%=request.getAttribute("viewTitle")%></h1>
     </div>
 
     <script>

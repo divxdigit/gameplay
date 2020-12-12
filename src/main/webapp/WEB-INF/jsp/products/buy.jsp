@@ -163,24 +163,23 @@
                         <%--<label for="userid">typeid</label>--%>
                         <input class="form-control" type="hidden" name="typeid" id="typeid" value="1" /> <%-- 1 : buy--%>
                     </div>
-                    <div><b>Facturatie adres:</b></div>
-                    <div>
-                        <label for="deliveryStreet">Leveringsadres</label>
-                        <input class="form-control" type="text" name="deliveryStreet" id="deliveryStreet" value="<%=user.getStreet()%>" />
-                    </div>
-                    <div>
-                        <label for="deliveryNumber">Nr</label>
-                        <input class="form-control" type="text" name="deliveryNumber" id="deliveryNumber" value="<%=user.getNumber()%>" />
-                    </div>
-                    <div>
-                        <label for="deliveryPostalcode">Postcode</label>
-                        <input class="form-control" type="text" name="deliveryPostalcode" id="deliveryPostalcode" value="<%=user.getPostalcode()%>" />
-                    </div>
-                    <div>
-                        <label for="deliveryCity">Gemeente</label>
-                        <input class="form-control" type="text" name="deliveryCity" id="deliveryCity" value="<%=user.getCity()%>" />
-                    </div>
-
+<%--                    <div><b>Facturatie adres:</b></div>--%>
+<%--                    <div>--%>
+<%--                        <label for="deliveryStreet">Leveringsadres</label>--%>
+<%--                        <input class="form-control" type="text" name="deliveryStreet" id="deliveryStreet" value="<%=user.getStreet()%>" />--%>
+<%--                    </div>--%>
+<%--                    <div>--%>
+<%--                        <label for="deliveryNumber">Nr</label>--%>
+<%--                        <input class="form-control" type="text" name="deliveryNumber" id="deliveryNumber" value="<%=user.getNumber()%>" />--%>
+<%--                    </div>--%>
+<%--                    <div>--%>
+<%--                        <label for="deliveryPostalcode">Postcode</label>--%>
+<%--                        <input class="form-control" type="text" name="deliveryPostalcode" id="deliveryPostalcode" value="<%=user.getPostalcode()%>" />--%>
+<%--                    </div>--%>
+<%--                    <div>--%>
+<%--                        <label for="deliveryCity">Gemeente</label>--%>
+<%--                        <input class="form-control" type="text" name="deliveryCity" id="deliveryCity" value="<%=user.getCity()%>" />--%>
+<%--                    </div>--%>
                     <button type="submit" class="btn btn-primary">Koop nu voor <%=product.getBuyPrice()%> €</button>
                     Er zijn nog <%=product.getRentStock()%> stuks beschikbaar.
                 </form>

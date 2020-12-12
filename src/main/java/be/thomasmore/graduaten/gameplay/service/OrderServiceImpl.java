@@ -72,6 +72,7 @@ public class OrderServiceImpl implements OrderService{
         return orderRepository.findByUserAndStatus(user, status);
     }
 
+
     @Override
     public List<Order> getOrdersByDateCreated(Date datecreated) {
         return orderRepository.findByDateCreated(datecreated);
