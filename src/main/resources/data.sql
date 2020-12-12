@@ -272,3 +272,15 @@ VALUES (3,3,1,2,2,0,1,1);
 insert into Order_Products(product_id,order_id, rent_duration_weeks, order_type, price, discount_price ,returned ,amount)
 VALUES (4,4,null,1,25.00,20.00,0,2);
 
+CREATE TABLE IF NOT EXISTS Ordertypes(
+    id int not null AUTO_INCREMENT,
+    name text,
+    primary key (id)
+);
+
+insert into Ordertypes(name)
+values ('Verhuur');
+insert into Ordertypes(name)
+values ('Verkoop');
+insert into Ordertypes(name)
+values ('Preorder');
