@@ -3,6 +3,7 @@ package be.thomasmore.graduaten.gameplay.service;
 import be.thomasmore.graduaten.gameplay.entity.Order;
 import be.thomasmore.graduaten.gameplay.entity.OrderProduct;
 import be.thomasmore.graduaten.gameplay.entity.Product;
+import be.thomasmore.graduaten.gameplay.entity.User;
 
 import java.util.List;
 import java.util.Optional;

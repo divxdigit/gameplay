@@ -138,19 +138,31 @@ public class OrderController {
                 //foutmelding geven
             };
         }
-
         order = orderService.getOrderByUserByStatus(user, 0);
-        order.setDeliveryStreet(request.getParameter("deliveryStreet"));
-        order.setDeliveryNumber(request.getParameter("deliveryNumber"));
-        order.setDeliveryPostalcode(Integer.valueOf(request.getParameter("deliveryPostalcode")));
-        order.setDeliveryCity(request.getParameter("deliveryCity"));
 
+
+        //check if orderProduct already exists in the order
         //Create orderproduct object
         OrderProduct orderProduct = new OrderProduct();
+        for (OrderProduct op: order.getOrderProducts()) {
+            if(op.getProduct().equals(product)) {
+//                orderProduct.setOrder(order);
+                orderProduct=op;
+                orderProduct.setAmount(orderProduct.getAmount()+1);
 
-        orderProduct.setOrder(order);
-        orderProduct.setOrderType(typeid);
-        orderProduct.setProduct(product);
+            }
+            else {
+
+                orderProduct.setOrder(order);
+                orderProduct.setOrderType(typeid);
+                orderProduct.setProduct(product);
+
+                //default values
+                orderProduct.setAmount(1);
+                orderProduct.setDiscountPrice(0.00);
+                orderProduct.setReturned(false);
+            }
+        }
 
         if (typeid == 1) {  //buy product
             orderProduct.setPrice(product.getBuyPrice());
@@ -167,11 +179,17 @@ public class OrderController {
         orderProductList.add(orderProduct);
 
         // Generate list for return view
-        List<Order> orders = orderService.getOrders();
-        Order selectedOrder = new Order();
-        model.addAttribute("orders", orders);
-        model.addAttribute("selectedOrder", selectedOrder );
-        return "orders/edit";
+
+        List<OrderProduct> orderProducts = orderProductService.getOrderProductsByOrder(order);
+
+        OrderProduct selectedOrderProduct = new OrderProduct();
+
+        model.addAttribute("orderProducts", orderProducts);
+        model.addAttribute("selectedOrderProduct", selectedOrderProduct);
+        model.addAttribute("viewTitle","Winkelmandje");
+
+
+        return "/orderproducts/basket";
     }
 
     @RequestMapping("/orders/add")
@@ -247,8 +265,88 @@ public class OrderController {
 
         model.addAttribute("orderProducts", orderProducts);
         model.addAttribute("selectedOrderProduct", selectedOrderProduct);
-
+        model.addAttribute("viewTitle","Orderproductenlijst");
         return "orderproducts/edit";
+    }
+
+/*    public String translateOrderProductTypes (Integer productType){
+        switch(productType){
+            case 1: return "Huren";
+            case 2: return "Kopen";
+            case 3: return "Pre-Order";
+        }
+    }*/
+    @RequestMapping(value = "/orderproducts/basket")
+    public String dataOrderProductsByUserCard(ModelMap model, HttpSession session) {
+        //get logged-in user
+        User user = new User();
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
+            String currentUserName = authentication.getName();
+            user = userService.getUserByEmail(currentUserName);
+
+            //get order from user where state is 0 (winkelmand)
+            Order order = orderService.getOrderByUserByStatus(user,0);
+            List<OrderProduct> orderProducts = orderProductService.getOrderProductsByOrder(order);
+
+            OrderProduct selectedOrderProduct = new OrderProduct();
+
+            model.addAttribute("orderProducts", orderProducts);
+            model.addAttribute("selectedOrderProduct", selectedOrderProduct);
+            model.addAttribute("viewTitle","Winkelmandje");
+
+            return "orderproducts/basket";
+        }
+        return "index";
+    }
+
+    @RequestMapping(value = "/orderproducts/basket" , params= {"orderProductID","inputnumber"})
+    public String dataOrderProductsByOrderID(ModelMap model, HttpSession session,
+                                             @RequestParam("orderProductID") Long orderProductID,
+                                             @RequestParam("inputnumber") Integer inputnumber) {
+        //get logged-in user
+        User user = new User();
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
+            String currentUserName = authentication.getName();
+            user = userService.getUserByEmail(currentUserName);
+
+            //get order from user where state is 0 (winkelmand)
+            Order order = orderService.getOrderByUserByStatus(user,0);
+
+            //Edit number depending product type
+            OrderProduct orderProduct = orderProductService.getOrderProductById(orderProductID);
+            switch(orderProduct.getOrderType()) {
+                case 2:
+                    // rent
+                    orderProduct.setRentDurationWeeks(inputnumber);
+                    break;
+                case 1:
+                case 3:
+                    // preorder
+                    // buy
+                    orderProduct.setAmount(inputnumber);
+                    break;
+                default:
+                    break;
+            }
+            // save changes in db
+            orderProductService.updateOrderProduct(orderProduct);
+
+            // Get input for view
+            List<OrderProduct> orderProducts = orderProductService.getOrderProductsByOrder(order);
+
+            OrderProduct selectedOrderProduct = new OrderProduct();
+
+            model.addAttribute("orderProducts", orderProducts);
+            model.addAttribute("selectedOrderProduct", selectedOrderProduct);
+            model.addAttribute("viewTitle","Winkelmandje");
+
+            return "orderproducts/basket";
+        }
+        return "index";
     }
 
     @RequestMapping(value = "/orderproducts/edit" , params= {"orderID"})
@@ -261,7 +359,7 @@ public class OrderController {
 
         model.addAttribute("orderProducts", orderProducts);
         model.addAttribute("selectedOrderProduct", selectedOrderProduct);
-
+        model.addAttribute("viewTitle","Orderproductenlijst");
         return "orderproducts/edit";
     }
 
@@ -276,7 +374,7 @@ public class OrderController {
             orderProducts = orderProductService.getOrderProductsByOrder(selectedOrderProduct.getOrder());
             model.addAttribute("orderProducts", orderProducts);
             model.addAttribute("selectedOrderProduct", selectedOrderProduct);
-
+            model.addAttribute("viewTitle","Orderproductenlijst");
             return "orderproducts/edit";
         }
 
@@ -295,6 +393,7 @@ public class OrderController {
             model.addAttribute("orderProducts", orderProducts);
             model.addAttribute("successSave", null);
             model.addAttribute("selectedOrderProduct", selectedOrderProduct);
+            model.addAttribute("viewTitle","Orderproductenlijst");
             return "/orderproducts/edit";
         }
 
@@ -312,7 +411,7 @@ public class OrderController {
 
         List<OrderProduct> orderProducts = orderProductService.getOrderProductsByOrder(selectedOrderProduct.getOrder());
         model.addAttribute("orderProducts", orderProducts);
-
+        model.addAttribute("viewTitle","Orderproductenlijst");
         return "orderproducts/edit";
     }
 

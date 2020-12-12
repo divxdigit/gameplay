@@ -15,7 +15,6 @@ public interface OrderService {
     List<Order> getOrdersByDateCreated(Date dateCreated);
     List<Order> getOrdersByDateCollect(Date dateCollect);
 
-
     List<Order> getOrdersCreatedBetweenDate(Date dateStart, Date dateEnd);
     List<Order> getOrdersCollectedBetweenDate(Date dateStart, Date dateEnd);
 
