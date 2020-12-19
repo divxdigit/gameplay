@@ -1,10 +1,7 @@
 package be.thomasmore.graduaten.gameplay.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "Usertypes")
@@ -15,10 +12,12 @@ public class UserType {
     private String name;
     private String description;
 
+
     public UserType() {
     }
     public UserType(String name, String description) {
         this.name = name;
+      //  this.users = users;
         this.description = description;
     }
 

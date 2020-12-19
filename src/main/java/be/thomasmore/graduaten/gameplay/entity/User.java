@@ -6,6 +6,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.time.LocalDate;
+import java.util.Set;
 
 @Entity
 @Table(name = "Users")
@@ -52,6 +53,8 @@ public class User {
 
     @ManyToOne
     private UserType userType;
+
+
 
     //constructors
 
@@ -174,6 +177,9 @@ public class User {
         this.city = city;
     }
 
+    @ManyToOne
+    public UserType getUserType() { return userType; }
+    public void setUserType(UserType userType) { this.userType = userType; }
 
 
     // methods

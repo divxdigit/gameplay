@@ -38,7 +38,7 @@
         <div class="form-group col-md-6">
             <label for="userType.id">Usertype</label>
             <form:select class="form-control" name="userTypeId" id="userType" path="userType.id">
-                <%  List<UserType> userTypeList = (List<UserType>) request.getAttribute("userType");
+                <%  List<UserType> userTypeList = (List<UserType>) request.getAttribute("userTypes");
                     for (UserType userType: userTypeList) { %>
                 <option value="<%= userType.getId() %>"><%= userType.getName() %></option>
                 <%} %>
@@ -46,62 +46,51 @@
         </div>
 
         <div class="form-group col-md-6">
-            <label for="firstName">FirstName</label>
-            <form:input readonly="true" type="text" class="form-control" id="firstName" path="firstName" placeholder="FirstName" value="<%=selectedUser.getFirstname()%>"/>
-        </div>
-
-        <<%--div class="form-group col-md-6">
-            <label for="user.lastname">Achternaam</label>
-            <form:input readonly="true" type="text" class="form-control" id="user.lastname" path="user.lastname" placeholder="Achternaam" value="<%=selectedOrder.getUser().getLastname()%>"/>
+            <label for="firstName">Voornaam</label>
+            <form:input readonly="false" type="text" class="form-control" id="firstname" path="firstname" placeholder="Voornaam" value="<%=selectedUser.getFirstname()%>"/>
         </div>
 
         <div class="form-group col-md-6">
-            <label for="dateCreated">Besteldatum</label>
-            <form:input type="date" class="form-control" id="dateCreated" path="dateCreated" placeholder="Besteldatum" value="<%=selectedOrder.getDateCreated()%>"/>
+            <label for="firstname">Achternaam</label>
+            <form:input readonly="false" type="text" class="form-control" id="lastname" path="lastname" placeholder="Achternaam" value="<%=selectedUser.getLastname()%>"/>
+        </div>
+
+        <div class="form-group col-md-6">
+            <label for="email">Email</label>
+            <form:input readonly="false" type="text" class="form-control" id="email" path="email" placeholder="Email" value="<%=selectedUser.getEmail()%>"/>
+        </div>
+
+        <div class="form-group col-md-6">
+            <label for="street">Straat</label>
+            <form:input type="text" class="form-control" id="street" path="street" placeholder="Straat" value="<%=selectedUser.getStreet()%>"/>
             <div class="invalid-feedback d-block">
-                <form:errors path ="dateCreated"/>
+                <form:errors path ="street"/>
             </div>
         </div>
 
         <div class="form-group col-md-6">
-            <label for="dateCollect">Leverdatum</label>
-            <form:input type="date" class="form-control" id="dateCollect" path="dateCollect" placeholder="Leverdatum" value="<%=selectedOrder.getDateCollect()%>"/>
+            <label for="number">Huisnummer</label>
+            <form:input type="text" class="form-control" id="number" path="number" placeholder="Huisnummer" value="<%=selectedUser.getNumber()%>"/>
             <div class="invalid-feedback d-block">
-                <form:errors path ="dateCollect"/>
+                <form:errors path ="number"/>
             </div>
         </div>
 
         <div class="form-group col-md-6">
-            <label for="deliveryStreet">Straat van leveradres</label>
-            <form:input type="text" class="form-control" id="deliveryStreet" path="deliveryStreet" placeholder="Straat van leveringsadres" value="<%=selectedOrder.getDeliveryStreet()%>"/>
+            <label for="postalcode">Postcode</label>
+            <form:input type="text" class="form-control" id="postalcode" path="postalcode" placeholder="Postcode" value="<%=selectedUser.getPostalcode()%>"/>
             <div class="invalid-feedback d-block">
-                <form:errors path ="deliveryStreet"/>
+                <form:errors path ="postalcode"/>
             </div>
         </div>
 
         <div class="form-group col-md-6">
-            <label for="deliveryNumber">Huisnummer van leveradres</label>
-            <form:input type="text" class="form-control" id="deliveryNumber" path="deliveryNumber" placeholder="Huisnummer van leveringsadres" value="<%=selectedOrder.getDeliveryNumber()%>"/>
+            <label for="city">Gemeente</label>
+            <form:input type="text" class="form-control" id="city" path="city" placeholder="Gemeente" value="<%=selectedUser.getCity()%>"/>
             <div class="invalid-feedback d-block">
-                <form:errors path ="deliveryNumber"/>
+                <form:errors path ="city"/>
             </div>
         </div>
-
-        <div class="form-group col-md-6">
-            <label for="deliveryPostalcode">Postcode van leveradres</label>
-            <form:input type="text" class="form-control" id="deliveryPostalcode" path="deliveryPostalcode" placeholder="Postcode van leveringsadres" value="<%=selectedOrder.getDeliveryPostalcode()%>"/>
-            <div class="invalid-feedback d-block">
-                <form:errors path ="deliveryPostalcode"/>
-            </div>
-        </div>
-
-        <div class="form-group col-md-6">
-            <label for="deliveryCity">Gemeente van leveradres</label>
-            <form:input type="text" class="form-control" id="deliveryCity" path="deliveryCity" placeholder="Gemeente van leveringsadres" value="<%=selectedOrder.getDeliveryCity()%>"/>
-            <div class="invalid-feedback d-block">
-                <form:errors path ="deliveryCity"/>
-            </div>
-        </div>--%>
 
     </div>
 

@@ -68,8 +68,10 @@ public class UserController {
         }
 
         List<User> users = userService.getUsers();
+        List<UserType> usertypes = userTypeService.getUserTypes();
         model.addAttribute("users", users);
         model.addAttribute("selectedUser", selectedUser);
+        model.addAttribute("userTypes", usertypes);
 
         return "/users/edit";
     }
