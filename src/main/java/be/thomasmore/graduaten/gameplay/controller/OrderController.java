@@ -144,46 +144,78 @@ public class OrderController {
         //check if orderProduct already exists in the order
         //Create orderproduct object
         OrderProduct orderProduct = new OrderProduct();
-        for (OrderProduct op: order.getOrderProducts()) {
-            if(op.getProduct().equals(product)) {
-//                orderProduct.setOrder(order);
-                orderProduct=op;
-                orderProduct.setAmount(orderProduct.getAmount()+1);
+        // Default values for productorder
+        orderProduct.setAmount(1);
+        orderProduct.setDiscountPrice(0.00);
+        orderProduct.setReturned(false);
+        orderProduct.setOrder(order);
+        orderProduct.setProduct(product);
+        orderProduct.setOrderType(typeid);
 
+        // No orderproducts in the order
+        if(order.getOrderProducts() == null) {
+            Set<OrderProduct> orderlist = new HashSet<>();
+            orderlist.add(orderProduct);
+            order.setOrderProducts(orderlist);
+            if (typeid == 1) {  //buy product
+                orderProduct.setPrice(product.getBuyPrice());
+
+            } else {            //rent product
+                Integer weeks = Integer.valueOf(request.getParameter("weeks"));
+                orderProduct.setPrice(product.getRentPrice() * weeks);
+                orderProduct.setRentDurationWeeks(weeks);
             }
-            else {
+        }
+        else {
+            for (OrderProduct op : order.getOrderProducts()) {
+                // if orderproduct with type already exists on orderproducts
+                if (op.getProduct().equals(product) && op.getOrderType() == typeid) {
 
-                orderProduct.setOrder(order);
-                orderProduct.setOrderType(typeid);
-                orderProduct.setProduct(product);
+                    orderProduct = op;
 
-                //default values
-                orderProduct.setAmount(1);
-                orderProduct.setDiscountPrice(0.00);
-                orderProduct.setReturned(false);
+                    if (typeid == 1) {  //buy product
+                        orderProduct.setAmount(orderProduct.getAmount() + 1);
+                        orderProduct.setPrice(product.getBuyPrice());
+
+                    } else {            //rent product
+                        Integer weeks= Integer.valueOf(request.getParameter("weeks"));
+                        orderProduct.setPrice(product.getRentPrice()* weeks);
+                        orderProduct.setRentDurationWeeks(weeks);
+                    }
+                } else {
+
+                    if (typeid == 1) {  //buy product
+                        orderProduct.setPrice(product.getBuyPrice());
+
+                    } else {            //rent product
+                        Integer weeks = Integer.valueOf(request.getParameter("weeks"));
+                        orderProduct.setPrice(product.getRentPrice() * weeks);
+                        orderProduct.setRentDurationWeeks(weeks);
+                    }
+                }
+
             }
         }
 
-        if (typeid == 1) {  //buy product
-            orderProduct.setPrice(product.getBuyPrice());
-        } else {            //rent product
-            Integer weeks= Integer.valueOf(request.getParameter("weeks"));
-            orderProduct.setPrice(product.getRentPrice()* weeks);
-            orderProduct.setRentDurationWeeks(weeks);
-        }
+
+
 
         // Add orderproduct to wishlist (order)
-        orderProductService.addOrderProduct(orderProduct);
+        if(!orderProductService.addOrderProduct(orderProduct))
+        {
+            return "/error/404";
+            // TO-DO - deftige errorpage
+        }
 
-        Set<OrderProduct> orderProductList = new HashSet<OrderProduct>() ;
-        orderProductList.add(orderProduct);
+       /* Set<OrderProduct> orderProductList = new HashSet<OrderProduct>() ;
+        orderProductList.add(orderProduct);*/
 
         // Generate list for return view
-
         List<OrderProduct> orderProducts = orderProductService.getOrderProductsByOrder(order);
 
         OrderProduct selectedOrderProduct = new OrderProduct();
-
+        String returnmessage="";
+        model.addAttribute("returnmessage",returnmessage);
         model.addAttribute("orderProducts", orderProducts);
         model.addAttribute("selectedOrderProduct", selectedOrderProduct);
         model.addAttribute("viewTitle","Winkelmandje");
@@ -292,6 +324,8 @@ public class OrderController {
 
             OrderProduct selectedOrderProduct = new OrderProduct();
 
+            String returnmessage="";
+            model.addAttribute("returnmessage",returnmessage);
             model.addAttribute("orderProducts", orderProducts);
             model.addAttribute("selectedOrderProduct", selectedOrderProduct);
             model.addAttribute("viewTitle","Winkelmandje");
@@ -318,28 +352,69 @@ public class OrderController {
 
             //Edit number depending product type
             OrderProduct orderProduct = orderProductService.getOrderProductById(orderProductID);
-            switch(orderProduct.getOrderType()) {
+            boolean stockcheck;
+            int stock=0;
+            switch (orderProduct.getOrderType()) {
                 case 2:
                     // rent
-                    orderProduct.setRentDurationWeeks(inputnumber);
+                    //stock = orderProduct.getProduct().getRentStock();
+                    /*if(stock >= inputnumber) {*/
+                        orderProduct.setRentDurationWeeks(inputnumber);
+                        stockcheck=true;
+                   /* }
+                    else
+                    {
+                        stockcheck=false;
+                    }*/
                     break;
                 case 1:
                 case 3:
                     // preorder
                     // buy
-                    orderProduct.setAmount(inputnumber);
+                    stock = orderProduct.getProduct().getBuyStock();
+                    if(stock >= inputnumber) {
+                        orderProduct.setAmount(inputnumber);
+                        stockcheck=true;
+                    }
+                    else
+                    {
+                        stockcheck=false;
+                    }
                     break;
                 default:
+                    stockcheck=false;
                     break;
             }
-            // save changes in db
-            orderProductService.updateOrderProduct(orderProduct);
+
+            String returnmessage="";
+            if(stockcheck)
+            {
+                // save changes in db
+                if(orderProductService.updateOrderProduct(orderProduct))
+                {
+                    returnmessage = "Het aantal werd aangepast.";
+                }
+                else
+                {
+                    returnmessage = "De aanpassing werd niet doorgevoerd.";
+                }
+            }
+            else
+            {
+                returnmessage ="Het gewenste aantal is groter dan wat er beschikbaar is. Momenteel zijn er slechts " + stock + " in stock.";
+            }
+
+            /*orderProductService.updateOrderProduct(orderProduct);*/
 
             // Get input for view
             List<OrderProduct> orderProducts = orderProductService.getOrderProductsByOrder(order);
 
             OrderProduct selectedOrderProduct = new OrderProduct();
 
+            boolean successSave=stockcheck;
+
+            model.addAttribute("successSave",successSave);
+            model.addAttribute("returnmessage",returnmessage);
             model.addAttribute("orderProducts", orderProducts);
             model.addAttribute("selectedOrderProduct", selectedOrderProduct);
             model.addAttribute("viewTitle","Winkelmandje");

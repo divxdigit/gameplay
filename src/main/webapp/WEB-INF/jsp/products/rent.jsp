@@ -125,7 +125,7 @@
                         <%--<label for="userid">typeid</label>--%>
                         <input class="form-control" type="hidden" name="typeid" id="typeid" value="2" /> <%-- 2 : rent--%>
                     </div>
-                    <div><b>Facturatie adres:</b></div>
+                    <%--<div><b>Facturatie adres:</b></div>
                     <div>
                         <label for="deliveryStreet">Leveringsadres</label>
                         <input class="form-control" type="text" name="deliveryStreet" id="deliveryStreet" value="<%=user.getStreet()%>" />
@@ -141,7 +141,7 @@
                     <div>
                         <label for="deliveryCity">Gemeente</label>
                         <input class="form-control" type="text" name="deliveryCity" id="deliveryCity" value="<%=user.getCity()%>" />
-                    </div>
+                    </div>--%>
 
                     <div>
                         <label for="weeks">Aantal weken</label>
@@ -166,7 +166,11 @@
                         <%--<label for="userid">typeid</label>--%>
                         <input class="form-control" type="hidden" name="typeid" id="typeid" value="2" /> <%-- 2 : rent--%>
                     </div>
-                    <div><b>Facturatie adres:</b></div>
+
+                    <div>
+                        <label for="weeks">Aantal weken</label>
+                        <input class="form-control" type="text" name="weeks" id="weeks" value="1"/>
+                    </div><%--<div><b>Facturatie adres:</b></div>
                     <div>
                         <label for="deliveryStreet">Leveringsadres</label>
                         <input class="form-control" type="text" name="deliveryStreet" id="deliveryStreet" value="<%=user.getStreet()%>" />
@@ -182,11 +186,7 @@
                     <div>
                         <label for="deliveryCity">Gemeente</label>
                         <input class="form-control" type="text" name="deliveryCity" id="deliveryCity" value="<%=user.getCity()%>" />
-                    </div>
-                    <div>
-                        <label for="weeks">Aantal weken</label>
-                        <input class="form-control" type="text" name="weeks" id="weeks" value="1"/>
-                    </div>
+                    </div>--%>
 
                     <button type="submit" class="btn btn-primary">Huur nu</button>
                     Er zijn nog <%=product.getRentStock()%> stuks beschikbaar om uit te lenen - <%=product.getRentPrice()%> €/week.

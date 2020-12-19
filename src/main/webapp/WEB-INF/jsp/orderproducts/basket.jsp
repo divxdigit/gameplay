@@ -137,10 +137,12 @@
     %>
 
     <div class="alert alert-success" role="alert" style="margin-top: 20px;">Het aanpassen is gelukt.</div>
+    <div class="alert alert-success" role="alert" style="margin-top: 20px;"><%=request.getAttribute("returnmessage")%> </div>
 
     <% } else { %>
 
     <div class="alert alert-danger" role="alert" style="margin-top: 20px;">Het aanpassen is mislukt.</div>
+    <div class="alert alert-danger" role="alert" style="margin-top: 20px;"><%=request.getAttribute("returnmessage")%> </div>
 
     <%};};%>
 
