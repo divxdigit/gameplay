@@ -96,13 +96,13 @@ public class OrderController {
     }
 
     @PostMapping(value = "/orders/edit/submit", params = "Cancel")
-    public String CancelEditOrder(ModelMap model) {
+    public String cancelEditOrder(ModelMap model) {
 
         return dataOrder(model);
     }
 
     @RequestMapping(value = "/orders/delete", params = {"id"})
-    public String DeleteOrderById(ModelMap model, HttpSession session, @RequestParam("id") Long id) {
+    public String deleteOrderById(ModelMap model, HttpSession session, @RequestParam("id") Long id) {
 
         if (orderService.deleteOrderByID(id) == true) {
 
@@ -364,7 +364,7 @@ public class OrderController {
     }
 
     @RequestMapping(value = "/orderproducts/edit/orderID/{orderID}/id/{id}", method = GET)
-    public String OrderProductsEditId(ModelMap model, HttpSession session, @PathVariable long orderID, @PathVariable long id) {
+    public String orderProductsEditId(ModelMap model, HttpSession session, @PathVariable long orderID, @PathVariable long id) {
 
         OrderProduct selectedOrderProduct = new OrderProduct();
         List<OrderProduct> orderProducts = new ArrayList<>();
@@ -386,7 +386,7 @@ public class OrderController {
     }
 
     @PostMapping(value = "/orderproducts/edit/submit", params = "Save")
-    public String EditOrderProduct(@Valid @ModelAttribute("selectedOrderProduct") OrderProduct selectedOrderProduct, BindingResult result, ModelMap model) {
+    public String editOrderProduct(@Valid @ModelAttribute("selectedOrderProduct") OrderProduct selectedOrderProduct, BindingResult result, ModelMap model) {
 
         if (result.hasErrors()) {
             List<OrderProduct> orderProducts = orderProductService.getOrderProductsByOrder(orderService.getOrderById(selectedOrderProduct.getOrder().getId()));
@@ -416,13 +416,13 @@ public class OrderController {
     }
 
     @PostMapping(value = "/orderproducts/edit/submit", params = "Cancel")
-    public String CancelEditOrderProduct(@ModelAttribute("selectedOrderProduct") OrderProduct selectedOrderProduct, BindingResult result, ModelMap model) {
+    public String cancelEditOrderProduct(@ModelAttribute("selectedOrderProduct") OrderProduct selectedOrderProduct, BindingResult result, ModelMap model) {
 
         return dataOrderProductsByOrderIDByCancel(model,selectedOrderProduct.getOrder().getId());
     }
 
     @RequestMapping(value = "/orderproducts/delete", params = {"id"})
-    public String DeleteOrderProductById(ModelMap model, HttpSession session, @RequestParam("id") Long id) {
+    public String deleteOrderProductById(ModelMap model, HttpSession session, @RequestParam("id") Long id) {
 
         Long orderID = orderProductService.getOrderProductById(id).getOrder().getId();
 

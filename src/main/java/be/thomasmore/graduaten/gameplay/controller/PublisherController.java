@@ -32,37 +32,27 @@ public class PublisherController {
     @Autowired
     PublisherService publisherService;
 
-    @RequestMapping("/publishers/list")
-    public String dataGenre(Model model) {
+    private String loadPublisher(ModelMap model, Publisher publisher){
+
         List<Publisher> publishers = publisherService.getPublishers();
         model.addAttribute("publishers", publishers);
-        model.addAttribute("publisher", new Publisher());
+        model.addAttribute("publisher", publisher);
         return "/publishers/list";
+    }
+
+    @RequestMapping("/publishers/list")
+    public String dataGenre(ModelMap model) {
+
+        return loadPublisher(model,new Publisher());
     }
 
     @PostMapping(value = "/publishers/add")
     public String EditOrderProduct(@Valid @ModelAttribute("publisher") Publisher publisher, BindingResult result, ModelMap model) {
 
-        if (result.hasErrors()) {
-            List<Publisher> publishers = publisherService.getPublishers();
-            model.addAttribute("publishers", publishers);
-            model.addAttribute("publisher", publisher);
-            return "/publishers/list";
-        }
+        if (result.hasErrors()) { return loadPublisher(model,publisher); }
+        model.addAttribute("successAdd",publisherService.addPublisher(publisher)?true:false);
+        return loadPublisher(model,new Publisher());
 
-        if (publisherService.addPublisher(publisher) == true) {
-
-            model.addAttribute("successAdd", true);
-        }
-        else{
-
-            model.addAttribute("successAdd", false);
-        }
-
-        List<Publisher> publishers = publisherService.getPublishers();
-        model.addAttribute("publishers", publishers);
-        model.addAttribute("publisher", new Publisher());
-        return "/publishers/list";
     }
 
 }

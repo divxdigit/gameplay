@@ -22,37 +22,28 @@ public class AgeCategoryController {
     @Autowired
     AgeCategoryService ageCategoryService;
 
-    @RequestMapping("/agecategory/lst")
-    public String dataAgeCategory(Model model) {
+    private String loadCategory(ModelMap model, AgeCategory ageCategory){
+
         List<AgeCategory> agecategories = ageCategoryService.getAgeCategories();
         model.addAttribute("ageCategories", agecategories);
-        model.addAttribute("ageCategory", new AgeCategory());
+        model.addAttribute("ageCategory", ageCategory);
         return "/agecategory/lst";
     }
 
+    @RequestMapping("/agecategory/lst")
+    public String dataAgeCategory(ModelMap model) {
+
+        return loadCategory(model,new AgeCategory());
+    }
+
     @PostMapping(value = "/agecategory/add")
-    public String EditAgeCategory(@Valid @ModelAttribute("ageCategory") AgeCategory ageCategory, BindingResult result, ModelMap model) {
+    public String editAgeCategory(@Valid @ModelAttribute("ageCategory") AgeCategory ageCategory, BindingResult result, ModelMap model) {
 
-        if (result.hasErrors()) {
-            List<AgeCategory> ageCategories = ageCategoryService.getAgeCategories();
-            model.addAttribute("ageCategories", ageCategories);
-            model.addAttribute("ageCategory", ageCategory);
-            return "/agecategory/lst";
-        }
+        if (result.hasErrors()) { return loadCategory(model,ageCategory); }
+        // als opslagen category gelukt (true) dan successAdd true, anders false
+        model.addAttribute("successAdd",ageCategoryService.addAgeCategory(ageCategory)?true:false);
+        return loadCategory(model,new AgeCategory());
 
-        if (ageCategoryService.addAgeCategory(ageCategory) == true) {
-
-            model.addAttribute("successAdd", true);
-        }
-        else{
-
-            model.addAttribute("successAdd", false);
-        }
-
-        List<AgeCategory> ageCategories = ageCategoryService.getAgeCategories();
-        model.addAttribute("ageCategories", ageCategories);
-        model.addAttribute("ageCategory", new AgeCategory());
-        return "/agecategory/lst";
     }
 }
 

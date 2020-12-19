@@ -22,37 +22,28 @@ public class GenreController {
     @Autowired
     GenreService genreService;
 
-    @RequestMapping("/genres/list")
-    public String dataGenre(Model model) {
+    private String loadGenre(ModelMap model, Genre genre){
+
         List<Genre> genres = genreService.getGenres();
         model.addAttribute("genres", genres);
-        model.addAttribute("genre", new Genre());
+        model.addAttribute("genre", genre);
         return "/genres/list";
+    }
+
+    @RequestMapping("/genres/list")
+    public String dataGenre(ModelMap model) {
+
+        return loadGenre(model,new Genre());
     }
 
     @PostMapping(value = "/genres/add")
     public String EditOrderProduct(@Valid @ModelAttribute("genre") Genre genre, BindingResult result, ModelMap model) {
 
-        if (result.hasErrors()) {
-            List<Genre> genres = genreService.getGenres();
-            model.addAttribute("genres", genres);
-            model.addAttribute("genre", genre);
-            return "/genres/list";
-        }
-
-        if (genreService.addGenre(genre) == true) {
-
-            model.addAttribute("successAdd", true);
-        }
-        else{
-
-            model.addAttribute("successAdd", false);
-        }
-
-        List<Genre> genres = genreService.getGenres();
-        model.addAttribute("genres", genres);
-        model.addAttribute("genre", new Genre());
-        return "/genres/list";
+        // als resultaat van input view fouten bevat, dan view terug tonen met weergave fouten
+        if (result.hasErrors()) { return loadGenre(model,genre); }
+        // als opslagen genre gelukt (true) dan successAdd true, anders false
+        model.addAttribute("succesAdd",genreService.addGenre(genre)?true:false);
+        return loadGenre(model,new Genre());
     }
 }
 

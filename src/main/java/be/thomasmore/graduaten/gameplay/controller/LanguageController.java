@@ -1,5 +1,6 @@
 package be.thomasmore.graduaten.gameplay.controller;
 
+import be.thomasmore.graduaten.gameplay.entity.Genre;
 import be.thomasmore.graduaten.gameplay.entity.Language;
 import be.thomasmore.graduaten.gameplay.service.LanguageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,37 +25,26 @@ public class LanguageController {
     @Autowired
     LanguageService languageService;
 
-    @RequestMapping("/languages/list")
-    public String dataGenre(Model model) {
+    private String loadLanguage(ModelMap model, Language language){
+
         List<Language> languages = languageService.getLanguages();
         model.addAttribute("languages", languages);
-        model.addAttribute("language", new Language());
+        model.addAttribute("language",language);
         return "/languages/list";
+    }
+
+    @RequestMapping("/languages/list")
+    public String dataGenre(ModelMap model) {
+
+        return loadLanguage(model,new Language());
     }
 
     @PostMapping(value = "/languages/add")
     public String EditOrderProduct(@Valid @ModelAttribute("language") Language language, BindingResult result, ModelMap model) {
 
-        if (result.hasErrors()) {
-            List<Language> languages = languageService.getLanguages();
-            model.addAttribute("languages", languages);
-            model.addAttribute("language", language);
-            return "/languages/list";
-        }
-
-        if (languageService.addLanguage(language) == true) {
-
-            model.addAttribute("successAdd", true);
-        }
-        else{
-
-            model.addAttribute("successAdd", false);
-        }
-
-        List<Language> languages = languageService.getLanguages();
-        model.addAttribute("languages", languages);
-        model.addAttribute("language", new Language());
-        return "/languages/list";
+        if (result.hasErrors()) { return loadLanguage(model,language); }
+        model.addAttribute("successAdd",languageService.addLanguage(language)?true:false);
+        return loadLanguage(model,new Language());
     }
 }
 

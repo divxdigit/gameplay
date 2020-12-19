@@ -21,6 +21,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers("/h2-console/**");
+        web.ignoring().antMatchers("/resources/**");
     }
 
     @Bean
@@ -56,11 +57,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/publishers","/logout").hasAnyAuthority("USER","ADMIN")
 
                 .antMatchers("/","/index","/contact","/genres/**","/products/**","/search","/users/**","/users/registration/*","/orders/**","/orderproducts/**","/error/**").permitAll()
-
-
-
                 .antMatchers("/css/**", "/js/**", "/images/**","/icons/**").permitAll()
                 .antMatchers(HttpMethod.POST,"/products/do-create").permitAll()
+
                 .antMatchers("/login").anonymous()
                 .anyRequest().authenticated()
                 .and()

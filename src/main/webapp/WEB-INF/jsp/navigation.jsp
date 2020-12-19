@@ -63,6 +63,7 @@
                         </sec:authorize>
                     </button>
                  </a>
+
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="AccountDropdownMenuLink" style="margin-left: 15px">
                         <sec:authorize access="hasAnyAuthority('ADMIN')">
                             <a class="dropdown-item" href="/publishers/list" >

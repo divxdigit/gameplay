@@ -12,7 +12,6 @@
 
 <jsp:include page="navigation.jsp" />
 
-
 </head>
 <body>
 <div class="container" style="margin-top: 25px ">
@@ -21,6 +20,7 @@
             Contact
         </h1>
     </div>
+
     <div class="form-row">
         <div class="col-sm-6 table-responsive ">
 
@@ -65,6 +65,7 @@
             <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzaBI4HEPbe1_7hwrjOQLsHxzjd_vdQgw&callback=initMap" defer></script>
     </div>
 </div>
+
 </body>
 
 </html>
