@@ -106,7 +106,7 @@ public class OrderController {
 
         selectedOrder.setUser(userService.getUserById(selectedOrder.getUser().getId()));
 
-        if (orderService.updateOrder(selectedOrder) == true) {
+        if (orderService.updateOrder(selectedOrder)) {
 
             model.addAttribute("successSave", "true");
             model.addAttribute("selectedOrder", new Order());
@@ -133,7 +133,7 @@ public class OrderController {
     @RequestMapping(value = "/orders/delete", params = {"id"})
     public String deleteOrderById(ModelMap model, HttpSession session, @RequestParam("id") Long id) {
 
-        if (orderService.deleteOrderByID(id) == true) {
+        if (orderService.deleteOrderByID(id)) {
 
             model.addAttribute("successDelete", true);
             // do something
@@ -165,7 +165,7 @@ public class OrderController {
             order.setDateCollect(LocalDate.now());
             if(! orderService.addOrder(order)) {
                 //foutmelding geven
-            };
+            }
         }
         order = orderService.getOrderByUserByStatus(user, 0);
 
@@ -198,7 +198,7 @@ public class OrderController {
         else {
             for (OrderProduct op : order.getOrderProducts()) {
                 // if orderproduct with type already exists on orderproducts
-                if (op.getProduct().equals(product) && op.getOrderType() == typeid) {
+                if (op.getProduct().equals(product) && op.getOrderType().equals(typeid)) {
 
                     orderProduct = op;
 
@@ -323,9 +323,9 @@ public class OrderController {
 
         //input
         User user = userService.getUserById(Long.valueOf(3));
-        Integer product1 = 1;
-        Integer product2 = 2;
-        Integer weeks= 2;
+        int product1 = 1;
+        int product2 = 2;
+        int weeks= 2;
 
         //check order for user with status 0
         Order order = new Order();
@@ -532,6 +532,54 @@ public class OrderController {
         return "index";
     }
 
+    @RequestMapping(value = "/orderproducts/basket", params = {"prodid"}) //Used for delete record by user
+    public String deleteOrderProductByProdId(ModelMap model, HttpSession session, @RequestParam("prodid") Long id) {
+
+        Order order = orderProductService.getOrderProductById(id).getOrder();
+        Long orderID = orderProductService.getOrderProductById(id).getOrder().getId();
+        //get logged-in user
+        User user = new User();
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
+            String currentUserName = authentication.getName();
+            user = userService.getUserByEmail(currentUserName);
+            List<OrderProduct> orderProducts;
+            if (orderProductService.deleteOrderProductByID(id)) {
+
+                model.addAttribute("successDelete", true);
+                // do something
+                //check last product on orderID
+                if(orderProductService.getOrderProductsByOrder(order).size() == 0){
+                    orderProducts = null;
+                    orderService.deleteOrderByID(orderID);
+                    //order=null;
+                }
+                else {
+                    orderProducts = orderProductService.getOrderProductsByOrder(order);
+                }
+            } else {
+                model.addAttribute("successDelete", false);
+                // do something
+                orderProducts = orderProductService.getOrderProductsByOrder(order);
+            }
+
+            //List<OrderProduct> orderProducts = orderProductService.getOrderProductsByOrder(order);
+
+            OrderProduct selectedOrderProduct = new OrderProduct();
+            String returnmessage = "";
+            model.addAttribute("returnmessage", returnmessage);
+            model.addAttribute("orderProducts", orderProducts);
+            model.addAttribute("orderId", orderID);
+            model.addAttribute("userRecord", user);
+            model.addAttribute("selectedOrderProduct", selectedOrderProduct);
+            model.addAttribute("viewTitle", "Winkelmandje");
+            return "/orderproducts/basket";
+
+        }
+        return "index";
+    }
+
     @RequestMapping(value = "/orderproducts/edit" , params= {"orderID"})
     public String dataOrderProductsByOrderID(ModelMap model, @RequestParam("orderID") Long orderID) {
 
@@ -583,7 +631,7 @@ public class OrderController {
     @PostMapping(value = "/orderproducts/edit/detail", params = "Delete")
     public String deleteDetailOrderProduct(ModelMap model, @RequestParam("orderID") Long orderID, @RequestParam("orderProductID") Long orderProductID) {
 
-        if (orderProductService.deleteOrderProductByID(orderProductID) == true) {
+        if (orderProductService.deleteOrderProductByID(orderProductID)) {
 
             model.addAttribute("successDelete", true);
             // do something
@@ -631,7 +679,7 @@ public class OrderController {
             return "/orderproducts/edit";
         }
 
-        if (orderProductService.updateOrderProduct(selectedOrderProduct) == true) {
+        if (orderProductService.updateOrderProduct(selectedOrderProduct)) {
 
             model.addAttribute("successSave", true);
             model.addAttribute("selectedOrderProduct", new OrderProduct());
@@ -660,7 +708,7 @@ public class OrderController {
 
         Long orderID = orderProductService.getOrderProductById(id).getOrder().getId();
 
-        if (orderProductService.deleteOrderProductByID(id) == true) {
+        if (orderProductService.deleteOrderProductByID(id)) {
 
             model.addAttribute("successDelete", true);
             // do something

@@ -44,7 +44,12 @@
 
     <% if (request.getAttribute("orderProducts") == null)
     { %>
-    Er bevinden zich geen producten in het winkelmandje
+    <div>
+        Er bevinden zich geen producten in het winkelmandje
+    </div>
+    <div class="col-md-4 table-responsive ">
+        <a class="btn btn-primary" href="/products/lst" role="button">Verder winkelen</a>
+    </div>
     <% }
     else {
         %>
@@ -111,22 +116,23 @@
                         <button type="submit" class="btn btn-primary">Aanpassen</button>
                     </form>
                 </td>
-                    <td>Eenheidsprijs:
-                        <br/>
-                        €<%=orderProduct.getPrice()%>
-                        <% if(orderProduct.getDiscountPrice() >0) {%>
-                            <br/><i>- €<%=orderProduct.getDiscountPrice()%></i>
-                        <% } %>
-                    </td>
-                    <td>Totaal prijs:
-                        <br/><b>€ <%=df.format((orderProduct.getPrice() - orderProduct.getDiscountPrice()) * inputnumber)%></b>
-                        <%
-                            totalPrice += (orderProduct.getPrice() - orderProduct.getDiscountPrice()) * inputnumber; %>
-                    </td>
-               <%-- <td>
-                    <a class="btn btn-primary" href="/orderproducts/edit/orderID/<%=orderProduct.getOrder().getId()%>/id/<%=orderProduct.getId()%>" role="button">Edit</a>
-                    <a class="btn btn-primary" href="/orderproducts/delete?id=<%=orderProduct.getId()%>" role="button">Delete</a>
-                </td>--%>
+                <td>Eenheidsprijs:
+                    <br/>
+                    €<%=orderProduct.getPrice()%>
+                    <% if(orderProduct.getDiscountPrice() >0) {%>
+                        <br/><i>- €<%=orderProduct.getDiscountPrice()%></i>
+                    <% } %>
+                </td>
+                <td>Totaal prijs:
+                    <br/><b>€ <%=df.format((orderProduct.getPrice() - orderProduct.getDiscountPrice()) * inputnumber)%></b>
+                    <%
+                        totalPrice += (orderProduct.getPrice() - orderProduct.getDiscountPrice()) * inputnumber; %>
+                </td>
+            <td>
+
+                <a class="btn btn-primary" href="/orderproducts/basket?prodid=<%=orderProduct.getId()%>" role="button">Verwijder</a>
+            </td>
+
 
                 </tr>
 
@@ -191,7 +197,7 @@
 
     <%
     if(request.getAttribute("successSave")!=null){
-        if (Boolean.valueOf(String.valueOf(request.getAttribute("successSave"))) == true){
+        if (Boolean.valueOf(String.valueOf(request.getAttribute("successSave")))){
     %>
         <div class="alert alert-success" role="alert" style="margin-top: 20px;">Het aanpassen is gelukt.</div>
         <div class="alert alert-success" role="alert" style="margin-top: 20px;"><%=request.getAttribute("returnmessage")%> </div>
@@ -202,7 +208,7 @@
     };%>
     <%
     if(request.getAttribute("successDelete")!=null){
-       if (Boolean.valueOf(String.valueOf(request.getAttribute("successDelete"))) == true){
+       if (Boolean.valueOf(String.valueOf(request.getAttribute("successDelete")))){
     %>
         <div class="alert alert-success" role="alert" style="margin-top: 20px;">Het verwijderen is gelukt.</div>
     <% } else { %>
