@@ -197,9 +197,6 @@ public class OrderController {
             }
         }
 
-
-
-
         // Add orderproduct to wishlist (order)
         if(!orderProductService.addOrderProduct(orderProduct))
         {
@@ -216,13 +213,79 @@ public class OrderController {
         OrderProduct selectedOrderProduct = new OrderProduct();
         String returnmessage="";
         model.addAttribute("returnmessage",returnmessage);
+        model.addAttribute("orderId", order.getId());
         model.addAttribute("orderProducts", orderProducts);
         model.addAttribute("selectedOrderProduct", selectedOrderProduct);
         model.addAttribute("userRecord",user);
         model.addAttribute("viewTitle","Winkelmandje");
-
-
         return "/orderproducts/basket";
+    }
+
+    @PostMapping("/products/do-ordercomplete")
+    public String completeOrder(Model model, HttpServletRequest request) {
+
+        //Ophalen orderId van de basket en opzoeken order in de db
+        Long orderid= Long.valueOf(request.getParameter("orderId"));
+        Order order = orderService.getOrderById(orderid);
+
+
+        // Aantallen op de gevraagde producten aanpassen
+        //* lijst maken van alle producten in dit order
+        for (OrderProduct op : order.getOrderProducts()) {
+            //Voor elk product in het order, verminder het aantal
+            if(op.getOrderType()==2)   //rent
+            {
+                int rentstock=op.getProduct().getRentStock();
+                op.getProduct().setRentStock(rentstock-1);
+            }
+            else //buy
+            {
+                //get amount available in stock
+                int buystock=op.getProduct().getBuyStock();
+                //perform check stock not less than ordered
+                if(buystock >= op.getAmount())  //stock is ok
+                {
+                    Product product =  op.getProduct();
+                    product.setBuyStock(buystock-op.getAmount());
+                    // update via
+                    productService.updateProduct(product);
+                }
+                else
+                {
+                    // TO-DO
+                    // error - het gevraagde aantal is niet meer beschikbaar
+                    return "/index";
+                }
+            }
+        }
+        //Ophalen alternatief leveringsadres
+        String provided_street = request.getParameter("deliveryStreet");
+        String provided_nr = request.getParameter("deliveryStreet");
+        Integer provided_postalcode = Integer.valueOf(request.getParameter("deliveryPostalcode"));
+        String provided_city = request.getParameter("deliveryCity");
+
+        if(order.getDeliveryStreet() != provided_street)
+        {
+            order.setDeliveryStreet(provided_street);
+        }
+        if(order.getDeliveryNumber() != provided_nr)
+        {
+            order.setDeliveryNumber(provided_nr);
+        }
+        if(order.getDeliveryPostalcode() != provided_postalcode)
+        {
+            order.setDeliveryPostalcode(provided_postalcode);
+        }
+        if(order.getDeliveryCity() != provided_city)
+        {
+            order.setDeliveryCity(provided_city);
+        }
+
+        //order vervolledigen en basket afsluiten
+        order.setStatus(1);
+        //Alle wijzigingen opslaan
+        Boolean bool= orderService.updateOrder(order);
+        return "/index";
     }
 
     @RequestMapping("/orders/add")
@@ -302,13 +365,6 @@ public class OrderController {
         return "orderproducts/edit";
     }
 
-/*    public String translateOrderProductTypes (Integer productType){
-        switch(productType){
-            case 1: return "Huren";
-            case 2: return "Kopen";
-            case 3: return "Pre-Order";
-        }
-    }*/
     @RequestMapping(value = "/orderproducts/basket")
     public String dataOrderProductsByUserCard(ModelMap model, HttpSession session) {
         //get logged-in user
@@ -321,18 +377,37 @@ public class OrderController {
 
             //get order from user where state is 0 (winkelmand)
             Order order = orderService.getOrderByUserByStatus(user,0);
-            List<OrderProduct> orderProducts = orderProductService.getOrderProductsByOrder(order);
+            if(order!= null) {
+                List<OrderProduct> orderProducts = orderProductService.getOrderProductsByOrder(order);
 
-            OrderProduct selectedOrderProduct = new OrderProduct();
+                OrderProduct selectedOrderProduct = new OrderProduct();
 
-            String returnmessage="";
-            model.addAttribute("returnmessage",returnmessage);
-            model.addAttribute("orderProducts", orderProducts);
-            model.addAttribute("userRecord", user);
-            model.addAttribute("selectedOrderProduct", selectedOrderProduct);
-            model.addAttribute("viewTitle","Winkelmandje");
+                String returnmessage = "";
+                model.addAttribute("returnmessage", returnmessage);
+                model.addAttribute("orderProducts", orderProducts);
+                model.addAttribute("orderId", order.getId());
+                model.addAttribute("userRecord", user);
+                model.addAttribute("selectedOrderProduct", selectedOrderProduct);
+                model.addAttribute("viewTitle", "Winkelmandje");
 
-            return "orderproducts/basket";
+
+                return "orderproducts/basket";
+            }
+            else
+            {   //no products in the basket
+                List<OrderProduct> orderProducts = null;
+
+                OrderProduct selectedOrderProduct = new OrderProduct();
+
+                String returnmessage = "";
+                /*model.addAttribute("returnmessage", returnmessage);
+                model.addAttribute("orderProducts", orderProducts);
+                model.addAttribute("orderId", 0);
+                model.addAttribute("userRecord", user);
+                model.addAttribute("selectedOrderProduct", selectedOrderProduct);*/
+                model.addAttribute("viewTitle", "Winkelmandje");
+                return "orderproducts/basket";
+            }
         }
         return "index";
     }
@@ -418,6 +493,7 @@ public class OrderController {
             model.addAttribute("successSave",successSave);
             model.addAttribute("returnmessage",returnmessage);
             model.addAttribute("userRecord", user);
+            model.addAttribute("orderId", order.getId());
             model.addAttribute("orderProducts", orderProducts);
             model.addAttribute("selectedOrderProduct", selectedOrderProduct);
             model.addAttribute("viewTitle","Winkelmandje");

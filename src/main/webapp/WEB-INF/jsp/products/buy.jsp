@@ -91,9 +91,9 @@
             </table>
 
             <br/>
-            <br/><b>Facturatie adres:</b>
-            <br/><%=user.getStreet()%> <%=user.getNumber()%> <%=user.getPostalcode()%> <%=user.getCity()%>
-            <br/>
+            <%--<br/><b>Facturatie adres:</b>
+            <br/><%=user.getStreet()%> <%=user.getNumber()%> <%=user.getPostalcode()%> <%=user.getCity()%>--%>
+            <%--<br/>--%>
             <%--<br/><b>Leveringsadres:</b>
             <br/><%=user.getStreet()%> <%=user.getNumber()%> <%=user.getPostalcode()%> <%=user.getCity()%>
             <br/><i>Momenteel is het nog niet mogelijk om op een andere locatie te leveren.</i>--%>
@@ -125,7 +125,7 @@
                         <%--<label for="userid">typeid</label>--%>
                         <input class="form-control" type="hidden" name="typeid" id="typeid" value="1" /> <%-- 1 : buy--%>
                     </div>
-                    <div><b>Facturatie adres:</b></div>
+                    <%--<div><b>Facturatie adres:</b></div>
                     <div>
                         <label for="deliveryStreet">Leveringsadres</label>
                         <input class="form-control" type="text" name="deliveryStreet" id="deliveryStreet" value="<%=user.getStreet()%>" />
@@ -141,7 +141,7 @@
                     <div>
                         <label for="deliveryCity">Gemeente</label>
                         <input class="form-control" type="text" name="deliveryCity" id="deliveryCity" value="<%=user.getCity()%>" />
-                    </div>
+                    </div>--%>
 
 
                     <button type="submit" class="btn btn-primary">Koop nu voor <%=product.getBuyPrice()%> €</button>
@@ -181,7 +181,7 @@
 <%--                        <input class="form-control" type="text" name="deliveryCity" id="deliveryCity" value="<%=user.getCity()%>" />--%>
 <%--                    </div>--%>
                     <button type="submit" class="btn btn-primary">Koop nu voor <%=product.getBuyPrice()%> €</button>
-                    Er zijn nog <%=product.getRentStock()%> stuks beschikbaar.
+                    Er zijn nog <%=product.getBuyStock()%> stuks beschikbaar.
                 </form>
                 <% } %>
             </div>

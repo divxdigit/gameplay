@@ -40,6 +40,16 @@
             });
         } );
     </script>
+    <% Long id =(Long) request.getAttribute("orderId");
+    %>
+
+    <% if (request.getAttribute("orderProducts") == null)
+    { %>
+    Er bevinden zich geen producten in het winkelmandje
+    <% }
+    else {
+        %>
+    <b>OrderID: <%=id%></b>
     <%
         List<OrderProduct> orderProducts = (List<OrderProduct>) request.getAttribute("orderProducts");
         double totalPrice=0;
@@ -124,13 +134,15 @@
 
             </table>
     <% } %>
+
+    <form action="/products/do-ordercomplete" method="post">
     <div class="row" style="margin-top: 50px">
         <div class="col-md-4 table-responsive ">
             <a class="btn btn-primary" href="/products/lst" role="button">Verder winkelen</a>
         </div>
         <div class="col-md-8 table-responsive ">
-            <a class="btn btn-primary" href="/orderproducts/do-ordercomplete" role="button">Voltooien bestelling</a>
-
+            <%--<a class="btn btn-primary" href="/orderproducts/do-ordercomplete" role="button">Voltooien bestelling</a>--%>
+            <button type="submit" class="btn btn-primary">Voltooien bestelling</button>
                 Totaal te Betalen: € <%= df.format(totalPrice)%>
 
         </div>
@@ -147,6 +159,7 @@
             User user = (User) request.getAttribute("userRecord");
             /*SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");*/
     %>
+            <input class="form-control" type="hidden" name="orderId" id="orderId"  value=<%=(Long) request.getAttribute("orderId") %> />
             <label for="deliveryStreet">Straat</label>
             <input class="form-control" type="text" name="deliveryStreet" id="deliveryStreet" value="<%=user.getStreet()%>" />
         </div>
@@ -165,16 +178,17 @@
             <input class="form-control" type="text" name="deliveryCity" id="deliveryCity" value="<%=user.getCity()%>" />
         </div>
     </div>
+    </form>
     <% } %>
-
-    <%
+    <% } %>
+    <%--<%
         OrderProduct selectedOrderProduct = (OrderProduct) request.getAttribute("selectedOrderProduct");
         if(selectedOrderProduct.getId()!=null){
     %>
 
     <jsp:include page="./edit-partial-view.jsp" />
 
-    <%};%>
+    <%};%>--%>
 
     <%
     if(request.getAttribute("successSave")!=null){

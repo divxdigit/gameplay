@@ -1,5 +1,6 @@
 package be.thomasmore.graduaten.gameplay.service;
 
+import be.thomasmore.graduaten.gameplay.entity.Order;
 import be.thomasmore.graduaten.gameplay.entity.Product;
 
 import java.util.List;
@@ -12,4 +13,5 @@ public interface ProductService {
 
     Product getProductById(Long id);
     Product addProduct(Product product);
+    Boolean updateProduct(Product product);
 }

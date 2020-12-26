@@ -1,5 +1,6 @@
 package be.thomasmore.graduaten.gameplay.service;
 
+import be.thomasmore.graduaten.gameplay.entity.Order;
 import be.thomasmore.graduaten.gameplay.entity.Product;
 import be.thomasmore.graduaten.gameplay.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,12 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product addProduct(Product product) {
         return productRepository.save(product);
+    }
+
+    @Override
+    public Boolean updateProduct(Product product) {
+        productRepository.save(product);
+        return true;
     }
 
     @Override
