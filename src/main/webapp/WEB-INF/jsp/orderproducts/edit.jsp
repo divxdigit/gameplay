@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <html lang="en">
 <head>
     <!-- Required meta tags -->
@@ -57,18 +58,27 @@
                     List<OrderProduct> orderProducts = (List<OrderProduct>) request.getAttribute("orderProducts");
                     for (OrderProduct orderProduct: orderProducts) { %>
                         <tr  class='clickable-row' data-href='/orderproducts/edit/orderID/<%=orderProduct.getOrder().getId()%>/id/<%=orderProduct.getId()%>' style="cursor: pointer" >
-                        <td><%=orderProduct.getOrder().getId()%></td>
-                        <td><%=orderProduct.getId()%></td>
-                        <td><%=orderProduct.getProduct().getName()%></td>
-                        <td><%=orderProduct.getRentDurationWeeks()%> </td>
-                        <td><%=orderProduct.getOrderType()%></td>
-                        <td><%=orderProduct.getPrice()%></td>
-                        <td><%=orderProduct.getDiscountPrice()%></td>
-                        <td>
-                            <a class="btn btn-primary" href="/orderproducts/edit/orderID/<%=orderProduct.getOrder().getId()%>/id/<%=orderProduct.getId()%>" role="button">Edit</a>
-                            <a class="btn btn-primary" href="/orderproducts/delete?id=<%=orderProduct.getId()%>" role="button">Delete</a>
-                        </td>
+                            <td><%=orderProduct.getOrder().getId()%></td>
+                            <td><%=orderProduct.getId()%></td>
+                            <td><%=orderProduct.getProduct().getName()%></td>
+                            <td><%=orderProduct.getRentDurationWeeks()%> </td>
+                            <td><%=orderProduct.getOrderType()%></td>
+                            <td><%=orderProduct.getPrice()%></td>
+                            <td><%=orderProduct.getDiscountPrice()%></td>
+                            <td>
+                                    <form action="/orderproducts/edit/detail" method="POST">
 
+                                        <input hidden="true" class="form-control" type="text" name="orderID" id="orderID" value="<%=orderProduct.getOrder().getId()%>" />
+                                        <input hidden="true" class="form-control" type="text" name="orderProductID" id="orderProductID" value="<%=orderProduct.getId()%>" />
+                                        <sec:authorize access="hasAnyAuthority('ADMIN')">
+                                            <button type="submit" name="Edit" value="Edit" class="btn btn-primary">Edit</button>
+                                            <button type="submit" name="Delete" value="Delete" class="btn btn-primary">Delete</button>
+                                        </sec:authorize>
+                                        <sec:authorize access="hasAnyAuthority('USER')">
+                                            <button type="submit" name="Edit" value="Edit" class="btn btn-primary">Toon info</button>
+                                        </sec:authorize>
+                                    </form>
+                            </td>
                         </tr>
 
                 <%    } %>

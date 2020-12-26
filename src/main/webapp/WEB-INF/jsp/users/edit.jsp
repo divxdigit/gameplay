@@ -71,6 +71,7 @@
 
             </table>
 
+
     <%
         User selectedUser = (User) request.getAttribute("selectedUser");
         if(selectedUser.getId()!=null){

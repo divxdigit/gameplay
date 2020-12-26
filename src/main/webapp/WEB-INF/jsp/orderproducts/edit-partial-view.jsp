@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
 <html lang="en">
 <head>
     <!-- Required meta tags -->
@@ -24,6 +26,7 @@
 
     <div class="form-row">
 
+        <%--READ ONLY GEDEELTE (zowel voor admin als user) --%>
         <div class="form-group col-md-6">
             <label for="id">OrderProductID</label>
             <form:input readonly="true" type="text" class="form-control" id="id" path="id" placeholder="OrderProductID" value="<%=selectedOrderProduct.getId()%>"/>
@@ -44,42 +47,85 @@
             <form:input readonly="true" type="text" class="form-control" id="product.name" path="product.name" placeholder="Productnaam" value="<%=selectedOrderProduct.getProduct().getName()%>"/>
         </div>
 
-        <div class="form-group col-md-6">
-            <label for="rentDurationWeeks">Huurtijd in weken</label>
-            <form:input type="text" class="form-control" id="rentDurationWeeks" path="rentDurationWeeks" placeholder="Huurtijd in weken" value="<%=selectedOrderProduct.getRentDurationWeeks()%>"/>
-            <div class="invalid-feedback d-block">
-                <form:errors path ="rentDurationWeeks"/>
+        <%--READ ONLY (enkel voor user) --%>
+        <sec:authorize access="hasAnyAuthority('USER')">
+            <div class="form-group col-md-6">
+                <label for="rentDurationWeeks">Huurtijd in weken</label>
+                <form:input readonly="true" type="text" class="form-control" id="rentDurationWeeks" path="rentDurationWeeks" placeholder="Huurtijd in weken" value="<%=selectedOrderProduct.getRentDurationWeeks()%>"/>
+                <div class="invalid-feedback d-block">
+                    <form:errors path ="rentDurationWeeks"/>
+                </div>
             </div>
-        </div>
 
-        <div class="form-group col-md-6">
-            <label for="orderType">Ordertype</label>
-            <form:input type="text" class="form-control" id="orderType" path="orderType" placeholder="Ordertype" value="<%=selectedOrderProduct.getOrderType()%>"/>
-            <div class="invalid-feedback d-block">
-                <form:errors path ="orderType"/>
+            <div class="form-group col-md-6">
+                <label for="orderType">Ordertype</label>
+                <form:input readonly="true" type="text" class="form-control" id="orderType" path="orderType" placeholder="Ordertype" value="<%=selectedOrderProduct.getOrderType()%>"/>
+                <div class="invalid-feedback d-block">
+                    <form:errors path ="orderType"/>
+                </div>
             </div>
-        </div>
 
-        <div class="form-group col-md-6">
-            <label for="price">Prijs</label>
-            <form:input type="text" class="form-control" id="price" path="price" placeholder="Prijs" value="<%=selectedOrderProduct.getPrice()%>"/>
-            <div class="invalid-feedback d-block">
-                <form:errors path ="price"/>
+            <div class="form-group col-md-6">
+                <label for="price">Prijs</label>
+                <form:input readonly="true" type="text" class="form-control" id="price" path="price" placeholder="Prijs" value="<%=selectedOrderProduct.getPrice()%>"/>
+                <div class="invalid-feedback d-block">
+                    <form:errors path ="price"/>
+                </div>
             </div>
-        </div>
 
-        <div class="form-group col-md-6">
-            <label for="discountPrice">Promoprijs</label>
-            <form:input type="text" class="form-control" id="discountPrice" path="discountPrice" placeholder="Promoprijs" value="<%=selectedOrderProduct.getDiscountPrice()%>"/>
-            <div class="invalid-feedback d-block">
-                <form:errors path ="discountPrice"/>
+            <div class="form-group col-md-6">
+                <label for="discountPrice">Promoprijs</label>
+                <form:input readonly="true" type="text" class="form-control" id="discountPrice" path="discountPrice" placeholder="Promoprijs" value="<%=selectedOrderProduct.getDiscountPrice()%>"/>
+                <div class="invalid-feedback d-block">
+                    <form:errors path ="discountPrice"/>
+                </div>
             </div>
-        </div>
+        </sec:authorize>
+
+        <%--READ & WRITE (enkel voor admin) --%>
+        <sec:authorize access="hasAnyAuthority('ADMIN')">
+
+            <div class="form-group col-md-6">
+                <label for="rentDurationWeeks">Huurtijd in weken</label>
+                <form:input type="text" class="form-control" id="rentDurationWeeks" path="rentDurationWeeks" placeholder="Huurtijd in weken" value="<%=selectedOrderProduct.getRentDurationWeeks()%>"/>
+                <div class="invalid-feedback d-block">
+                    <form:errors path ="rentDurationWeeks"/>
+                </div>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="orderType">Ordertype</label>
+                <form:input type="text" class="form-control" id="orderType" path="orderType" placeholder="Ordertype" value="<%=selectedOrderProduct.getOrderType()%>"/>
+                <div class="invalid-feedback d-block">
+                    <form:errors path ="orderType"/>
+                </div>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="price">Prijs</label>
+                <form:input type="text" class="form-control" id="price" path="price" placeholder="Prijs" value="<%=selectedOrderProduct.getPrice()%>"/>
+                <div class="invalid-feedback d-block">
+                    <form:errors path ="price"/>
+                </div>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="discountPrice">Promoprijs</label>
+                <form:input type="text" class="form-control" id="discountPrice" path="discountPrice" placeholder="Promoprijs" value="<%=selectedOrderProduct.getDiscountPrice()%>"/>
+                <div class="invalid-feedback d-block">
+                    <form:errors path ="discountPrice"/>
+                </div>
+            </div>
+        </sec:authorize>
 
     </div>
 
-    <form:button type="submit" name="Save" value="Save" class="btn btn-primary">Opslaan</form:button>
-<%--    <form:button type="submit" name="Delete" value="Delete" class="btn btn-primary">Verwijderen</form:button>--%>
+    <%--BUTTONS ONLY FOR ADMINS --%>
+    <sec:authorize access="hasAnyAuthority('ADMIN')">
+        <form:button type="submit" name="Save" value="Save" class="btn btn-primary">Opslaan</form:button>
+    </sec:authorize>
+
+    <%--BUTTONS FOR USERS AND ADMINS --%>
     <form:button type="submit" name="Cancel" value="Cancel" class="btn btn-primary">Cancel</form:button>
 
 </form:form>

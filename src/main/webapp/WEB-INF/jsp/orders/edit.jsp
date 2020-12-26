@@ -1,4 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
 <html lang="en">
 <head>
     <!-- Required meta tags -->
@@ -67,9 +69,17 @@
                         <td><%=order.getDateCreated()%> </td>
                         <td><%=order.getDateCollect()%> </td>
                         <td>
-                            <a class="btn btn-primary" href="/orders/edit?id=<%=order.getId()%>" role="button">Edit</a>
-                            <a class="btn btn-primary" href="/orders/delete?id=<%=order.getId()%>" role="button">Delete</a>
-                            <a class="btn btn-primary" href="/orderproducts/edit?orderID=<%=order.getId()%>" role="button">Toon orderproducten</a>
+                            <sec:authorize access="hasAnyAuthority('ADMIN')">
+                                <a class="btn btn-primary" href="/orders/edit?id=<%=order.getId()%>" role="button">Edit</a>
+                                <a class="btn btn-primary" href="/orders/delete?id=<%=order.getId()%>" role="button">Delete</a>
+                                <a class="btn btn-primary" href="/orderproducts/edit?orderID=<%=order.getId()%>" role="button">Toon orderproducten</a>
+                            </sec:authorize>
+
+                            <sec:authorize access="hasAnyAuthority('USER')">
+                                <a class="btn btn-primary" href="/orders/edit?id=<%=order.getId()%>" role="button">Toon info</a>
+                                <a class="btn btn-primary" href="/orderproducts/edit?orderID=<%=order.getId()%>" role="button">Toon orderproducten</a>
+                            </sec:authorize>
+
                         </td>
 
                         </tr>
@@ -78,14 +88,14 @@
 
             </table>
 
-    <%
-        Order selectedOrder = (Order)request.getAttribute("selectedOrder");
-        if(selectedOrder.getId()!=null){
-    %>
+        <%
+            Order selectedOrder = (Order)request.getAttribute("selectedOrder");
+            if(selectedOrder.getId()!=null){
+        %>
 
-    <jsp:include page="./edit-partial-view.jsp" />
+        <jsp:include page="./edit-partial-view.jsp" />
 
-    <%};%>
+        <%};%>
 
     <%
         if(request.getAttribute("successSave")!=null){

@@ -104,7 +104,7 @@
                             <hr>
                         </sec:authorize>
                         <sec:authorize access="hasAnyAuthority('USER')">
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="/orders/edit">
                                 <svg  width="20" height="20" fill="currentColor">
                                     <use xlink:href="/icons/bootstrap-icons.svg#receipt" />
                                 </svg> Mijn orders

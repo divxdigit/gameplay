@@ -17,7 +17,6 @@
     <%@ page import="be.thomasmore.graduaten.gameplay.entity.Order" %>
     <%@ page import="be.thomasmore.graduaten.gameplay.entity.OrderProduct" %>
     <%@ page import="be.thomasmore.graduaten.gameplay.entity.User" %>
-    <%@ page import="static jdk.nashorn.internal.objects.NativeMath.round" %>
     <%@ page import="java.text.DecimalFormat" %>
     <%@ page import="java.math.RoundingMode" %>
 

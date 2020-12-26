@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
 <html lang="en">
 <head>
     <!-- Required meta tags -->
@@ -47,7 +49,7 @@
 
         <div class="form-group col-md-6">
             <label for="firstName">Voornaam</label>
-            <form:input readonly="false" type="text" class="form-control" id="firstname" path="firstname" placeholder="Voornaam" value="<%=selectedUser.getFirstname()%>"/>
+             <form:input  readonly="false" type="text" class="form-control" id="firstname" path="firstname" placeholder="Voornaam" value="<%=selectedUser.getFirstname()%>"/>
         </div>
 
         <div class="form-group col-md-6">

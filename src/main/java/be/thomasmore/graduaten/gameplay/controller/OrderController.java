@@ -39,8 +39,23 @@ public class OrderController {
 
     @RequestMapping("/orders/edit")
     public String dataOrder(ModelMap model) {
-        List<Order> orders = orderService.getOrders();
+        User user = new User();
+        List<Order> orders = new ArrayList<>();
         Order selectedOrder = new Order();
+
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
+            String currentUserName = authentication.getName();
+            user = userService.getUserByEmail(currentUserName);
+
+            if(user.getUserType().getName().equals("ADMIN")){
+                orders = orderService.getOrders();
+            }
+            else{
+                orders = orderService.getOrdersByUser(user);
+            }
+        }
 
         model.addAttribute("orders", orders);
         model.addAttribute("selectedOrder", selectedOrder);
@@ -51,13 +66,27 @@ public class OrderController {
     @RequestMapping(value = "/orders/edit", params = {"id"})
     public String OrdersEditId(ModelMap model, HttpSession session, @RequestParam("id") Long id) {
 
+        User user = new User();
+        List<Order> orders = new ArrayList<>();
         Order selectedOrder = new Order();
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
+            String currentUserName = authentication.getName();
+            user = userService.getUserByEmail(currentUserName);
+
+            if(user.getUserType().getName().equals("ADMIN")){
+                orders = orderService.getOrders();
+            }
+            else{
+                orders = orderService.getOrdersByUser(user);
+            }
+        }
 
         if (id != 0) {
             selectedOrder = orderService.getOrderById(id);
         }
 
-        List<Order> orders = orderService.getOrders();
         model.addAttribute("orders", orders);
         model.addAttribute("selectedOrder", selectedOrder);
 
@@ -504,12 +533,24 @@ public class OrderController {
     }
 
     @RequestMapping(value = "/orderproducts/edit" , params= {"orderID"})
-    public String dataOrderProductsByOrderID(ModelMap model, HttpSession session, @RequestParam("orderID") Long orderID) {
+    public String dataOrderProductsByOrderID(ModelMap model, @RequestParam("orderID") Long orderID) {
 
-        Order order = orderService.getOrderById(orderID);
-        List<OrderProduct> orderProducts = orderProductService.getOrderProductsByOrder(order);
-
+        User user;
+        List<OrderProduct> orderProducts = new ArrayList<>();
         OrderProduct selectedOrderProduct = new OrderProduct();
+        Order selectedOrder = orderService.getOrderById(orderID);
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
+            String currentUserName = authentication.getName();
+            user = userService.getUserByEmail(currentUserName);
+
+            if(user.getUserType().getName().equals("ADMIN") || selectedOrder.getUser().equals(user)){
+
+                orderProducts = orderProductService.getOrderProductsByOrder(selectedOrder);
+            }
+
+         }
 
         model.addAttribute("orderProducts", orderProducts);
         model.addAttribute("selectedOrderProduct", selectedOrderProduct);
@@ -517,7 +558,46 @@ public class OrderController {
         return "orderproducts/edit";
     }
 
-    @RequestMapping(value = "/orderproducts/edit/orderID/{orderID}/id/{id}", method = GET)
+    @PostMapping(value = "/orderproducts/edit/detail", params = "Edit")
+    public String editDetailOrderProduct(ModelMap model, @RequestParam("orderID") Long orderID, @RequestParam("orderProductID") Long orderProductID) {
+
+        OrderProduct selectedOrderProduct;
+        List<OrderProduct> orderProducts;
+
+        if (orderProductID != 0) {
+            selectedOrderProduct = orderProductService.getOrderProductById(orderProductID);
+            orderProducts = orderProductService.getOrderProductsByOrder(selectedOrderProduct.getOrder());
+            model.addAttribute("orderProducts", orderProducts);
+            model.addAttribute("selectedOrderProduct", selectedOrderProduct);
+            model.addAttribute("viewTitle","Orderproductenlijst");
+            return "orderproducts/edit";
+        }
+
+        if(orderID != 0){
+            return dataOrderProductsByOrderID(model, orderID);
+        }
+
+        return dataOrder(model);
+    }
+
+    @PostMapping(value = "/orderproducts/edit/detail", params = "Delete")
+    public String deleteDetailOrderProduct(ModelMap model, @RequestParam("orderID") Long orderID, @RequestParam("orderProductID") Long orderProductID) {
+
+        if (orderProductService.deleteOrderProductByID(orderProductID) == true) {
+
+            model.addAttribute("successDelete", true);
+            // do something
+
+        }
+        else{
+            model.addAttribute("successDelete", false);
+            // do something
+        }
+
+        return dataOrderProductsByOrderID(model, orderID);
+    }
+
+ /*   @RequestMapping(value = "/orderproducts/edit/orderID/{orderID}/id/{id}", method = GET)
     public String orderProductsEditId(ModelMap model, HttpSession session, @PathVariable long orderID, @PathVariable long id) {
 
         OrderProduct selectedOrderProduct = new OrderProduct();
@@ -533,11 +613,11 @@ public class OrderController {
         }
 
         if(orderID != 0){
-            return dataOrderProductsByOrderID(model,session,orderID);
+            return dataOrderProductsByOrderID(model,orderID);
         }
 
         return dataOrder(model);
-    }
+    }*/
 
     @PostMapping(value = "/orderproducts/edit/submit", params = "Save")
     public String editOrderProduct(@Valid @ModelAttribute("selectedOrderProduct") OrderProduct selectedOrderProduct, BindingResult result, ModelMap model) {
