@@ -218,6 +218,7 @@ public class OrderController {
         model.addAttribute("returnmessage",returnmessage);
         model.addAttribute("orderProducts", orderProducts);
         model.addAttribute("selectedOrderProduct", selectedOrderProduct);
+        model.addAttribute("userRecord",user);
         model.addAttribute("viewTitle","Winkelmandje");
 
 
@@ -327,6 +328,7 @@ public class OrderController {
             String returnmessage="";
             model.addAttribute("returnmessage",returnmessage);
             model.addAttribute("orderProducts", orderProducts);
+            model.addAttribute("userRecord", user);
             model.addAttribute("selectedOrderProduct", selectedOrderProduct);
             model.addAttribute("viewTitle","Winkelmandje");
 
@@ -415,6 +417,7 @@ public class OrderController {
 
             model.addAttribute("successSave",successSave);
             model.addAttribute("returnmessage",returnmessage);
+            model.addAttribute("userRecord", user);
             model.addAttribute("orderProducts", orderProducts);
             model.addAttribute("selectedOrderProduct", selectedOrderProduct);
             model.addAttribute("viewTitle","Winkelmandje");
