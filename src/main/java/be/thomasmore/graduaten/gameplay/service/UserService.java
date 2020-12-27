@@ -19,6 +19,7 @@ public interface UserService {
     Boolean existsByEmail(String email);
     Boolean addUser(User user);
     Boolean updateUser(User user);
-
+    public Boolean checkUserPwd(User user,String password);
+    public Boolean changeUserPwd(User user,String password);
 
 }

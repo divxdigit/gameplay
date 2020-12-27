@@ -101,15 +101,21 @@
                                     <use xlink:href="/icons/bootstrap-icons.svg#people-fill" />
                                 </svg> Beheer Gebruikers
                             </a>
-                            <hr>
+
                         </sec:authorize>
+
                         <sec:authorize access="hasAnyAuthority('USER')">
                             <a class="dropdown-item" href="/orders/edit">
                                 <svg  width="20" height="20" fill="currentColor">
                                     <use xlink:href="/icons/bootstrap-icons.svg#receipt" />
                                 </svg> Mijn orders
                             </a>
-                            <hr>
+                            <a class="dropdown-item" href="/users/my-account">
+                                <svg  width="20" height="20" fill="currentColor">
+                                    <use xlink:href="/icons/bootstrap-icons.svg#person-circle" />
+                                </svg> Mijn account
+                            </a>
+
                         </sec:authorize>
 
                         <sec:authorize access="!isAuthenticated()">

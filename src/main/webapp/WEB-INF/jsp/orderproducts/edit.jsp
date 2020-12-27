@@ -57,7 +57,7 @@
                 <%
                     List<OrderProduct> orderProducts = (List<OrderProduct>) request.getAttribute("orderProducts");
                     for (OrderProduct orderProduct: orderProducts) { %>
-                        <tr  class='clickable-row' data-href='/orderproducts/edit/orderID/<%=orderProduct.getOrder().getId()%>/id/<%=orderProduct.getId()%>' style="cursor: pointer" >
+                        <tr  class='clickable-row' data-href='/orderproducts/edit/detail?orderID=<%=orderProduct.getOrder().getId()%>&orderProductID=<%=orderProduct.getId()%>' style="cursor: pointer" >
                             <td><%=orderProduct.getOrder().getId()%></td>
                             <td><%=orderProduct.getId()%></td>
                             <td><%=orderProduct.getProduct().getName()%></td>

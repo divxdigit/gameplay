@@ -645,27 +645,11 @@ public class OrderController {
         return dataOrderProductsByOrderID(model, orderID);
     }
 
- /*   @RequestMapping(value = "/orderproducts/edit/orderID/{orderID}/id/{id}", method = GET)
-    public String orderProductsEditId(ModelMap model, HttpSession session, @PathVariable long orderID, @PathVariable long id) {
+    @RequestMapping(value = "/orderproducts/edit/detail")
+    public String orderProductsEditId(ModelMap model, @RequestParam long orderID, @RequestParam long orderProductID) {
 
-        OrderProduct selectedOrderProduct = new OrderProduct();
-        List<OrderProduct> orderProducts = new ArrayList<>();
-
-        if (id != 0) {
-            selectedOrderProduct = orderProductService.getOrderProductById(id);
-            orderProducts = orderProductService.getOrderProductsByOrder(selectedOrderProduct.getOrder());
-            model.addAttribute("orderProducts", orderProducts);
-            model.addAttribute("selectedOrderProduct", selectedOrderProduct);
-            model.addAttribute("viewTitle","Orderproductenlijst");
-            return "orderproducts/edit";
-        }
-
-        if(orderID != 0){
-            return dataOrderProductsByOrderID(model,orderID);
-        }
-
-        return dataOrder(model);
-    }*/
+        return editDetailOrderProduct(model,orderID,orderProductID);
+    }
 
     @PostMapping(value = "/orderproducts/edit/submit", params = "Save")
     public String editOrderProduct(@Valid @ModelAttribute("selectedOrderProduct") OrderProduct selectedOrderProduct, BindingResult result, ModelMap model) {

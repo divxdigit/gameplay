@@ -1,3 +1,5 @@
+<%@ page import="be.thomasmore.graduaten.gameplay.entity.Product" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en">
 <head>
@@ -48,13 +50,39 @@
             </p>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus libero leo, pellentesque ornare, adipiscing vitae, rhoncus commodo, nulla. Fusce quis ipsum. Nulla neque massa, feugiat sed, commodo in, adipiscing ut, est. In fermentum mattis ligula. Nulla ipsum. Vestibulum condimentum condimentum augue. Nunc purus risus, volutpat sagittis, lobortis at, dignissim sed, sapien. Fusce porttitor iaculis ante. Curabitur eu arcu. Morbi quam purus, tempor eget, ullamcorper feugiat, commodo ullamcorper, neque.</p>
         </div>
-        <div class="col-md-4 card rounded shadow" style="background-image: linear-gradient(to bottom,  white 60%, #b1dfbb ); margin-bottom: 15px;" >  <%--#9fcdff, #b9bbbe--%>
+        <div class="col-md-4 card bg-white rounded shadow" >  <%--#9fcdff, #b9bbbe--%>
+            <div class="text-center"><h3>Promo</h3>
+            </div>
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner">
+                    <% List<Product> promoProducts = (List<Product>) request.getAttribute("promoProducts");%>
 
-            <%--linear-gradient(180deg, #9fcdff, white);--%>
-            <h2>
-                Games
-            </h2>
+                    <div class="carousel-item active">
+                        <a href="/products/search?id=<%= promoProducts.get(0).getId()%>"><img class="d-block w-100" src="<%= promoProducts.get(0).getPicture()%>" alt="First promo" height="300"></a>
+                    </div>
+                    <div class="carousel-item">
+                        <a href="/products/search?id=<%= promoProducts.get(1).getId()%>"><img class="d-block w-100" src="<%= promoProducts.get(1).getPicture()%>" alt="Second promo" height="300"></a>
+                    </div>
+                    <div class="carousel-item">
+                        <a href="/products/search?id=<%= promoProducts.get(2).getId()%>"><img class="d-block w-100" src="<%= promoProducts.get(2).getPicture()%>" alt="Third promo" height="300"></a>
+                    </div>
 
+                </div>
+
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
         </div>
     </div>
 

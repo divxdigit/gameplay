@@ -74,8 +74,22 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Boolean updateUser(User user) {
-        userRepository.save(user);
+        try { userRepository.save(user); }
+        catch(Exception e){ return false; }
         return true;
     }
 
+    @Override
+    public Boolean checkUserPwd(User user,String password) {
+       return passwordEncoder.matches(password,user.getPassword());
+    }
+
+    @Override
+    public Boolean changeUserPwd(User user,String password) {
+        user.setPassword(passwordEncoder.encode(password));
+        try { userRepository.save(user); }
+        catch(Exception e){ return false; }
+        return true;
+
+    }
 }

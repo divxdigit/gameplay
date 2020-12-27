@@ -19,7 +19,7 @@ public class OrderServiceImpl implements OrderService{
     @Autowired
     OrderProductService orderProductService;
 
-        @Override
+    @Override
     public List<Order> getOrders() {
         return orderRepository.findAll();
     }
@@ -71,7 +71,6 @@ public class OrderServiceImpl implements OrderService{
     public Order getOrderByUserByStatus(User user, Integer status) {
         return orderRepository.findByUserAndStatus(user, status);
     }
-
 
     @Override
     public List<Order> getOrdersByDateCreated(Date datecreated) {

@@ -113,5 +113,85 @@ public class UserController {
         return dataUser((Model) model);
     }
 
+    @RequestMapping("/users/my-account")
+    public String myAccount(ModelMap model) {
+        User user;
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
+            String currentUserName = authentication.getName();
+            user = userService.getUserByEmail(currentUserName);
+            model.addAttribute("myUser",user);
+            return "/users/my-account";
+        }
+
+        return "/error/404";
+    }
+
+    @PostMapping(value = "/users/my-account/submit", params = "Save")
+    public String editMyUser(@Valid @ModelAttribute("myUser") User myUser, BindingResult result,ModelMap model) {
+
+        if (result.hasErrors()) {
+            model.addAttribute("successSave", null);
+            model.addAttribute("myUser", myUser);
+            return "/users/my-account";
+        }
+
+        myUser.setType(userService.getUserById(myUser.getId()).getUserType());
+
+        if(userService.updateUser(myUser)){
+            model.addAttribute("successSave", true);
+            User user = userService.getUserById(myUser.getId());
+            model.addAttribute("myUser",user);
+        }
+        else{
+            model.addAttribute("successSave", false);
+            model.addAttribute("myUser", myUser);
+        }
+
+        return "/users/my-account";
+    }
+
+    @PostMapping(value = "/users/my-account/changepwd", params = "Save")
+    public String changePwdMyUser(ModelMap model,@RequestParam("currentPwd") String currentPwd,@RequestParam("newPwd") String newPwd,@RequestParam("repeatPwd") String repeatPwd,@RequestParam("userID") Long userID) {
+
+        User myUser = userService.getUserById(userID);
+
+        if(userService.checkUserPwd(myUser,currentPwd)){
+
+            if(newPwd.equals("")){
+                model.addAttribute("successChangePwd", false);
+                model.addAttribute("errorMessage", "Nieuw wachtwoord mag niet leeg zijn");
+            }
+            else{
+
+                if(newPwd.equals(repeatPwd)){
+                    myUser.setType(userService.getUserById(myUser.getId()).getUserType());
+                    if(userService.changeUserPwd(myUser,newPwd)){
+                        model.addAttribute("successChangePwd", true);
+                        model.addAttribute("errorMessage", "");
+                    }
+                    else{
+                        model.addAttribute("successChangePwd", false);
+                        model.addAttribute("errorMessage", "Er is iets misgelopen met het updaten van de database.");
+                    }
+                }
+
+                else{
+                    model.addAttribute("successChangePwd", false);
+                    model.addAttribute("errorMessage", "Je nieuwe wachtwoord en het te herhalen wachtwoord komt niet overeen");
+                }
+            }
+        }
+        else{
+            model.addAttribute("successChangePwd", false);
+            model.addAttribute("errorMessage", "Het ingegeven huidige wachtwoord komt niet overeen met je werkelijke wachtwoord");
+        }
+
+        myUser = userService.getUserById(myUser.getId());
+        model.addAttribute("myUser",myUser);
+        return "/users/my-account";
+    }
+
 }
 

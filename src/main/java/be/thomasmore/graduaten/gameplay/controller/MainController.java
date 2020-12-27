@@ -1,14 +1,21 @@
 package be.thomasmore.graduaten.gameplay.controller;
 
 
+import be.thomasmore.graduaten.gameplay.entity.Product;
+import be.thomasmore.graduaten.gameplay.service.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
+import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import java.text.SimpleDateFormat;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 //afbeeldingen
 
@@ -16,16 +23,28 @@ import java.util.Date;
 @Controller
 public class MainController {
 
+    @Autowired
+    ProductService productService;
+
     // BASE
     //-----------------
     @RequestMapping("/")
-    public String index() {
+    public String index(ModelMap model) {
+
+        List<Product> promoProducts = new ArrayList<>();
+
+        promoProducts.add(productService.getProductById((long)1));
+        promoProducts.add(productService.getProductById((long)2));
+        promoProducts.add(productService.getProductById((long)3));
+
+        model.addAttribute("promoProducts",promoProducts);
+
         return "index";
     }
 
     @RequestMapping("/index")
-    public String index2() {
-        return "index";
+    public String index2(ModelMap model) {
+        return index(model);
     }
 
     @RequestMapping("/contact")
