@@ -81,9 +81,11 @@ public class UserController {
 
         if (result.hasErrors()) {
             List<User> users = userService.getUsers();
+            List<UserType> usertypes = userTypeService.getUserTypes();
             model.addAttribute("users", users);
             model.addAttribute("successSave", null);
             model.addAttribute("selectedUser", selectedUser);
+            model.addAttribute("userTypes", usertypes);
             return "/users/edit";
         }
 
@@ -101,8 +103,10 @@ public class UserController {
             model.addAttribute("selectedUser", selectedUser);
         }
 
+        List<UserType> usertypes = userTypeService.getUserTypes();
         List<User> users = userService.getUsers();
         model.addAttribute("users", users);
+        model.addAttribute("userTypes", usertypes);
 
         return "/users/edit";
     }

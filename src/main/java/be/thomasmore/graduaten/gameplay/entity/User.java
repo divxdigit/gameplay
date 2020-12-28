@@ -85,6 +85,7 @@ public class User {
         this.id = id;
     }
 
+
     public UserType getType() {
         return userType;
     }
