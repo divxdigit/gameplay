@@ -96,7 +96,7 @@
                                     <use xlink:href="/icons/bootstrap-icons.svg#reception-4" />
                                 </svg> Beheer Orders
                             </a>
-                            <a class="dropdown-item" href="/users">
+                            <a class="dropdown-item" href="/users/edit">
                                 <svg  width="20" height="20" fill="currentColor">
                                     <use xlink:href="/icons/bootstrap-icons.svg#people-fill" />
                                 </svg> Beheer Gebruikers
