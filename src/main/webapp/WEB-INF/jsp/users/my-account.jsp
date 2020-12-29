@@ -14,7 +14,7 @@
     <!--Datatables CSS-->
     <link href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css" rel="stylesheet">
 
-    <title>Users - edit</title>
+    <title>Mijn account</title>
 
     <%@ page import="be.thomasmore.graduaten.gameplay.entity.User" %>
     <%@ page import="be.thomasmore.graduaten.gameplay.entity.UserType" %>

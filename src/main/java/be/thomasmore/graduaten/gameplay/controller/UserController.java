@@ -7,7 +7,6 @@ import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,16 +14,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.List;
-
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 @Controller
 public class UserController {
@@ -38,17 +29,8 @@ public class UserController {
     @Autowired
     UserTypeService userTypeService;
 
-/*    @RequestMapping("/users")
-    public String dataUser(Model model) {
-        List<User> users = userService.getUsers();
-        List<UserType> usertypes = userTypeService.getUserTypes();
-        model.addAttribute("users", users);
-        model.addAttribute("userTypes", usertypes);
-        return "users/users";
-    }*/
-
     @RequestMapping("/users/edit")
-    public String dataUser(Model model) {
+    public String dataUser(ModelMap model) {
         List<User> users = userService.getUsers();
         List<UserType> usertypes = userTypeService.getUserTypes();
         User selectedUser = new User();
@@ -59,7 +41,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/users/edit", params = {"id"})
-    public String UsersEditId(ModelMap model, HttpSession session, @RequestParam("id") Long id) {
+    public String UsersEditId(ModelMap model, @RequestParam("id") Long id) {
 
         User selectedUser = new User();
 
@@ -114,7 +96,7 @@ public class UserController {
     @PostMapping(value = "/users/edit/submit", params = "Cancel")
     public String CancelEditUser(ModelMap model) {
 
-        return dataUser((Model) model);
+        return dataUser(model);
     }
 
     @RequestMapping("/users/my-account")

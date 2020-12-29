@@ -15,24 +15,8 @@
     <jsp:include page="navigation.jsp" />
     <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
-<%--<style>
-        .bd-placeholder-img {
-            font-size: 1.125rem;
-            text-anchor: middle;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-        }
-
-        @media (min-width: 768px) {
-            .bd-placeholder-img-lg {
-                font-size: 3.5rem;
-            }
-        }
-    </style>--%>
-
 </head>
+
 <body>
 <div class="container" style="margin-top: 25px ">
     <div class="row">
@@ -51,7 +35,7 @@
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus libero leo, pellentesque ornare, adipiscing vitae, rhoncus commodo, nulla. Fusce quis ipsum. Nulla neque massa, feugiat sed, commodo in, adipiscing ut, est. In fermentum mattis ligula. Nulla ipsum. Vestibulum condimentum condimentum augue. Nunc purus risus, volutpat sagittis, lobortis at, dignissim sed, sapien. Fusce porttitor iaculis ante. Curabitur eu arcu. Morbi quam purus, tempor eget, ullamcorper feugiat, commodo ullamcorper, neque.</p>
         </div>
         <div class="col-md-4 card bg-white rounded shadow" >  <%--#9fcdff, #b9bbbe--%>
-            <div class="text-center"><h3>Promo</h3>
+            <div class="text-center"><u><h3>In de kijker</h3></u>
             </div>
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">

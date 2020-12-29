@@ -8,8 +8,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Users - edit - partial view</title>
-
     <%@ page import="be.thomasmore.graduaten.gameplay.entity.User" %>
     <%@ page import="be.thomasmore.graduaten.gameplay.entity.UserType" %>
     <%@ page import="java.util.List" %>

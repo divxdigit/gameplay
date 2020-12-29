@@ -8,7 +8,7 @@
     <link href="/static/css/bootstrap.css" rel="stylesheet">
 
     <link href="/static/css/styles.css" rel="stylesheet">
-    <title>Index</title>
+    <title>Error</title>
 
 <jsp:include page="../navigation.jsp" />
 

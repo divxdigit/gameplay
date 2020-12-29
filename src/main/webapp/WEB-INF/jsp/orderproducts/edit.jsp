@@ -12,7 +12,7 @@
     <!--Datatables CSS-->
     <link href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css" rel="stylesheet">
 
-    <title>Orders - edit</title>
+    <title>Detail bestelling</title>
 
     <%@ page import="java.util.List" %>
     <%@ page import="be.thomasmore.graduaten.gameplay.entity.Order" %>
@@ -71,8 +71,8 @@
                                         <input hidden="true" class="form-control" type="text" name="orderID" id="orderID" value="<%=orderProduct.getOrder().getId()%>" />
                                         <input hidden="true" class="form-control" type="text" name="orderProductID" id="orderProductID" value="<%=orderProduct.getId()%>" />
                                         <sec:authorize access="hasAnyAuthority('ADMIN')">
-                                            <button type="submit" name="Edit" value="Edit" class="btn btn-primary">Edit</button>
-                                            <button type="submit" name="Delete" value="Delete" class="btn btn-primary">Delete</button>
+                                            <button type="submit" name="Edit" value="Edit" class="btn btn-primary">Wijzig</button>
+                                            <button type="submit" name="Delete" value="Delete" class="btn btn-primary">Verwijderen</button>
                                         </sec:authorize>
                                         <sec:authorize access="hasAnyAuthority('USER')">
                                             <button type="submit" name="Edit" value="Edit" class="btn btn-primary">Toon info</button>
@@ -85,7 +85,7 @@
             </table>
 
     <div>
-        <a class="btn btn-primary" href="/orders/edit" role="button">Terug naar orders</a>
+        <a class="btn btn-primary" href="/orders/edit" role="button">Terug naar bestellingen</a>
     </div>
 
     <%

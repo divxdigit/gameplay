@@ -18,12 +18,8 @@
                 <a class="nav-link" href="/">Home <span class="sr-only" >(current)</span></a>
             </li>
 
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="aanbodDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Aanbod</a>
-                <div class="dropdown-menu" aria-labelledby="aanbodDropdownMenuLink">
-                    <a class="dropdown-item" href="/products/lst">Overzicht Bordspellen</a>
-                    <a class="dropdown-item" href="/genres/list">Genres</a>
-                </div>
+            <li class="nav-item">
+                <a class="nav-link" href="/products/lst">Bordspellen <span class="sr-only" >(current)</span></a>
             </li>
 
             <li class="nav-item">
@@ -69,37 +65,37 @@
                             <a class="dropdown-item" href="/publishers/list" >
                                 <svg  width="20" height="20" fill="currentColor">
                                     <use xlink:href="/icons/bootstrap-icons.svg#signpost-split" />
-                                </svg> Beheer Publishers
+                                </svg> Beheer uitgevers
                             </a>
                             <a class="dropdown-item" href="/languages/list" >
                                 <svg  width="20" height="20" fill="currentColor">
                                     <use xlink:href="/icons/bootstrap-icons.svg#signpost-split" />
-                                </svg> Beheer Languages
+                                </svg> Beheer talen
                             </a>
                             <a class="dropdown-item" href="/genres/list" >
                                 <svg  width="20" height="20" fill="currentColor">
                                     <use xlink:href="/icons/bootstrap-icons.svg#signpost-split" />
-                                </svg> Beheer Genres
+                                </svg> Beheer genres
                             </a>
                             <a class="dropdown-item" href="/agecategory/lst">
                                 <svg  width="20" height="20" fill="currentColor">
                                     <use xlink:href="/icons/bootstrap-icons.svg#shield-check" />
-                                </svg> Beheer Leeftijdscategorieën
+                                </svg> Beheer leeftijdscategorieën
                             </a>
                             <a class="dropdown-item" href="/products/lst">
                                 <svg  width="20" height="20" fill="currentColor">
                                     <use xlink:href="/icons/bootstrap-icons.svg#dice-5" />
-                                </svg> Beheer Bordspellen
+                                </svg> Beheer bordspellen
                             </a>
                             <a class="dropdown-item" href="/orders/edit">
                                 <svg  width="20" height="20" fill="currentColor">
                                     <use xlink:href="/icons/bootstrap-icons.svg#reception-4" />
-                                </svg> Beheer Orders
+                                </svg> Beheer bestellingen
                             </a>
                             <a class="dropdown-item" href="/users/edit">
                                 <svg  width="20" height="20" fill="currentColor">
                                     <use xlink:href="/icons/bootstrap-icons.svg#people-fill" />
-                                </svg> Beheer Gebruikers
+                                </svg> Beheer gebruikers
                             </a>
 
                         </sec:authorize>
@@ -108,7 +104,7 @@
                             <a class="dropdown-item" href="/orders/edit">
                                 <svg  width="20" height="20" fill="currentColor">
                                     <use xlink:href="/icons/bootstrap-icons.svg#receipt" />
-                                </svg> Mijn orders
+                                </svg> Mijn bestellingen
                             </a>
                             <a class="dropdown-item" href="/users/my-account">
                                 <svg  width="20" height="20" fill="currentColor">

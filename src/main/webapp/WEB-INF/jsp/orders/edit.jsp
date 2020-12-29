@@ -13,7 +13,7 @@
     <!--Datatables CSS-->
     <link href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css" rel="stylesheet">
 
-    <title>Orders - edit</title>
+    <title>Bestellingen</title>
 
     <%@ page import="java.util.List" %>
     <%@ page import="be.thomasmore.graduaten.gameplay.entity.Order" %>
@@ -27,13 +27,13 @@
 <div class="container mb-3 mt-3" style="margin-top: 25px ">
     <div class="row">
         <h1>
-            Orders
+            Bestellingen
         </h1>
     </div>
 
     <div class="row">
         <h1>
-            <h2>Orderlijst</h2>
+            <h2>Lijst van bestellingen</h2>
         </h1>
     </div>
 
@@ -51,7 +51,7 @@
                 <thead>
                     <tr scope=\"col\">
                         <th>Id</th>
-                        <th>UserID</th>
+                        <th>Klant</th>
                         <th>Besteldatum</th>
                         <th>Leverdatum</th>
                         <th>Acties</th>
@@ -70,14 +70,14 @@
                         <td><%=order.getDateCollect()%> </td>
                         <td>
                             <sec:authorize access="hasAnyAuthority('ADMIN')">
-                                <a class="btn btn-primary" href="/orders/edit?id=<%=order.getId()%>" role="button">Edit</a>
-                                <a class="btn btn-primary" href="/orders/delete?id=<%=order.getId()%>" role="button">Delete</a>
-                                <a class="btn btn-primary" href="/orderproducts/edit?orderID=<%=order.getId()%>" role="button">Toon orderproducten</a>
+                                <a class="btn btn-primary" href="/orders/edit?id=<%=order.getId()%>" role="button">Wijzig</a>
+                                <a class="btn btn-primary" href="/orders/delete?id=<%=order.getId()%>" role="button">Verwijderen</a>
+                                <a class="btn btn-primary" href="/orderproducts/edit?orderID=<%=order.getId()%>" role="button">Toon bestellijnen</a>
                             </sec:authorize>
 
                             <sec:authorize access="hasAnyAuthority('USER')">
                                 <a class="btn btn-primary" href="/orders/edit?id=<%=order.getId()%>" role="button">Toon info</a>
-                                <a class="btn btn-primary" href="/orderproducts/edit?orderID=<%=order.getId()%>" role="button">Toon orderproducten</a>
+                                <a class="btn btn-primary" href="/orderproducts/edit?orderID=<%=order.getId()%>" role="button">Toon bestellijnen</a>
                             </sec:authorize>
 
                         </td>
@@ -122,7 +122,6 @@
     <div class="alert alert-danger" role="alert" style="margin-top: 20px;">Het verwijderen is mislukt.</div>
 
     <%};};%>
-
 
 </div>
 

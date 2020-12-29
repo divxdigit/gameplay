@@ -9,8 +9,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Orders - edit - partial view</title>
-
     <%@ page import="be.thomasmore.graduaten.gameplay.entity.Order" %>
 
 </head>
@@ -22,7 +20,7 @@
 
 <form:form action="/orders/edit/submit" method="POST" modelAttribute="selectedOrder" >
 
-    <div class="row"><h3>Geselecteerde Order</h3></div>
+    <div class="row" style="margin-top: 25px"><h3>Geselecteerde bestelling</h3></div>
 
     <div class="form-row">
 
@@ -158,7 +156,7 @@
     </sec:authorize>
 
     <%--BUTTONS FOR USERS AND ADMINS --%>
-    <form:button type="submit" name="Cancel" value="Cancel" class="btn btn-primary">Cancel</form:button>
+    <form:button type="submit" name="Cancel" value="Cancel" class="btn btn-primary">Annuleren</form:button>
 
 </form:form>
 

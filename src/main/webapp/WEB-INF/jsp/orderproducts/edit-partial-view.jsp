@@ -8,8 +8,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>OrderProduct - edit - partial view</title>
-
     <%@ page import="be.thomasmore.graduaten.gameplay.entity.Order" %>
     <%@ page import="be.thomasmore.graduaten.gameplay.entity.OrderProduct" %>
 
@@ -22,7 +20,7 @@
 
 <form:form action="/orderproducts/edit/submit" method="POST" modelAttribute="selectedOrderProduct" >
 
-    <div class="row"><h3>Geselecteerde OrderProduct</h3></div>
+    <div class="row" style="margin-top: 25px"><h3>Geselecteerde bestellijn</h3></div>
 
     <div class="form-row">
 
@@ -74,7 +72,7 @@
             </div>
 
             <div class="form-group col-md-6">
-                <label for="discountPrice">Promoprijs</label>
+                <label for="discountPrice">Korting</label>
                 <form:input readonly="true" type="text" class="form-control" id="discountPrice" path="discountPrice" placeholder="Promoprijs" value="<%=selectedOrderProduct.getDiscountPrice()%>"/>
                 <div class="invalid-feedback d-block">
                     <form:errors path ="discountPrice"/>
@@ -110,7 +108,7 @@
             </div>
 
             <div class="form-group col-md-6">
-                <label for="discountPrice">Promoprijs</label>
+                <label for="discountPrice">Kprto,g</label>
                 <form:input type="text" class="form-control" id="discountPrice" path="discountPrice" placeholder="Promoprijs" value="<%=selectedOrderProduct.getDiscountPrice()%>"/>
                 <div class="invalid-feedback d-block">
                     <form:errors path ="discountPrice"/>
@@ -126,7 +124,7 @@
     </sec:authorize>
 
     <%--BUTTONS FOR USERS AND ADMINS --%>
-    <form:button type="submit" name="Cancel" value="Cancel" class="btn btn-primary">Cancel</form:button>
+    <form:button type="submit" name="Cancel" value="Cancel" class="btn btn-primary">Annuleren</form:button>
 
 </form:form>
 

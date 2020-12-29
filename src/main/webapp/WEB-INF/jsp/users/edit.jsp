@@ -11,7 +11,7 @@
     <!--Datatables CSS-->
     <link href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css" rel="stylesheet">
 
-    <title>Users - edit</title>
+    <title>Overzicht van gebruikers</title>
 
     <%@ page import="java.util.List" %>
     <%@ page import="be.thomasmore.graduaten.gameplay.entity.User" %>
@@ -62,7 +62,7 @@
                         <td><%=user.getId()%></td>
                         <td><%=user.getFirstname()%> <%=user.getLastname()%></td>
                         <td>
-                            <a class="btn btn-primary" href="/users/edit?id=<%=user.getId()%>" role="button">Edit</a>
+                            <a class="btn btn-primary" href="/users/edit?id=<%=user.getId()%>" role="button">Wijzig</a>
                         </td>
 
                         </tr>

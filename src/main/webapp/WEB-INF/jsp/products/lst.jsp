@@ -17,7 +17,7 @@
     <link href="/css/styles.css" rel="stylesheet">
     <link href="/css/bootstrap.css" rel="stylesheet">
 
-    <title>GamePlay - Bordspellen</title>
+    <title>Overzicht bordspellen</title>
 
     <jsp:include page="../navigation.jsp" />
 
@@ -134,7 +134,10 @@
                             <td><%=product.getRentStock()%></td>
                         <% } %>
                         <%--<td> <a href="/products/search?id=<%=product.getId()%>">Meer info </a></td>--%>
-                        <td><a href="/products/edit?id=<%=product.getId()%>">Edit</a> | <a href="/products/delete?id=<%=product.getId()%>"> Delete</a>                        </td>
+                        <td>
+                                <a class="btn btn-primary" href="/products/edit?id=<%=product.getId()%>" role="button">Wijzig</a>
+                                <a class="btn btn-primary" href="/products/delete?id=<%=product.getId()%>" role="button">Verwijder</a>
+                        </td>
                     </tr>
                     <% } %>
                 <% } %>

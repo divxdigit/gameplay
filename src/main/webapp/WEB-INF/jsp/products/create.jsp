@@ -17,7 +17,7 @@
     <link href="/css/styles.css" rel="stylesheet">
     <link href="/css/bootstrap.css" rel="stylesheet">
 
-    <title>GamePlay - Bordspellen</title>
+    <title>Nieuw bordspel</title>
 
     <jsp:include page="../navigation.jsp" />
 

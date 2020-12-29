@@ -10,7 +10,7 @@
     <link href="/static/css/bootstrap.css" rel="stylesheet">
     <link href="/static/css/styles.css" rel="stylesheet">
 
-    <title>Overzicht van publishers</title>
+    <title>Overzicht van uitgevers</title>
 
 <%@ page import="java.util.List" %>
 <%@ page import="be.thomasmore.graduaten.gameplay.entity.Publisher" %>
@@ -20,7 +20,7 @@
 <body>
 <div class="container" style="margin-top: 25px ">
 <h1>
-    Overzicht van Publishers
+    Overzicht van Uitgevers
 </h1>
 
     <div class="col-md-6 table-responsive">
@@ -45,7 +45,7 @@
             <div class="form-row">
 
                 <div class="form-group col-md-6">
-                    <label for="name">Publisher</label>
+                    <label for="name">Uitgever</label>
                     <form:input type="text" class="form-control" id="name" path="name" placeholder="Naam"/>
                     <div class="invalid-feedback d-block">
                         <form:errors path="name"/>
@@ -53,7 +53,7 @@
                 </div>
 
             </div>
-            <button type="submit" name="submit" value="submit" class="btn btn-primary">Publisher toevoegen</button>
+            <button type="submit" name="submit" value="submit" class="btn btn-primary">Uitgever toevoegen</button>
         </form:form>
 
         <%

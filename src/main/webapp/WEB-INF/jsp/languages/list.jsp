@@ -19,7 +19,7 @@
 <body>
 <div class="container" style="margin-top: 25px ">
 <h1>
-    Overzicht van Languages
+    Overzicht van Talen
 </h1>
 
     <div class="col-md-6 table-responsive">
@@ -44,7 +44,7 @@
             <div class="form-row">
 
                 <div class="form-group col-md-6">
-                    <label for="name">Language</label>
+                    <label for="name">Taal</label>
                     <form:input type="text" class="form-control" id="name" path="name" placeholder="Naam"/>
                     <div class="invalid-feedback d-block">
                         <form:errors path="name"/>
@@ -52,7 +52,7 @@
                 </div>
 
             </div>
-            <button type="submit" name="submit" value="submit" class="btn btn-primary">Language toevoegen</button>
+            <button type="submit" name="submit" value="submit" class="btn btn-primary">Talen toevoegen</button>
         </form:form>
 
         <%

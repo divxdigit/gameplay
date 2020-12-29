@@ -16,6 +16,15 @@
 <body>
 <div class="container" style="margin-top: 25px ">
 
+    <%
+        if(request.getAttribute("registrationSuccess")!=null){
+            if (Boolean.valueOf(String.valueOf(request.getAttribute("registrationSuccess"))) == true){
+    %>
+
+    <div class="alert alert-success" role="alert" style="margin-top: 20px;">De registratie is gelukt.</div>
+
+    <% };};%>
+
     <h1>Log in</h1>
 
     <form action="login" method="POST" >

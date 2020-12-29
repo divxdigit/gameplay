@@ -10,7 +10,7 @@
     <link href="/css/bootstrap.css" rel="stylesheet">
     <link href="/css/styles.css" rel="stylesheet">
 
-    <title>Registratie</title>
+    <title>Registratieformulier</title>
 
     <%@ page import="java.util.List" %>
 

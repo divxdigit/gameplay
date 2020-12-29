@@ -54,8 +54,6 @@ public class User {
     @ManyToOne
     private UserType userType;
 
-
-
     //constructors
 
     public User() {
