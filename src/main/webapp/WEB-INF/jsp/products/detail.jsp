@@ -23,7 +23,7 @@
 <body>
 
 <div class="container" style="margin-top: 25px ">
-    <a href=/products/lst> Terug naar overzicht spellen</a>
+    <a href=/products/lst> Terug naar overzicht spellen<br/><br/></a>
 
     <%--<div class="col-md-8">
         <h1>
@@ -93,9 +93,10 @@
             <div>Naam: <%= product.getName()%></div>--%>
             <%= product.getPublisher()%>
             <h1><%= product.getName()%></h1>
-            <div><%= product.getPlayersMinimum()%> tot <%= product.getPlayersMaximum()%> spelers| <%= product.getAgeCategory()%> | <%= product.getLanguage()%></div>
+            <div><%= product.getPlayersMinimum()%> tot <%= product.getPlayersMaximum()%> spelers | <%= product.getAgeCategory()%> | <%= product.getLanguage()%></div>
 
             <div>
+                <br/>
                 <% if (product.getRating() != null){
 
                     int count = 0;
@@ -105,13 +106,13 @@
                 <% count++;
                 }; }; %>
             </div>
-            <br />
+            <br/>
             <%--<div>Launch datum: <%= product.getDateLaunch()%></div>--%>
             <%--<div>Leeftijdscategory: <%= product.getAgeCategory()%></div>
             <%--<div>Launch datum: <%= format.format(product.getDateLaunch())%></div>--%><%--
             <div>Taal: <%= product.getLanguage()%></div>--%>
-            <div>Genre: <%= product.getGenre()%></div>
-            <div>Omschrijving:
+            <div><b>Genre:</b> <%= product.getGenre()%></div>
+            <div><b>Omschrijving:</b>
                 <br/> <%= product.getDescription()%></div>
             <%--<div>Beoordeling: <%= product.getRating()%></div>--%>
 

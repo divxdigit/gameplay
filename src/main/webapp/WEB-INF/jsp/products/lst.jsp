@@ -28,8 +28,11 @@
     <h1>
         Overzicht Bordspellen
     </h1>
+    </div>
+    <div>
         <p>
-            Hieronder vind u een lijst met alle beschikbare bordspellen. U kan ook de zoekfunctie gebruiken voor het zoeken op naam.
+            Hieronder vind u een lijst met alle beschikbare bordspellen.<br>
+            U kan ook de zoekfunctie gebruiken voor het zoeken op naam en genre.
         </p>
     </div>
     <div class="row">
@@ -65,10 +68,6 @@
     </div>
 
         <br />
-        <%--<%  List<Genre> genres = (List<Genre>) request.getAttribute("genres");
-            for (Genre genre: genres) { %>
-                <p><%=genre.getName()%></p>
-             <%} %>--%>
 <sec:authorize access="hasAnyAuthority('ADMIN')">
     <div class="row">
             <%
@@ -110,21 +109,13 @@
                             <br/><%=product.getLanguage()%> - <%=product.getGenre()%>
                         </td>
                         <td><%=product.getAgeCategory()%></td>
-                        <%--<td><%=product.getGenre()%></td>
-                        <td><%=product.getLanguage()%></td>--%>
                         <td><%=product.getBuyPrice()%> euro</td>
                         <% if (product.getBuyStock() ==0 ) {%>
                             <td style="color:darkred;">
                                 <b><%=product.getBuyStock()%></b>
-                                <%--<a href="/products/search?id=<%=product.getId()%>">
-                                    <img src="/icons/plus-circle-fill.svg" width="15" height="15" fill="none"/>
-                                </a>--%>
                             </td>
                         <% } else { %>
                             <td><%=product.getBuyStock()%>
-                                <%--<a href="/products/search?id=<%=product.getId()%>">
-                                    <img src="/icons/plus-circle-fill.svg" width="15" height="15" fill="none"/>
-                                </a>--%>
                             </td>
                         <% } %>
                             <td><%=product.getRentPrice()%> euro</td>
@@ -133,7 +124,7 @@
                         <% } else { %>
                             <td><%=product.getRentStock()%></td>
                         <% } %>
-                        <%--<td> <a href="/products/search?id=<%=product.getId()%>">Meer info </a></td>--%>
+
                         <td>
                                 <a class="btn btn-primary" href="/products/edit?id=<%=product.getId()%>" role="button">Wijzig</a>
                                 <a class="btn btn-primary" href="/products/delete?id=<%=product.getId()%>" role="button">Verwijder</a>
@@ -145,7 +136,7 @@
 
     </div>
     <div class="row">
-        <a href=/products/create>Nieuws spel toevoegen</a>
+        <a href=/products/create>Nieuw spel toevoegen</a>
         <br/><br/>
     </div>
 </sec:authorize>
@@ -173,9 +164,6 @@
                 <div><img src="<%= product.getPicture()%>" alt="<%= product.getName()%>" height="150"></div>
                 <% } %>
 
-               <%-- <svg  width="150" height="150" fill="currentColor">
-                    <use xlink:href="/icons/bootstrap-icons.svg#image" />
-                </svg>--%>
                 <div class="card-title">
                     <h4><%= product.getName() %></h4>
                     <h5><i>(<%= product.getPublisher() %>)</i></h5>
@@ -185,9 +173,8 @@
                     <p class="card-text"><b>Leeftijdscategorie:</b> <%=product.getAgeCategory() %>
                     <br /> <b>Aantal spelers:</b> <%=product.getPlayersMinimum() %> - <%=product.getPlayersMaximum() %>
                     <br /><b>Taal:</b> <%=product.getLanguage() %></p>
-                    <%--<a href=/products/search?id=<%=product.getId()%>>Meer info </a>--%>
+
                 </div>
-                <%--<div class="card-body">--%>
                     <div>
                     <a href=/products/search?id=<%=product.getId()%> class="card-link" >Meer info </a>
                     <hr />
