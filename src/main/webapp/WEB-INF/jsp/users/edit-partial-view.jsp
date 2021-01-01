@@ -20,9 +20,6 @@
 //        User user = (User) request.getAttribute("inputUser");
 %>
 
-
-
-
 <form:form action="/users/edit/submit" method="POST" modelAttribute="selectedUser" >
 
     <div class="row"><h3>Geselecteerde Gebruiker</h3></div>
