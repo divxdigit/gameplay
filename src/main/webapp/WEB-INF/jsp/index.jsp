@@ -20,7 +20,7 @@
 <body>
 <div class="container" style="margin-top: 25px ">
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-6">
             <h2>
                 Welkom
                         <sec:authorize access="isAuthenticated()">
@@ -30,11 +30,12 @@
                         </sec:authorize>
                 bij Gameplay
             </h2>
-            <p>GamePlay is opgericht als schoolproject en uitgegroeid tot een webshop met een zeer groot aanbod.
+            <p>GamePlay is opgericht in 2015 en is in 2020 gestart met het online verkopen van bordspellen. Bij ons kan u terecht voor bordspellen van zeer uiteenlopende genres.
             </p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus libero leo, pellentesque ornare, adipiscing vitae, rhoncus commodo, nulla. Fusce quis ipsum. Nulla neque massa, feugiat sed, commodo in, adipiscing ut, est. In fermentum mattis ligula. Nulla ipsum. Vestibulum condimentum condimentum augue. Nunc purus risus, volutpat sagittis, lobortis at, dignissim sed, sapien. Fusce porttitor iaculis ante. Curabitur eu arcu. Morbi quam purus, tempor eget, ullamcorper feugiat, commodo ullamcorper, neque.</p>
+            <p>Twijfelt u tussen bepaalde spellen? Geen probleem! Bij ons in de winkel kan u bijna elk spel testen alvorens u het koopt.
+            Woont u echter te ver van onze winkel? Ook hieraan hebben we gedacht. De meeste van onze spellen kan u namelijk ook huren! Benieuzd naar de prijzen? Neem snel een kijkje in ons aanbod!</p>
         </div>
-        <div class="col-md-4 card bg-white rounded shadow" >  <%--#9fcdff, #b9bbbe--%>
+        <div class="col-md-6 card bg-white rounded shadow" >  <%--#9fcdff, #b9bbbe--%>
             <div class="text-center"><u><h3>In de kijker</h3></u>
             </div>
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -47,13 +48,13 @@
                     <% List<Product> promoProducts = (List<Product>) request.getAttribute("promoProducts");%>
 
                     <div class="carousel-item active">
-                        <a href="/products/search?id=<%= promoProducts.get(0).getId()%>"><img class="d-block w-100" src="<%= promoProducts.get(0).getPicture()%>" alt="First promo" height="300"></a>
+                        <a href="/products/search?id=<%= promoProducts.get(0).getId()%>"><img class="d-block w-100" src="<%= promoProducts.get(0).getPicture()%>" alt="First promo" height="500"></a>
                     </div>
                     <div class="carousel-item">
-                        <a href="/products/search?id=<%= promoProducts.get(1).getId()%>"><img class="d-block w-100" src="<%= promoProducts.get(1).getPicture()%>" alt="Second promo" height="300"></a>
+                        <a href="/products/search?id=<%= promoProducts.get(1).getId()%>"><img class="d-block w-100" src="<%= promoProducts.get(1).getPicture()%>" alt="Second promo" height="500"></a>
                     </div>
                     <div class="carousel-item">
-                        <a href="/products/search?id=<%= promoProducts.get(2).getId()%>"><img class="d-block w-100" src="<%= promoProducts.get(2).getPicture()%>" alt="Third promo" height="300"></a>
+                        <a href="/products/search?id=<%= promoProducts.get(2).getId()%>"><img class="d-block w-100" src="<%= promoProducts.get(2).getPicture()%>" alt="Third promo" height="500"></a>
                     </div>
 
                 </div>
@@ -72,12 +73,14 @@
 
     <div class="card shadow p-3 mb-5 bg-white rounded " style="margin-top: 25px ">
         <h2>
-            Aanbod
+            Openingsuren
         </h2>
-        <p>Bij ons kan u verschillende bordspellen vinden in alle genres.<br>
-            - RPG<br>
-            - Co-op<br>
-            - ...</p>
+        <p>Webshop: 24/7<br>
+           Winkel:<br>
+            - dinsdag tot vrijdag: 10:00u - 18:00u<br>
+            - zaterdag: 11:00u - 20:00u<br>
+            - maandag en zondag: gesloten
+        </p>
     </div>
 
 </div>
