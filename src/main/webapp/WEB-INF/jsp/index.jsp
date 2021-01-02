@@ -33,7 +33,8 @@
             <p>GamePlay is opgericht in 2015 en is in 2020 gestart met het online verkopen van bordspellen. Bij ons kan u terecht voor bordspellen van zeer uiteenlopende genres.
             </p>
             <p>Twijfelt u tussen bepaalde spellen? Geen probleem! Bij ons in de winkel kan u bijna elk spel testen alvorens u het koopt.
-            Woont u echter te ver van onze winkel? Ook hieraan hebben we gedacht. De meeste van onze spellen kan u namelijk ook huren! Benieuzd naar de prijzen? Neem snel een kijkje in ons aanbod!</p>
+            Test u het spel liever thuis? Ook hieraan hebben we gedacht. De meeste van onze spellen kan u namelijk ook huren! Benieuwd naar onze scherpe prijzen?<br/>
+                Neem snel een kijkje in ons aanbod!</p>
         </div>
         <div class="col-md-6 card bg-white rounded shadow" >  <%--#9fcdff, #b9bbbe--%>
             <div class="text-center"><u><h3>In de kijker</h3></u>

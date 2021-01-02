@@ -108,8 +108,10 @@
             </div>
         </div>
         <div class="row" style="margin-top: 50px">
-            <p><b>Leveringsadres:</b>
-            <br><i>Indien het leveringsadres verschillend is met de informatie die wij hebben, gelieve deze hieronder dan aan te passen.</i>
+            <p><b>Facturatieadres:</b>
+            <br><i>Indien het facturatieadres verschillend is met de informatie die wij hebben, gelieve deze hieronder dan aan te passen voor deze bestelling.<br/>
+            Na het plaatsen van de bestelling zullen de bestelde spellen onmiddellijk beschikbaar zijn voor afhaling (rekening houdend met de openingsuren).<br/>
+            Betalen doet u in onze winkel.</i>
         </div>
         <div class="row">
             <div class="col-md-4 table-responsive ">

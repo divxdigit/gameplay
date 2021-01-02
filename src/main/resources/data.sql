@@ -232,7 +232,7 @@ VALUES (1,'2020-10-10','2020-10-11',1,'Kerkstraat','7A','2230','Herselt');
 insert into Orders(user_id, date_created, date_collect, status, delivery_street, delivery_number, delivery_postalcode, delivery_city)
 VALUES (3,'2020-08-10','2020-08-11',1,'Teststraat','18','2440','Geel');
 insert into Orders(user_id, date_created, date_collect, status, delivery_street, delivery_number, delivery_postalcode, delivery_city)
-VALUES (1,'2020-09-10','2020-12-11',0,'Dorpsplein','24','2230','Herselt');
+VALUES (1,'2020-09-10','2020-12-11',1,'Dorpsplein','24','2230','Herselt');
 insert into Orders(user_id, date_created, date_collect, status, delivery_street, delivery_number, delivery_postalcode, delivery_city)
 VALUES (2,'2020-10-10','2020-10-11',1,'Langeweg','36','2230','Herselt');
 
