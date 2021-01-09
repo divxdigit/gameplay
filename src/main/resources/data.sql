@@ -12,6 +12,7 @@ SET FOREIGN_KEY_CHECKS = 0;
 
 SET FOREIGN_KEY_CHECKS = 1;
 
+-- Joeri: Indien een fout, alles met alter in comment zetten.
 Alter table Products
 alter column description longtext;
 
