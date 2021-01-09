@@ -79,13 +79,11 @@
                         <th>Info</th>
                         <th>Naam</th>
                         <th>Leeftijdscategorie</th>
-                        <%--<th>Genre</th>
-                        <th>Taal</th>--%>
                         <th>Prijs Verkoop</th>
                         <th>Stock Verkoop</th>
                         <th>Prijs Verhuur</th>
                         <th>Stock Verhuur</th>
-                        <%--<th>Detail</th>--%>
+                        <th>Actief</th>
                         <th>Acties</th></tr>
 
                 <%--//Als er geen producten beschikbaar zijn of wanneer de search-string geen resultaten oplevert.--%>
@@ -121,9 +119,18 @@
                             <td><%=product.getRentPrice()%> euro</td>
                         <% if (product.getRentStock() ==0 ) {%>
                         <td style="color:darkred;"><b><%=product.getRentStock()%></b></td>
+
                         <% } else { %>
                             <td><%=product.getRentStock()%></td>
                         <% } %>
+
+                        <td>
+                            <% if(product.getActive()){ %>
+                            Ja
+                            <% }else{ %>
+                            Nee
+                            <% }; %>
+                        </td>
 
                         <td>
                                 <a class="btn btn-primary" href="/products/edit?id=<%=product.getId()%>" role="button">Wijzig</a>
@@ -152,6 +159,7 @@
         }
         //Wanneer er wel producten zijn gegeven, wordt de tabel opgebouwd met de verkregen gegevens.
         for (Product product: products2) {
+            if (product.getActive()){
     %>
 
         <div class="col-sm-4  ">
@@ -192,7 +200,7 @@
                 </div>
             </div>
         </div>
-        <% } %>
+        <% }} %>
 
     </div>
 
