@@ -31,8 +31,6 @@ public class Product {
 
     @Override
     public boolean equals(Object o) {
-////        if (this == o) return true;
-//        if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
         return id.equals(product.getId());
     }
@@ -94,8 +92,6 @@ public class Product {
     }
 
     public Product(String name, String description, Genre genre, AgeCategory ageCategory, Integer playersMinimum, Integer playersMaximum, Integer rating, Integer rentStock, Integer buyStock, Publisher publisher, String picture, Double rentPrice, Double buyPrice, Language language, LocalDate dateLaunch, Boolean active) {
-        /*this.id = id;*/
-    /*public Product(Long id, Set<OrderProduct> orderProducts, String name, String description, Genre genre, AgeCategory ageCategory, Integer playersMinimum, Integer playersMaximum, Integer rating, Integer rentStock, Integer buyStock, Publisher publisher, String picture, Double rentPrice, Double buyPrice, Language language, Date dateLaunch, Boolean active) {*/
         this.id = id;
         this.orderProducts = orderProducts;
         this.name = name;

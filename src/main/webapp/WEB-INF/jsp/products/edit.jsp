@@ -3,6 +3,7 @@
 <%@ page import="java.time.LocalDate" %>
 
 <%@ page import="be.thomasmore.graduaten.gameplay.entity.*" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <html lang="en" >
@@ -193,7 +194,19 @@
                 </div>
             </div>
 
+            <div class="form-group col-md-2">
+                <label>Actief</label>
+                <%if(product.getActive()){%>
+                <form:radiobutton path="active" value="true" checked="checked"/>Ja
+                <form:radiobutton path="active" value="false"/>Nee
+                <%}else {%>
+                <form:radiobutton path="active" value="true"/>Ja
+                <form:radiobutton path="active" value="false" checked="checked"/>Nee
+                <%};%>
+            </div>
+
         </div>
+
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label>Afbeelding</label>
@@ -205,11 +218,10 @@
                 <form:input class="form-control" type="hidden" name="productid" id="productid" value="<%=product.getId()%>" path="id"/>
             </div>
 
-            <div class="form-group col-md-6">
-                <form:input class="form-check-input" type="hidden" name="active" id="active" value="true" path="active"/>
-            </div>
-
         </div>
+
+
+
 
         <button type="submit" class="btn btn-primary">Wijzigingen opslaan</button>
 

@@ -161,6 +161,7 @@ public class ProductController {
         if (id != 0) {
             loadCreateParameters(model);
             model.addAttribute("inputProduct", productService.getProductById(id));
+
             return "/products/edit";
         }
         return "index";
