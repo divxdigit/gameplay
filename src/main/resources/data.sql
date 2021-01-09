@@ -135,7 +135,7 @@ CREATE TABLE IF NOT EXISTS Products(
    players_minimum int,
    players_maximum int,
    rating int,
-   rent_stock int,``
+   rent_stock int,
    buy_stock int not null,
    publisher_id int not null,
    picture varchar(250),
