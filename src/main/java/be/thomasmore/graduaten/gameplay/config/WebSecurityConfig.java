@@ -53,12 +53,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 //AUTHENTICATION
                 .authorizeRequests()
                 .antMatchers("/products/buy","/products/rent").authenticated()
+                .antMatchers("/logout").authenticated()
                 .antMatchers("/admin", "/admin/**").hasAnyAuthority("ADMIN")
-                .antMatchers("/publishers","/logout").hasAnyAuthority("USER","ADMIN")
+                .antMatchers("/genres","/users/edit","/publishers").hasAnyAuthority("ADMIN")
+                .antMatchers("/","/index","/contact","/products/**","/search","/users/**","/users/registration/*","/orders/**","/orderproducts/**","/error/**").permitAll()
 
-                .antMatchers("/","/index","/contact","/genres/**","/products/**","/search","/users/**","/users/registration/*","/orders/**","/orderproducts/**","/error/**").permitAll()
                 .antMatchers("/css/**", "/js/**", "/images/**","/icons/**").permitAll()
-                .antMatchers(HttpMethod.POST,"/products/do-create").permitAll()
+                .antMatchers(HttpMethod.POST,"/products/do-create").authenticated()
 
                 .antMatchers("/login").anonymous()
                 .anyRequest().authenticated()
