@@ -68,7 +68,6 @@
                     /*SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");*/
             %>
             <h2>Uw persoonlijke gegevens</h2>
-            <%--<table class="table border-0">--%>
             <table class="table" style="border:none;">
                 <tbody>
                 <tr>
@@ -91,12 +90,6 @@
             </table>
 
             <br/>
-            <%--<br/><b>Facturatie adres:</b>
-            <br/><%=user.getStreet()%> <%=user.getNumber()%> <%=user.getPostalcode()%> <%=user.getCity()%>--%>
-            <%--<br/>--%>
-            <%--<br/><b>Leveringsadres:</b>
-            <br/><%=user.getStreet()%> <%=user.getNumber()%> <%=user.getPostalcode()%> <%=user.getCity()%>
-            <br/><i>Momenteel is het nog niet mogelijk om op een andere locatie te leveren.</i>--%>
             <% } else { %>
             <br/>No output
             <% } %>
@@ -114,72 +107,29 @@
                 <% } else if (product.getBuyStock() == 1)  { %>
                 <form action="/products/do-orderproduct" method="post">
                     <div>
-                        <%--<label for="productid">productid</label>--%>
                         <input class="form-control" type="hidden" name="productid" id="productid"  value=<%=product.getId()%> />
                     </div>
                     <div>
-                        <%--<label for="userid">userid</label>--%>
                         <input class="form-control" type="hidden" name="userid" id="userid" value=<%=user.getId()%> />
                     </div>
                     <div>
-                        <%--<label for="userid">typeid</label>--%>
                         <input class="form-control" type="hidden" name="typeid" id="typeid" value="1" /> <%-- 1 : buy--%>
                     </div>
-                    <%--<div><b>Facturatie adres:</b></div>
-                    <div>
-                        <label for="deliveryStreet">Leveringsadres</label>
-                        <input class="form-control" type="text" name="deliveryStreet" id="deliveryStreet" value="<%=user.getStreet()%>" />
-                    </div>
-                    <div>
-                        <label for="deliveryNumber">Nr</label>
-                        <input class="form-control" type="text" name="deliveryNumber" id="deliveryNumber" value="<%=user.getNumber()%>" />
-                    </div>
-                    <div>
-                        <label for="deliveryPostalcode">Postcode</label>
-                        <input class="form-control" type="text" name="deliveryPostalcode" id="deliveryPostalcode" value="<%=user.getPostalcode()%>" />
-                    </div>
-                    <div>
-                        <label for="deliveryCity">Gemeente</label>
-                        <input class="form-control" type="text" name="deliveryCity" id="deliveryCity" value="<%=user.getCity()%>" />
-                    </div>--%>
-
 
                     <button type="submit" class="btn btn-primary">Koop nu voor <%=product.getBuyPrice()%> €</button>
                     Haast je, er is nog <%=product.getBuyStock()%> stuk beschikbaar.
                 </form>
-
-
                 <% } else { %>
                 <form action="/products/do-orderproduct" method="POST">
                     <div style=“display:none”>
-                        <%--<label for="productid">productid</label>--%>
                         <input class="form-control" type="hidden" name="productid" id="productid" value="<%=product.getId()%>" />
                     </div>
                     <div>
-                        <%--<label for="userid">userid</label>--%>
                         <input class="form-control" type="hidden" name="userid" id="userid" value="<%=user.getId()%>" />
                     </div>
                     <div>
-                        <%--<label for="userid">typeid</label>--%>
                         <input class="form-control" type="hidden" name="typeid" id="typeid" value="1" /> <%-- 1 : buy--%>
                     </div>
-<%--                    <div><b>Facturatie adres:</b></div>--%>
-<%--                    <div>--%>
-<%--                        <label for="deliveryStreet">Leveringsadres</label>--%>
-<%--                        <input class="form-control" type="text" name="deliveryStreet" id="deliveryStreet" value="<%=user.getStreet()%>" />--%>
-<%--                    </div>--%>
-<%--                    <div>--%>
-<%--                        <label for="deliveryNumber">Nr</label>--%>
-<%--                        <input class="form-control" type="text" name="deliveryNumber" id="deliveryNumber" value="<%=user.getNumber()%>" />--%>
-<%--                    </div>--%>
-<%--                    <div>--%>
-<%--                        <label for="deliveryPostalcode">Postcode</label>--%>
-<%--                        <input class="form-control" type="text" name="deliveryPostalcode" id="deliveryPostalcode" value="<%=user.getPostalcode()%>" />--%>
-<%--                    </div>--%>
-<%--                    <div>--%>
-<%--                        <label for="deliveryCity">Gemeente</label>--%>
-<%--                        <input class="form-control" type="text" name="deliveryCity" id="deliveryCity" value="<%=user.getCity()%>" />--%>
-<%--                    </div>--%>
                     <button type="submit" class="btn btn-primary">Koop nu voor <%=product.getBuyPrice()%> €</button>
                     Er zijn nog <%=product.getBuyStock()%> stuks beschikbaar.
                 </form>

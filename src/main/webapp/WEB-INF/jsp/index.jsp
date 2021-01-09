@@ -36,10 +36,12 @@
             Test u het spel liever thuis? Ook hieraan hebben we gedacht. De meeste van onze spellen kan u namelijk ook huren! Benieuwd naar onze scherpe prijzen?<br/>
                 Neem snel een kijkje in ons aanbod!</p>
         </div>
-        <div class="col-md-6 card bg-white rounded shadow" >  <%--#9fcdff, #b9bbbe--%>
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-5 card bg-white rounded shadow" >  <%--#9fcdff, #b9bbbe--%>
             <div class="text-center"><u><h3>In de kijker</h3></u>
             </div>
-            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <div id="carouselExampleIndicators" class="carousel slide text-center align-content-center align-items-center" data-ride="carousel">
                 <ol class="carousel-indicators">
                     <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
                     <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -48,14 +50,14 @@
                 <div class="carousel-inner">
                     <% List<Product> promoProducts = (List<Product>) request.getAttribute("promoProducts");%>
 
-                    <div class="carousel-item active">
-                        <a href="/products/search?id=<%= promoProducts.get(0).getId()%>"><img class="d-block w-100" src="<%= promoProducts.get(0).getPicture()%>" alt="First promo" height="500"></a>
+                    <div class="carousel-item active" style="text-align:center;">
+                        <a href="/products/search?id=<%= promoProducts.get(0).getId()%>"><img class="d-block w-90" src="<%= promoProducts.get(0).getPicture()%>" alt="<%= promoProducts.get(0).getName() %>"   height="300"><%= promoProducts.get(0).getName() %></a>
                     </div>
-                    <div class="carousel-item">
-                        <a href="/products/search?id=<%= promoProducts.get(1).getId()%>"><img class="d-block w-100" src="<%= promoProducts.get(1).getPicture()%>" alt="Second promo" height="500"></a>
+                    <div class="carousel-item" style="text-align:center;">
+                        <a href="/products/search?id=<%= promoProducts.get(1).getId()%>"><img class="d-block w-90" src="<%= promoProducts.get(1).getPicture()%>" alt="<%= promoProducts.get(1).getName() %>"  height="300"><%= promoProducts.get(1).getName() %></a>
                     </div>
-                    <div class="carousel-item">
-                        <a href="/products/search?id=<%= promoProducts.get(2).getId()%>"><img class="d-block w-100" src="<%= promoProducts.get(2).getPicture()%>" alt="Third promo" height="500"></a>
+                    <div class="carousel-item align-content-center" style="text-align:center;">
+                        <a href="/products/search?id=<%= promoProducts.get(2).getId()%>"><img class="d-block w-90" src="<%= promoProducts.get(2).getPicture()%>" alt="<%= promoProducts.get(2).getName() %>"  height="300"><%= promoProducts.get(2).getName() %></a>
                     </div>
 
                 </div>
@@ -72,18 +74,19 @@
         </div>
     </div>
 
-    <div class="card shadow p-3 mb-5 bg-white rounded " style="margin-top: 25px ">
-        <h2>
-            Openingsuren
-        </h2>
-        <p>Webshop: 24/7<br>
-           Winkel:<br>
-            - dinsdag tot vrijdag: 10:00u - 18:00u<br>
-            - zaterdag: 11:00u - 20:00u<br>
-            - maandag en zondag: gesloten
-        </p>
+    <div class="row">
+        <div class="col-md-12 card shadow p-3 mb-5 bg-white rounded " style="margin-top: 25px ">
+            <h2>
+                Openingsuren
+            </h2>
+            <p>Webshop: 24/7<br>
+               Winkel:<br>
+                - dinsdag tot vrijdag: 10:00u - 18:00u<br>
+                - zaterdag: 11:00u - 20:00u<br>
+                - maandag en zondag: gesloten
+            </p>
+        </div>
     </div>
-
 </div>
 
 </body>

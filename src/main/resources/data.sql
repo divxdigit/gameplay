@@ -12,6 +12,7 @@ SET FOREIGN_KEY_CHECKS = 0;
 
 SET FOREIGN_KEY_CHECKS = 1;
 
+-- Joeri: Indien een fout, alles met alter in comment zetten.
 Alter table Products
 alter column description longtext;
 
@@ -151,12 +152,6 @@ CREATE TABLE IF NOT EXISTS Products(
    foreign key (language_id) references Languages (id)
 );
 
--- insert into Products(name,description,genre_id,age_category_id,players_minimum,players_maximum,rating,rent_stock,buy_stock,publisher_id,picture,rent_price,buy_price,language_id,date_launch,active)
--- values ('De Kwakzalvers van Kakelenburg','De Kwakzalvers',1,9,2,4,4,1,9,5,'/images/GameImages/Kwakzalvers-van-Kakelenburg.png',1.89,39.95,2,'2001-01-31',1);
--- insert into Products(name,description,genre_id,age_category_id,players_minimum,players_maximum,rating,rent_stock,buy_stock,publisher_id,picture,rent_price,buy_price,language_id,date_launch,active)
--- values ('Wingspan','Een vogelspel',4,9,1,5,1,1,0,5,'/images/GameImages/3d-wingspan.png',3.50,56.14,1,'2000-06-20',1);
--- insert into Products(name,description,genre_id,age_category_id,players_minimum,players_maximum,rating,rent_stock,buy_stock,publisher_id,picture,rent_price,buy_price,language_id,date_launch,active)
--- values ('Ticket to Ride Europe 2','Met het Ticket',1,9,2,5,3,2,15,3,'/images/GameImages/TicketToRideEurope.jpg',2.45,34.95,1,'2008-02-20',1);
 
 insert into Products(name,description,genre_id,age_category_id,players_minimum,players_maximum,rating,rent_stock,buy_stock,publisher_id,picture,rent_price,buy_price,language_id,date_launch,active)
 values ('De Kwakzalvers van Kakelenburg','De Kwakzalvers van Kakelenburg Eenmaal per jaar komen in Kakelenburg de beste wonderdoktoren en beunhazen samen om drankjes tegen zweetvoeten, heimwee, de hik en liefdesverdriet te brouwen. Iedere kwakzalver kookt hier echter zijn eigen soep. Iedere speler trekt zolang ingrediënten uit zijn eigen, in de loop van het spel zelf samengestelde, voorraadbuidel totdat hij denkt dat zijn drank perfect is. Maar pas op: een paar knalerwten en de hele drank ontploft. Het is dus beter om op tijd te stoppen en een kleinere portie te koken om zo met de opbrengst ervan kostbare ingrediënten aan te schaffen. Zo vult de voorraadbuidel zich met steeds meer nuttige ingrediënten, waardoor de volgende drank wellicht nog beter wordt en meer punten oplevert. In dit spel met meer dan 2000 combinatiemogelijkheden wordt het beproefde deckbuildingssysteem gecombineerd met het populaire “push your luck”-mechanisme.',1,9,2,4,4,1,9,5,'/images/GameImages/Kwakzalvers-van-Kakelenburg.png',1.89,39.95,2,'2001-01-31',1);
@@ -240,12 +235,6 @@ VALUES (1,'2020-09-10','2020-12-11',1,'Dorpsplein','24','2230','Herselt');
 insert into Orders(user_id, date_created, date_collect, status, delivery_street, delivery_number, delivery_postalcode, delivery_city)
 VALUES (2,'2020-10-10','2020-10-11',1,'Langeweg','36','2230','Herselt');
 
--- insert into Orders(user_id, date_created, date_collect, status)
--- VALUES (1,'2020-10-10','2020-10-11',1);
--- insert into Orders(user_id, date_created, date_collect, status)
--- VALUES (3,'2020-08-10','2020-08-11',1);
--- insert into Orders(user_id, date_created, date_collect, status)
--- VALUES (1,'2020-09-10','2020-12-11',0);
 
 
 CREATE TABLE IF NOT EXISTS Order_Products(

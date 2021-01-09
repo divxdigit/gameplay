@@ -103,20 +103,12 @@
         <div class="form-group col-md-2">
             <form:input class="form-control" type="hidden" name="password" id="password" value="<%=selectedUser.getPassword()%>" path="password"/>
         </div>
-<%--        <div class="form-group col-md-2">--%>
-<%--            <form:input class="form-control" type="hidden" name="wrongpasswordcounter" id="wrongpasswordcounter" value="<%=selectedUser.getWrongPasswordcounter()%>" path="wrongpasswordcounter"/>--%>
-<%--        </div>--%>
         <div class="form-group col-md-6">
             <form:input class="form-check-input" type="hidden" name="active" id="active" value="true" path="active"/>
         </div>
-<%--        <div class="form-group col-md-6">--%>
-<%--            <form:input class="form-check-input" type="hidden" name="deleted" id="deleted" value="false" path="deleted"/>--%>
-<%--        </div>--%>
-
     </div>
 
     <form:button type="submit" name="Save" value="Save" class="btn btn-primary">Opslaan</form:button>
-<%--    <form:button type="submit" name="Delete" value="Delete" class="btn btn-primary">Verwijderen</form:button>--%>
     <form:button type="submit" name="Cancel" value="Cancel" class="btn btn-primary">Cancel</form:button>
 
 </form:form>

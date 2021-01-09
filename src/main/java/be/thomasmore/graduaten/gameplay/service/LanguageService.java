@@ -9,6 +9,5 @@ public interface LanguageService {
     List<Language> getLanguageByName(String name);
     Language getLanguageById(Long id);
     Boolean addLanguage(Language language);
-    //Language updateLanguage(Language language);
-    //Language deleteLanguage(Language language);
+
 }
