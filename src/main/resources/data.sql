@@ -135,7 +135,7 @@ CREATE TABLE IF NOT EXISTS Products(
    players_minimum int,
    players_maximum int,
    rating int,
-   rent_stock int,
+   rent_stock int,``
    buy_stock int not null,
    publisher_id int not null,
    picture varchar(250),
@@ -211,6 +211,8 @@ insert into Users(user_type_id, firstname, lastname, birthdate, password, email,
 values (2,'Eve', 'Ravignot','1990-03-8','$2y$12$NgrX/SSjH8bF.4jpQtPsruWmkZOGQDU8zuQaaszp1xvZclT6bG8si','Eve@test.com','Teststraat','69',2300,'Turnhout',TRUE,FALSE,0);
 insert into Users(user_type_id, firstname, lastname, birthdate, password, email, street, number, postalcode, city, active, deleted, wrongpasswordcounter)
 values (1,'Ruben', 'Van Hout','1991-09-04','$2y$12$L5MWSKjMiyLC63KLsEEWEOawtiKRDJz59AvOgG3oORUj3tJrqKS9K','Ruben@test.com','Kathovestraat','12/1',2260,'Westerlo',TRUE,FALSE,0);
+insert into Users(user_type_id, firstname, lastname, birthdate, password, email, street, number, postalcode, city, active, deleted, wrongpasswordcounter)
+values (1,'Winkel', 'Gameplay','1999-01-01','$2y$12$Rm4nOGWZAB9wD4U5Yk0pqu.ayRabtXI2nYkOODK4BCPuIzCX3yLMW','Winkel@test.com','Kleinhoefstraat','4',2440,'Geel',TRUE,FALSE,0);
 
 
 CREATE TABLE IF NOT EXISTS Orders(
