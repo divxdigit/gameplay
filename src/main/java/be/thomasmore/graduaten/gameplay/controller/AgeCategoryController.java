@@ -42,7 +42,6 @@ public class AgeCategoryController {
         // als opslagen category gelukt (true) dan successAdd true, anders false
         model.addAttribute("successAdd",ageCategoryService.addAgeCategory(ageCategory)?true:false);
         return loadCategory(model,new AgeCategory());
-
     }
 }
 
