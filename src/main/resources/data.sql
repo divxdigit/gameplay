@@ -172,7 +172,9 @@ Zoals bij alle Ticket to Ride spellen proberen spelers de meeste punten te score
 te claimen en bestemmingskaarten te behalen (in dit geval contractkaarten). Nieuw bij deze versie is de mogelijkheid om bonuspunten
 te scoren dankzij handelsbonuskaarten die je verdient door routes te claimen met het kar-symbool.
 In deze uitgave van Ticket to Ride zijn de bekende treinkaarten vervangen door speciale transportkaarten en ook de miniatuurtreintjes zijn anders, dit zijn nu miniaturen van plastic karren, geheel in stijl van de 17e eeuw.',1,9,2,5,3,2,15,3,'/images/GameImages/TicketToRideAmsterdam.jpg',2.45,34.95,1,'2008-02-20',1);
-
+insert into Products(name,description,genre_id,age_category_id,players_minimum,players_maximum,rating,rent_stock,buy_stock,publisher_id,picture,rent_price,buy_price,language_id,date_launch,active)
+values ('Saboteur','In dit Saboteur kaartspel voor 3-10 spelers bouw je met speelkaarten een mijn met ondergrondse gangen uit. Elke speler krijgt in het geheim een rol toebedeeld. De dwergen stippelen via de gangen een route uit naar een kaart met een verborgen edelsteen. De saboteurs gaan hen hierbij dwarsbomen. De rol die je vervult bepaalt of je punten (goudklompjes) verdient via successen of mislukkingen.
+Het Saboteur spel bevat ook nog actiekaartjes: hiermee hinder je andere spelers, of verzamel je informatie over de locatie van de edelsteen. 999 Games verdeelde tot voor kort de meertalige uitgave van Amigo. Het commerciële succes leidde tot deze eigen uitgave.',3,9,3,10,3,0,0,5,'/images/GameImages/saboteur.jpg',2.00,35.50,1,'2001-01-31',0);
 
 CREATE TABLE IF NOT EXISTS Usertypes(
     id int not null AUTO_INCREMENT,
