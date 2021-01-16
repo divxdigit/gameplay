@@ -3,6 +3,7 @@ package be.thomasmore.graduaten.gameplay.controller;
 import be.thomasmore.graduaten.gameplay.entity.*;
 import be.thomasmore.graduaten.gameplay.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -30,12 +31,14 @@ public class PublisherController {
     }
 
     @RequestMapping("/publishers/list")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String dataGenre(ModelMap model) {
 
         return loadPublisher(model,new Publisher());
     }
 
     @PostMapping(value = "/publishers/add")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String EditOrderProduct(@Valid @ModelAttribute("publisher") Publisher publisher, BindingResult result, ModelMap model) {
 
         if (result.hasErrors()) { return loadPublisher(model,publisher); }

@@ -3,6 +3,7 @@ package be.thomasmore.graduaten.gameplay.controller;
 import be.thomasmore.graduaten.gameplay.entity.*;
 import be.thomasmore.graduaten.gameplay.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -148,6 +149,7 @@ public class ProductController {
     }
 
     @RequestMapping("/products/create")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String productCreate(Model model) {
 
         loadCreateParameters(model);
@@ -156,6 +158,7 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/products/edit", params = {"id"})
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String productEdit(Model model, HttpSession session, @RequestParam("id") Long id) {
 
         if (id != 0) {
@@ -171,6 +174,7 @@ public class ProductController {
     private Date date;
 
     @PostMapping("/products/do-create")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String addProduct(Model model, HttpServletRequest request, @RequestParam("image") MultipartFile multipartFile,@Valid @ModelAttribute("inputProduct") Product inputProduct, BindingResult result) throws IOException {
 
         if (result.hasErrors()) {
@@ -214,6 +218,7 @@ public class ProductController {
     }
 
     @PostMapping("/products/do-update")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String editProduct(Model model, HttpServletRequest request, @RequestParam("image") MultipartFile multipartFile,@Valid @ModelAttribute("inputProduct") Product inputProduct, BindingResult result) throws IOException {
         if (result.hasErrors()) {
             loadCreateParameters(model);

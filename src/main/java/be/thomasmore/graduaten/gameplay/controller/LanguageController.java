@@ -3,6 +3,7 @@ package be.thomasmore.graduaten.gameplay.controller;
 import be.thomasmore.graduaten.gameplay.entity.Language;
 import be.thomasmore.graduaten.gameplay.service.LanguageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -31,12 +32,14 @@ public class LanguageController {
     }
 
     @RequestMapping("/languages/list")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String dataGenre(ModelMap model) {
 
         return loadLanguage(model,new Language());
     }
 
     @PostMapping(value = "/languages/add")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String EditOrderProduct(@Valid @ModelAttribute("language") Language language, BindingResult result, ModelMap model) {
 
         if (result.hasErrors()) { return loadLanguage(model,language); }

@@ -3,6 +3,7 @@ package be.thomasmore.graduaten.gameplay.controller;
 import be.thomasmore.graduaten.gameplay.entity.*;
 import be.thomasmore.graduaten.gameplay.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -11,11 +12,15 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.*;
 
+/*
+@RolesAllowed({"USER","ADMIN"})
+*/
 @Controller
 public class OrderController {
 
@@ -99,6 +104,7 @@ public class OrderController {
         return listOfOrdersByUserAndOrderId(model,id);
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping(value = "/orders/edit/submit", params = "Save") //saving an update for an order (only for admins)
     public String EditOrder(@Valid @ModelAttribute("selectedOrder") Order selectedOrder, BindingResult result, ModelMap model) {
 
@@ -139,7 +145,8 @@ public class OrderController {
         return listOrders(model);
     }
 
-    @RequestMapping(value = "/orders/delete", params = {"id"}) //deleting an order by a passed id
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @RequestMapping(value = "/orders/delete", params = {"id"}) //deleting an order by a passed id (only for admins)
     public String deleteOrderById(ModelMap model, @RequestParam("id") Long id) {
 
         if (orderService.deleteOrderByID(id)) { model.addAttribute("successDelete", true); }
@@ -611,6 +618,7 @@ public class OrderController {
         }
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping(value = "/orderproducts/edit/detail", params = "Delete") //deleting an orderProduct by a passed orderProductID
     public String deleteDetailOrderProduct(ModelMap model, @RequestParam("orderID") Long orderID, @RequestParam("orderProductID") Long orderProductID) {
 
@@ -619,6 +627,7 @@ public class OrderController {
         return listOrderProducts(model, orderID);
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping(value = "/orderproducts/edit/submit", params = "Save") //saving the editing of an orderProduct
     public String editOrderProduct(@Valid @ModelAttribute("selectedOrderProduct") OrderProduct selectedOrderProduct, BindingResult result, ModelMap model) {
 
@@ -665,6 +674,7 @@ public class OrderController {
         return listOfOrderProductsByOrderID(model,selectedOrderProduct.getOrder().getId());
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping(value = "/orderproducts/delete", params = {"id"}) //deleting an orderProduct by a passed orderProductID
     public String deleteOrderProductById(ModelMap model, @RequestParam("id") Long id) {
         Long orderID = orderProductService.getOrderProductById(id).getOrder().getId();

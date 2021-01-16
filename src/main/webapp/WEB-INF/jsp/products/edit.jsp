@@ -220,9 +220,6 @@
 
         </div>
 
-
-
-
         <button type="submit" class="btn btn-primary">Wijzigingen opslaan</button>
 
     </form:form>

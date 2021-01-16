@@ -3,6 +3,7 @@ package be.thomasmore.graduaten.gameplay.controller;
 import be.thomasmore.graduaten.gameplay.entity.*;
 import be.thomasmore.graduaten.gameplay.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -30,6 +31,7 @@ public class UserController {
     UserTypeService userTypeService;
 
     @RequestMapping("/users/edit")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String dataUser(ModelMap model) {
         List<User> users = userService.getUsers();
         List<UserType> usertypes = userTypeService.getUserTypes();
@@ -41,6 +43,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/users/edit", params = {"id"})
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String UsersEditId(ModelMap model, @RequestParam("id") Long id) {
 
         User selectedUser = new User();
@@ -59,6 +62,7 @@ public class UserController {
     }
 
     @PostMapping(value = "/users/edit/submit", params = "Save")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String EditUser(@Valid @ModelAttribute("selectedUser") User selectedUser, BindingResult result, ModelMap model) {
 
         if (result.hasErrors()) {
@@ -94,6 +98,7 @@ public class UserController {
     }
 
     @PostMapping(value = "/users/edit/submit", params = "Cancel")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String CancelEditUser(ModelMap model) {
 
         return dataUser(model);

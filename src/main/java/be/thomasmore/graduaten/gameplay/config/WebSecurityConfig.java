@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -15,6 +16,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
@@ -52,41 +54,31 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 //AUTHENTICATION
                 .authorizeRequests()
-                .antMatchers("/products/buy","/products/rent").authenticated()
-                .antMatchers("/logout").authenticated()
-                .antMatchers("/admin", "/admin/**").hasAnyAuthority("ADMIN")
-                .antMatchers("/genres","/users/edit","/publishers").hasAnyAuthority("ADMIN")
-                .antMatchers("/","/index","/contact","/products/**","/search","/users/**","/users/registration/*","/orders/**","/orderproducts/**","/error/**").permitAll()
-
-                .antMatchers("/css/**", "/js/**", "/images/**","/icons/**").permitAll()
-                .antMatchers(HttpMethod.POST,"/products/do-create").authenticated()
-
                 .antMatchers("/login").anonymous()
+                .antMatchers("/","/index","/contact","/error/**","/css/**", "/js/**", "/images/**","/icons/**").permitAll()
+                .antMatchers("/users/registration/**").permitAll()
+                .antMatchers("/products/lst","/products/search/**").permitAll()
+                .antMatchers("/orders/**","/orderproducts/**").authenticated()
+                .antMatchers("/products/do-orderproduct","/products/do-ordercomplete","/products/buy/**","/products/rent/**","/users/my-account/**","/logout").authenticated()
+                .antMatchers("/admin/**","/products/**","/genres/**","/users/**","/publishers/**","/languages/**","/agecategories/**").hasAnyAuthority("ADMIN")
                 .anyRequest().authenticated()
                 .and()
-
 
                 //LOG IN
                 .formLogin().permitAll()
                 .loginPage("/login")
                 .failureUrl("/login?error=true")
-                //.loginProcessingUrl("/perform_login")
-                //.defaultSuccessUrl("/publishers", true)
-                //.failureHandler(authenticationFailureHandler())
-
                 .and()
 
                 //LOGOUT
                 .logout().permitAll()
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/")
-
                 .and()
-
                 .exceptionHandling().accessDeniedPage("/403");
+
                 http.csrf().disable();
     }
-
 }
 
 

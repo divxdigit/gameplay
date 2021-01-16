@@ -3,6 +3,8 @@ package be.thomasmore.graduaten.gameplay.controller;
 import be.thomasmore.graduaten.gameplay.entity.AgeCategory;
 import be.thomasmore.graduaten.gameplay.service.AgeCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -30,12 +33,14 @@ public class AgeCategoryController {
     }
 
     @RequestMapping("/agecategory/lst")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String dataAgeCategory(ModelMap model) {
 
         return loadCategory(model,new AgeCategory());
     }
 
     @PostMapping(value = "/agecategory/add")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String editAgeCategory(@Valid @ModelAttribute("ageCategory") AgeCategory ageCategory, BindingResult result, ModelMap model) {
 
         if (result.hasErrors()) { return loadCategory(model,ageCategory); }
