@@ -273,8 +273,8 @@ CREATE TABLE IF NOT EXISTS Ordertypes(
 );
 
 insert into Ordertypes(name)
-values ('Verhuur');
-insert into Ordertypes(name)
 values ('Verkoop');
+insert into Ordertypes(name)
+values ('Verhuur');
 insert into Ordertypes(name)
 values ('Preorder');

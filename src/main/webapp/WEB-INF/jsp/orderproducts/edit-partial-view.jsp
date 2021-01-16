@@ -24,18 +24,18 @@
 
     <div class="form-row">
 
-        <%--READ ONLY GEDEELTE (zowel voor admin als user) --%>
-        <div class="form-group col-md-6">
+        <%--READ ONLY GEDEELTE (zowel voor admin als user)--%>
+        <div class="form-group col-md-6" style="display: none;">
             <label for="id">OrderProductID</label>
             <form:input readonly="true" type="text" class="form-control" id="id" path="id" placeholder="OrderProductID" value="<%=selectedOrderProduct.getId()%>"/>
         </div>
 
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-6" style="display: none;">
             <label for="order.id">OrderID</label>
             <form:input readonly="true" type="text" class="form-control" id="order.id" path="order.id" placeholder="OrderID" value="<%=selectedOrderProduct.getOrder().getId()%>"/>
         </div>
 
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-6" style="display: none;">
             <label for="product.id">ProductID</label>
             <form:input readonly="true" type="text" class="form-control" id="product.id" path="product.id" placeholder="ProductID" value="<%=selectedOrderProduct.getProduct().getId()%>"/>
         </div>
@@ -45,8 +45,17 @@
             <form:input readonly="true" type="text" class="form-control" id="product.name" path="product.name" placeholder="Productnaam" value="<%=selectedOrderProduct.getProduct().getName()%>"/>
         </div>
 
+        <div class="form-group col-md-6">
+            <label for="price">Aantal</label>
+            <form:input readonly="true" type="text" class="form-control" id="amount" path="amount" placeholder="Amount" value="<%=selectedOrderProduct.getAmount()%>"/>
+            <div class="invalid-feedback d-block">
+                <form:errors path ="amount"/>
+            </div>
+        </div>
+
         <%--READ ONLY (enkel voor user) --%>
         <sec:authorize access="hasAnyAuthority('USER')">
+            <% if(selectedOrderProduct.getRentDurationWeeks()!=null) {%>
             <div class="form-group col-md-6">
                 <label for="rentDurationWeeks">Huurtijd in weken</label>
                 <form:input readonly="true" type="text" class="form-control" id="rentDurationWeeks" path="rentDurationWeeks" placeholder="Huurtijd in weken" value="<%=selectedOrderProduct.getRentDurationWeeks()%>"/>
@@ -54,8 +63,9 @@
                     <form:errors path ="rentDurationWeeks"/>
                 </div>
             </div>
+            <% } ;%>
 
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-6" style="display: none;">
                 <label for="orderType">Ordertype</label>
                 <form:input readonly="true" type="text" class="form-control" id="orderType" path="orderType" placeholder="Ordertype" value="<%=selectedOrderProduct.getOrderType()%>"/>
                 <div class="invalid-feedback d-block">
@@ -71,7 +81,8 @@
                 </div>
             </div>
 
-            <div class="form-group col-md-6">
+
+            <div class="form-group col-md-6" style="display: none;">
                 <label for="discountPrice">Korting</label>
                 <form:input readonly="true" type="text" class="form-control" id="discountPrice" path="discountPrice" placeholder="Promoprijs" value="<%=selectedOrderProduct.getDiscountPrice()%>"/>
                 <div class="invalid-feedback d-block">
@@ -82,7 +93,7 @@
 
         <%--READ & WRITE (enkel voor admin) --%>
         <sec:authorize access="hasAnyAuthority('ADMIN')">
-
+            <% if(selectedOrderProduct.getRentDurationWeeks()!=null) {%>
             <div class="form-group col-md-6">
                 <label for="rentDurationWeeks">Huurtijd in weken</label>
                 <form:input type="text" class="form-control" id="rentDurationWeeks" path="rentDurationWeeks" placeholder="Huurtijd in weken" value="<%=selectedOrderProduct.getRentDurationWeeks()%>"/>
@@ -90,8 +101,9 @@
                     <form:errors path ="rentDurationWeeks"/>
                 </div>
             </div>
+            <% } ;%>
 
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-6" style="display: none;">
                 <label for="orderType">Ordertype</label>
                 <form:input type="text" class="form-control" id="orderType" path="orderType" placeholder="Ordertype" value="<%=selectedOrderProduct.getOrderType()%>"/>
                 <div class="invalid-feedback d-block">
@@ -107,8 +119,8 @@
                 </div>
             </div>
 
-            <div class="form-group col-md-6">
-                <label for="discountPrice">Kprto,g</label>
+            <div class="form-group col-md-6" style="display: none;">
+                <label for="discountPrice">Korting</label>
                 <form:input type="text" class="form-control" id="discountPrice" path="discountPrice" placeholder="Promoprijs" value="<%=selectedOrderProduct.getDiscountPrice()%>"/>
                 <div class="invalid-feedback d-block">
                     <form:errors path ="discountPrice"/>

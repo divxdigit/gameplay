@@ -43,13 +43,11 @@
 
                 <thead>
                     <tr scope=\"col\">
-                        <th>OrderId</th>
-                        <th>Id</th>
                         <th>Product</th>
                         <th>Huurtijd in weken</th>
                         <th>Ordertype</th>
                         <th>Prijs</th>
-                        <th>Promoprijs</th>
+                        <th>Aantal</th>
                         <th>Acties</th>
 
                     </tr>
@@ -58,13 +56,11 @@
                     List<OrderProduct> orderProducts = (List<OrderProduct>) request.getAttribute("orderProducts");
                     for (OrderProduct orderProduct: orderProducts) { %>
                         <tr  class='clickable-row' data-href='/orderproducts/edit/detail?orderID=<%=orderProduct.getOrder().getId()%>&orderProductID=<%=orderProduct.getId()%>' style="cursor: pointer" >
-                            <td><%=orderProduct.getOrder().getId()%></td>
-                            <td><%=orderProduct.getId()%></td>
                             <td><%=orderProduct.getProduct().getName()%></td>
-                            <td><%=orderProduct.getRentDurationWeeks()%> </td>
-                            <td><%=orderProduct.getOrderType()%></td>
+                            <td><% if(orderProduct.getRentDurationWeeks()==null) {%> <% } else { %><%=orderProduct.getRentDurationWeeks()%><%};%></td>
+                            <td><% if(orderProduct.getOrderType()==1){%>Kopen <% } else {%>Huren<% }%></td>
                             <td><%=orderProduct.getPrice()%></td>
-                            <td><%=orderProduct.getDiscountPrice()%></td>
+                            <td><%=orderProduct.getAmount()%></td>
                             <td>
                                     <form action="/orderproducts/edit/detail" method="POST">
 
