@@ -47,17 +47,17 @@
                     <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
                     <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
                 </ol>
-                <div class="carousel-inner">
+                <div class="carousel-inner ce">
                     <% List<Product> promoProducts = (List<Product>) request.getAttribute("promoProducts");%>
 
                     <div class="carousel-item active" style="text-align:center;">
-                        <a href="/products/search?id=<%= promoProducts.get(0).getId()%>"><img class="d-block w-90" src="<%= promoProducts.get(0).getPicture()%>" alt="<%= promoProducts.get(0).getName() %>"   height="300"><%= promoProducts.get(0).getName() %></a>
+                        <a href="/products/search?id=<%= promoProducts.get(0).getId()%>"><img class="d-block w-100" src="<%= promoProducts.get(0).getPicture()%>" alt="<%= promoProducts.get(0).getName() %>"  width="300" ><%= promoProducts.get(0).getName() %></a>
                     </div>
                     <div class="carousel-item" style="text-align:center;">
-                        <a href="/products/search?id=<%= promoProducts.get(1).getId()%>"><img class="d-block w-90" src="<%= promoProducts.get(1).getPicture()%>" alt="<%= promoProducts.get(1).getName() %>"  height="300"><%= promoProducts.get(1).getName() %></a>
+                        <a href="/products/search?id=<%= promoProducts.get(1).getId()%>"><img class="d-block w-100" src="<%= promoProducts.get(1).getPicture()%>" alt="<%= promoProducts.get(1).getName() %>"  width="300" ><%= promoProducts.get(1).getName() %></a>
                     </div>
                     <div class="carousel-item align-content-center" style="text-align:center;">
-                        <a href="/products/search?id=<%= promoProducts.get(2).getId()%>"><img class="d-block w-90" src="<%= promoProducts.get(2).getPicture()%>" alt="<%= promoProducts.get(2).getName() %>"  height="300"><%= promoProducts.get(2).getName() %></a>
+                        <a href="/products/search?id=<%= promoProducts.get(2).getId()%>"><img class="d-block w-100" src="<%= promoProducts.get(2).getPicture()%>" alt="<%= promoProducts.get(2).getName() %>"  width="300" ><%= promoProducts.get(2).getName() %></a>
                     </div>
 
                 </div>
